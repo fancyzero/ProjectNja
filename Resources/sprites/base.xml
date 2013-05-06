@@ -1,0 +1,12 @@
+<sprites>
+    <sprite name="brick" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:brick" />
+		</sprite_components>
+    </sprite>
+    <sprite name="ninja" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:circle" />
+		</sprite_components>
+    </sprite>
+</sprites>

@@ -1,0 +1,16 @@
+<sprite_components>
+
+	<sprite_component name="life_bar">
+		<physics_def >
+			<body is_dynamic="true"  rotation="0" anchor="0,0.5">
+
+			</body>
+		</physics_def>
+		<animation_def>
+			<sequence anchor_x="0" anchor_y="0" name="default" animated="false" texture="pic/ui_elements.plist" framenames="life_bar.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
+	
+</sprite_components>
+
+

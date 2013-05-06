@@ -1,0 +1,8 @@
+<bodies>
+{% for body in bodies %}
+<body name="{{body.name}}" id="{{body.identifier}}" anchor_rel="{{body.anchorPointRel.x|floatformat:3}},{{body.anchorPointRel.y|floatformat:3}}" anchor_abs="{{body.anchorPointAbs.x|floatformat:3}},{{body.anchorPointAbs.y|floatformat:3}}" size="{{body.size.width|floatformat:3}},{{body.size.height|floatformat:3}}">{% for fixture in body.fixtures %}{% if fixture.isCircle %}
+<circle radius="{{fixture.radius|floatformat:3}}" is_sensor="{% if fixture.isSensor %}true{% else %}false{% endif %}" />{%else%}{% for polygon in fixture.polygons %}
+<polygon vertices="{% for point in polygon %} {% if not forloop.first %},{% endif %}{{point.x|floatformat:3}},{{point.y|floatformat:3}}{% endfor %}" is_sensor="{% if fixture.isSensor %}true{% else %}false{% endif %}" />{% endfor %}{% endif %}{% endfor %}
+</body>{% endfor %}
+</bodies>
+        
