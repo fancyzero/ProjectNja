@@ -1,13 +1,15 @@
 <xml>
 	<level map_width="1024.00" map_height="768.00" >
 		<acting_range>
-<keyframe progress="0.00" pos="0.00,0.00" size="1024.00,800.00"/>
-<keyframe progress="100000.00" pos="0.00,0.00" size="1024.00,800.00"/>
+<keyframe progress="0.00" pos="0.00,0.00" size="1024.00,768.00"/>
+<keyframe progress="100000.00" pos="0.00,0.00" size="1024.00,768.00"/>
 		</acting_range>
 		<actions>
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_3" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="       " progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:bg1" layer="bg2" init_zorder="1" class="SSceneStaticObj" init_scale="1" init_position="756.92,473.60" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:bg1" layer="bg2" init_zorder="1" class="SSceneStaticObj" init_scale="1" init_position="584.26,442.81" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_3" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="0,0" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_4" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="802.30,796.63" progress="0.000000" init_rotation="180" />            
+			<action act="add_obj" sprite_desc="sprites/base.xml:bg1" layer="bg2" init_zorder="1" class="SSceneStaticObj" init_scale="1" init_position="1607.32,534.37" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:bg1" layer="bg2" init_zorder="1" class="SSceneStaticObj" init_scale="1" init_position="512,384" progress="0.000000" />
+
 		</actions>
 	</level>
 </xml>

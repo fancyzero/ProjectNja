@@ -27,17 +27,40 @@
         f->SetFriction(0);
         f = f->GetNext();
     }
+    [ self set_zorder:100];
+    m_player_side = ps_can_land_bottom;
     return self;
 }
 
 -(void) go_left
 {
     m_velocity = ccp( 0, 4000 );
+    if ( m_player_side != ps_can_land_top )
+    {
+    
+        [m_sprite_components[0] setFlipY:TRUE];
+        CGPoint anchor = m_sprite_components[0].anchorPointInPoints;
+        anchor.y = m_sprite_components[0].contentSize.height - anchor.y;
+        anchor.x /= m_sprite_components[0].contentSize.width;
+        anchor.y /= m_sprite_components[0].contentSize.height;
+        [ m_sprite_components[0] setAnchorPoint: anchor ];
+    }
+    m_player_side = ps_can_land_top;
 }
 
 -(void) go_right
 {
     m_velocity = ccp( 0, -4000 );
+    if ( m_player_side != ps_can_land_bottom )
+    {
+        [m_sprite_components[0] setFlipY:FALSE];
+        CGPoint anchor = m_sprite_components[0].anchorPointInPoints;
+        anchor.y = m_sprite_components[0].contentSize.height - anchor.y;
+        anchor.x /= m_sprite_components[0].contentSize.width;
+        anchor.y /= m_sprite_components[0].contentSize.height;
+        [ m_sprite_components[0] setAnchorPoint: anchor ];
+    }
+    m_player_side = ps_can_land_bottom;
 }
 
 -(void) on_begin_contact :( struct b2Contact* ) contact
@@ -101,20 +124,15 @@
     return 1;
 }
 
+
 -(void) update:(float)delta_time
 {
+    [ super update:delta_time];
     [ self apply_force_center:0 :m_velocity.x force_y:m_velocity.y ];
-    if ( fabs([ self get_physic_linear_velocity:0].y) >  0.1 )
-    {
-        m_sprite_components[0].scaleY = 1.5;
-        m_sprite_components[0].scaleX = 0.7;
-    }
-    else
-    {
-        m_sprite_components[0].scale = 1;
-    }
-    if ( [self get_physic_position:0].x < 100 )
-        [ self apply_force_center:0 :50 force_y:0];
+
+
+    //if ( [self get_physic_position:0].x < 100 )
+    [ self apply_force_center:0 :1000 force_y:0];
     //[self set_physic_linear_velocity:0 :m_velocity.x :m_velocity.y ];
 }
 @end

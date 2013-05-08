@@ -34,7 +34,7 @@
     hero = [ Hero new];
     hero.m_name = @"Hero";
 	CGPoint spawnpos;
-	spawnpos.x = 1024 /2 - 300;
+	spawnpos.x = 300;
 	spawnpos.y = 1024 / 2 ;
     [ hero set_physic_position:0 : spawnpos ];
     [ world add_gameobj:hero ];
@@ -57,6 +57,38 @@
 	
 }
 
+-(void) updaet_acting_range_physic
+{
+	float ptm = [GameBase get_ptm_ratio];
+	if ( m_acting_range_body_ == NULL )
+    {
+        b2BodyDef bodydef;
+        bodydef.type = b2_staticBody;
+        bodydef.position = b2Vec2(0,0);
+        b2Body* body = [GameBase get_game].m_world.m_physics_world->CreateBody(&bodydef);
+
+        float x1, y1,x2,y2;
+        x1 = 300/ptm;
+        y1 = 300/ptm;
+        x2 = (0 + 1024) / ptm;
+        y2 = (0 + 768) / ptm;
+        b2PolygonShape shape;
+        shape.SetAsBox((1024-300)/2.0/ptm, 768/2.0/ptm, b2Vec2(300/ptm + (1024-300)/2.0/ptm, 768/2.0/ptm), 0);
+        b2Filter filter;
+        filter.categoryBits=cg_acting_range;
+        filter.maskBits=cg_player1 | cg_player2 | cg_acting_range;
+        
+        b2Fixture* fix = body->CreateFixture(&shape,1);
+        fix->SetFriction( 0 );
+        fix->SetRestitution(0);
+        fix->SetFilterData(filter);
+
+        
+        m_acting_range_body_  = body;
+    }
+
+	
+}
 
 -(void)update:(float)delta_time
 {
@@ -64,42 +96,13 @@
 	
 	
 	// update acting range
-	//todo: optmize
-	std::vector<level_acting_range_keyframe>::const_iterator i;
-	level_acting_range_keyframe a,b;
-	
-	for ( i = m_acting_range_keyframes_.begin(); i != m_acting_range_keyframes_.end(); ++i)
-	{
-		b = *i;
-		if ( b.progress >= m_level_progress_ )
-			break;
-	}
-	if ( i != m_acting_range_keyframes_.begin())
-	{
-		a = (*(i-1));
-		CGRect rc_act;
-		if ( b.progress == a.progress )
-		{
-			[self set_acting_range:b.act_rect];
-			self->m_acting_range_velocity_ = ccp(0,0);
-		}
-		else
-		{
-			float alpha = (m_level_progress_ - a.progress) / (b.progress - a.progress);
-			rc_act.origin.x = a.act_rect.origin.x * (1- alpha) + b.act_rect.origin.x * alpha;
-			rc_act.origin.y = a.act_rect.origin.y * (1- alpha) + b.act_rect.origin.y * alpha;
-			rc_act.size.width = a.act_rect.size.width * (1- alpha) + b.act_rect.size.width * alpha;
-			rc_act.size.height = a.act_rect.size.height * (1- alpha) + b.act_rect.size.height * alpha;
-			self->m_acting_range_velocity_.x = (b.act_rect.origin.x - a.act_rect.origin.x) / (b.progress - a.progress);
-			self->m_acting_range_velocity_.y = (b.act_rect.origin.y - a.act_rect.origin.y) / (b.progress - a.progress);
-			[self set_acting_range:rc_act];
-		}
-		
-	}
-	else
-	{
-		[self set_acting_range:b.act_rect];
-	}
+	CGRect rc_act;
+    rc_act.origin = ccp(0,0);
+    rc_act.size.width = 1024;
+    rc_act.size.height = 768;
+
+    [self set_acting_range:rc_act];
+
 
 	if ( super.m_next_trigger < m_level_triggers.size() )
 	{

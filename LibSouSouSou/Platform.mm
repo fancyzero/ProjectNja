@@ -13,8 +13,14 @@
 -(int) init_default_values
 {
     [ super init_default_values];
-    [ self set_collision_filter:cg_player1 cat:cg_static ];
     return 0;
+}
+
+-(int) init_with_xml:(NSString *)filename
+{
+    [super init_with_xml:filename];
+    [ self set_collision_filter:cg_player1 | cg_player2 cat:cg_static];
+    return  0;
 }
 @end
 
