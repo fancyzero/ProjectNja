@@ -1,21 +1,54 @@
 <sprite_components>
     
-	<sprite_component name="brick">
+	<sprite_component name="earth_1">
 		<physics_def>
-			<body type="kinematic" url="pdb/main.xml:brick"/>
+			<body type="kinematic" url="pdb/main.xml:earth_1"/>
 		</physics_def>
 		<animation_def>
-			<sequence name="default" animated="true" texture="pic/main.plist" framenames="brick.png" framespeed="0"/>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="earth_1.png" framespeed="0"/>
 		</animation_def>
 	</sprite_component>
-	<sprite_component name="circle">
+	<sprite_component name="earth_2">
 		<physics_def>
-			<body type="dynamic" url="pdb/main.xml:pic1"/>
+			<body type="kinematic" url="pdb/main.xml:earth_2"/>
 		</physics_def>
 		<animation_def>
-			<sequence name="default" animated="true" texture="pic/main.plist" framenames="pic1.png" framespeed="0"/>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="earth_2.png" framespeed="0"/>
 		</animation_def>
 	</sprite_component>
+	<sprite_component name="earth_3">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:earth_3"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="earth_3.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
+	<sprite_component name="earth_4">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:earth_4"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="earth_4.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
+	<sprite_component name="ninja">
+		<physics_def>
+			<body type="dynamic" url="pdb/main.xml:ninja_run"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/ninja_run.plist" framenames="run_1.png,run_2.png,run_3.png,run_4.png" framespeed="0.08"/>
+		</animation_def>
+	</sprite_component>
+    
+	<sprite_component name="bg1">
+		<physics_def>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="false" texture="pic/bg.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
+    
 </sprite_components>
 
 

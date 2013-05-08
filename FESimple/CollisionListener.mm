@@ -43,30 +43,53 @@ void CollisionListener::BeginContact(b2Contact* contact)
 		spriteA = sprite_comp_A.m_parent;
 	if ( sprite_comp_B != NULL )
 		spriteB = sprite_comp_B.m_parent;
+
 	if ( spriteA != spriteB )
 	{
-		if ( m_collision_process_mode == collision_process_after_simulation )
-		{
-			m_collisions.push_back(myContact);
+        if ( spriteA )
+            [ spriteA on_begin_contact: contact ];
+        if ( spriteB )
+            [ spriteB on_begin_contact: contact ];
+        if ( contact->IsEnabled())
+        {
+            if ( m_collision_process_mode == collision_process_after_simulation )
+            {
+                m_collisions.push_back(myContact);
+            }
+            else
+            {
+                //NSLog(@"spriteA %@ spriteB %@", spriteA, spriteB);
+                //NSLog(@"spriteA dead %d spriteB dead %d", [spriteA isdead], [spriteB isdead]);
+                if ( ![spriteA isdead] && ![spriteB isdead] )
+                {
+                    [ spriteA collied_with:spriteB :&myContact ];
+                    [ spriteB collied_with:spriteA :&myContact ];
+                }
+            }
 		}
-		else
-		{
-			//NSLog(@"spriteA %@ spriteB %@", spriteA, spriteB);
-			//NSLog(@"spriteA dead %d spriteB dead %d", [spriteA isdead], [spriteB isdead]);
-			if ( ![spriteA isdead] && ![spriteB isdead] )
-			{
-				[ spriteA collied_with:spriteB :&myContact ];
-				[ spriteB collied_with:spriteA :&myContact ];
-			}
-		}
-		
 	}
     
 }
 
 void CollisionListener::EndContact(b2Contact* contact)
 {
-	Collision myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
+    assert ( (contact->GetFixtureA() != NULL) && (contact->GetFixtureB() != NULL) );
+    Collision myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
+	PhysicsSprite* sprite_comp_A = (PhysicsSprite*)myContact.fixtureA->GetUserData();
+	PhysicsSprite* sprite_comp_B = (PhysicsSprite*)myContact.fixtureB->GetUserData();
+	SpriteBase* spriteA = NULL;
+	SpriteBase* spriteB = NULL;
+	if ( sprite_comp_A != NULL )
+		spriteA = sprite_comp_A.m_parent;
+	if ( sprite_comp_B != NULL )
+		spriteB = sprite_comp_B.m_parent;
+
+    if ( spriteA )
+        [spriteA on_end_contact:contact];
+    
+    if ( spriteB )
+        [spriteB on_end_contact:contact];
+    
     std::vector<Collision>::iterator pos;
     pos = std::find(m_collisions.begin(), m_collisions.end(), myContact);
     if (pos != m_collisions.end())
@@ -90,9 +113,7 @@ void CollisionListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 			spriteB = sprite_comp_B.m_parent;
 		if ( spriteA != spriteB )
 		{
-
 			if ( [spriteA isdead] || [spriteB isdead] )
-				
 			{
 				contact->SetEnabled(false);
 			}

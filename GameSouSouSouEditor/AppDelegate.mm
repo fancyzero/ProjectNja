@@ -14,10 +14,10 @@
 #import "AppDelegate.h"
 #import "SaDEditor.h"
 #import "GameScene.h"
-#import "GameSad.h"
+#import "GameSouSouSou.h"
 #import "Level.h"
 #import "EditorCommon.h"
-#import "GameSadEditorLevel.h"
+#import "GameSouSouSouEditorLevel.h"
 
 typedef void *Cache;
 #import "obj_runtime_new.h"
@@ -176,9 +176,9 @@ void clear_other_params (NSMutableDictionary* init_params )
 		NSString* str = [url path];
 		SaDEditor* game = (SaDEditor*)[GameBase get_game];
 		[game open_level:str];
-		if ( [GameSad get_game].m_level != NULL )
+		if ( [GameSouSouSou get_game].m_level != NULL )
 		{
-			GameSadEditorLevel* lvl = (GameSadEditorLevel*)[GameSad get_game].m_level;
+			GameSouSouSouLevel* lvl = (GameSouSouSouLevel*)[GameSouSouSou get_game].m_level;
 			[max_progress setFloatValue:[ lvl get_max_level_progress ]];
 		}
     }
@@ -206,13 +206,13 @@ void clear_other_params (NSMutableDictionary* init_params )
 - (IBAction)on_undo:(id)sender
 {
 	SaDEditor* game = (SaDEditor*)[GameBase get_game];
-	[(GameSadEditorLevel*) game.m_level  pop_histroy];
+	[(GameSouSouSouEditorLevel*) game.m_level  pop_histroy];
 }
 
 - (IBAction)on_redo:(id)sender
 {
 	SaDEditor* game = (SaDEditor*)[GameBase get_game];
-	[(GameSadEditorLevel*) game.m_level  pop_redo_histroy];
+	[(GameSouSouSouEditorLevel*) game.m_level  pop_redo_histroy];
 }
 
 - (IBAction)toggleFullScreen: (id)sender
@@ -224,7 +224,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 - (IBAction)toggle_show_act_range:(id)sender
 {
 	NSMenuItem* item = (NSMenuItem*)sender;
-	GameSadEditorLevel* lvl = (GameSadEditorLevel*)[GameBase get_game].m_level;
+	GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
 	[lvl show_act_range: ![lvl is_act_range_showed]];
 	if ( [lvl is_act_range_showed] == TRUE )
 		[item setState:1];
@@ -234,7 +234,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 
 - (IBAction)on_level_progress_changed:(id)sender
 {
-	GameSadEditorLevel* lvl = (GameSadEditorLevel*)[GameBase get_game].m_level;
+	GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
 		float value = [sender floatValue];
 	[ lvl set_progress :value];
 
@@ -280,7 +280,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 	NSString* identifier = [sender identifier];
 	NSString* strval = [sender stringValue];
 
-	GameSadEditorLevel* lvl = (GameSadEditorLevel*)[GameBase get_game].m_level;
+	GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
 	EditorController* edctrl = (EditorController*)[ (SaDEditor*)[GameBase get_game] get_controller];
 	
 	if ( [edctrl get_edit_mode] == sed_modify )
@@ -518,7 +518,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 			[trigger->get_params() setObject:new_value forKey:old_key];
 		}
 		[tableView reloadData];
-		GameSadEditorLevel* lvl = (GameSadEditorLevel*)[GameBase get_game].m_level;
+		GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
 		[lvl  on_trigger_changed: trigger->id];
 
 		break;

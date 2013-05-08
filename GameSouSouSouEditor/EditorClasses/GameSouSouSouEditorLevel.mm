@@ -1,14 +1,14 @@
 //
-//  GameSadEditorLevel.m
+//  GameSouSouSouEditorLevel.m
 //  GameSaDEditor
 //
 //  Created by Zero Fancy on 12-11-24.
 //
 //
 
-#import "GameSadEditorLevel.h"
+#import "GameSouSouSouEditorLevel.h"
 #import "SaDEditor.h"
-#import "BGLayer.h"
+
 #include <vector>
 #import "World.h"
 #import "SpriteXMLParser.h"
@@ -20,7 +20,7 @@
 #import "SpriteProxy.h"
 #import	"EditorVisualizer.h"
 #import "GLES-Render.h"
-@implementation GameSadEditorLevel
+@implementation GameSouSouSouEditorLevel
 
 -(void)reset
 {
@@ -37,7 +37,7 @@
 	ar.size.width = 1000;
 	ar.size.height = 700;
 	[self set_acting_range: ar];
-	if ( 0 )
+	if ( 1 )
 	{
 		physics_debug_sprite* pds = [ physics_debug_sprite new ];
 		pds.zOrder = 200;

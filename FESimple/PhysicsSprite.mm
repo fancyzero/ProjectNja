@@ -25,7 +25,12 @@
 @synthesize m_phy_body = m_phy_body_;
 @synthesize m_color_override_endtime = m_color_override_endtime_;
 
+float m_physics_loading_scale = 0.5;
 
++(void) set_physics_loading_scale:(float) s
+{
+    m_physics_loading_scale = s;
+}
 
 -(void) setM_position:(CGPoint)pos
 {
@@ -230,14 +235,14 @@
 		if ( s->type == pst_circle )
 		{
 			cs.m_type = b2Shape::e_circle;
-			cs.m_radius = s->radius * scaleX_/ptm;
-			cs.m_p.x = s->offset_x * scaleX_/ptm;
-			cs.m_p.y = s->offset_y * scaleY_/ptm;
+			cs.m_radius = s->radius * scaleX_ * m_physics_loading_scale / ptm;
+			cs.m_p.x = s->offset_x * scaleX_ * m_physics_loading_scale / ptm;
+			cs.m_p.y = s->offset_y * scaleY_ * m_physics_loading_scale / ptm;
 			b2s = &cs;
 		}
 		else if ( s->type == pst_box)
 		{
-			ps.SetAsBox(s->w * scaleX_/ptm, s->h * scaleY_/ptm,b2Vec2(s->offset_x*scaleX_/ptm,s->offset_y*scaleY_/ptm), s->rotation);
+			ps.SetAsBox(s->w * scaleX_ * m_physics_loading_scale / ptm, s->h * scaleY_ * m_physics_loading_scale / ptm,b2Vec2(s->offset_x*scaleX_*m_physics_loading_scale/ptm,s->offset_y*scaleY_*m_physics_loading_scale/ptm), s->rotation);
 			ps.m_type = b2Shape::e_polygon;
 			b2s = &ps;
 		}
@@ -248,9 +253,9 @@
 			b2Vec2* p = vecs;
 			for( std::vector<float>::const_iterator i = s->float_array.begin(); i != s->float_array.end(); )
 			{
-				p->x = (*i)* scaleX_/ptm;
+				p->x = (*i)* scaleX_*m_physics_loading_scale/ptm;
 				++i;
-				p->y = (*i)* scaleY_/ptm;
+				p->y = (*i)* scaleY_*m_physics_loading_scale/ptm;
 				++i;
 				p++;
 			}

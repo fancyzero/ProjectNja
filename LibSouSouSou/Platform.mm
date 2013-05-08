@@ -10,17 +10,16 @@
 #import "Common.h"
 #include <Box2D.h>
 @implementation Platform
--(id) init
+-(int) init_default_values
 {
-    self = [super init];
-    [ self init_with_xml:@"sprites/base.xml:brick" ];
-    [ self set_collision_filter:cg_player1 cat:cg_static];
-    b2Fixture *f = m_sprite_components[0].m_phy_body->GetFixtureList();
-    while( f )
-    {
-        f->SetFriction(0);
-        f = f->GetNext();
-    }
-    return self;
+    [ super init_default_values];
+    [ self set_collision_filter:cg_player1 cat:cg_static ];
+    return 0;
 }
+@end
+
+@implementation PassthroughPlatform
+
+
+
 @end

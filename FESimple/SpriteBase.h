@@ -103,7 +103,8 @@ typedef std::vector<drop_desc>		DROPDESCS;
 //logic
 @property (nonatomic, assign) float        m_health;
 
-
+-(void) on_begin_contact :( struct b2Contact* ) contact;
+-(void) on_end_contact :( struct b2Contact* ) contact;
 -(int) init_default_values;
 -(int) post_init;
 -(bool) is_batchable;

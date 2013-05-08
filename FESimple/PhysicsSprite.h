@@ -150,7 +150,7 @@ struct sprite_def
 @property (nonatomic, assign) SpriteBase* m_parent;
 @property (nonatomic, assign) CGPoint	m_offset;
 @property (nonatomic, readonly) struct b2Body* m_phy_body;
-
++(void) set_physics_loading_scale:(float) s;
 -(void) set_color_override :( ccColor4F ) color duration:(float) duration;
 -(void) set_shader_parameter:(const GLchar*)name param_color:(ccColor4F) c;
 -(void) set_shader_parameter:(const GLchar*)name param_f1:(float) f1;

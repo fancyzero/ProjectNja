@@ -1,14 +1,14 @@
 //
-//  GameSadEditorLevel.h
+//  GameSouSouSouEditorLevel.h
 //  GameSaDEditor
 //
 //  Created by Zero Fancy on 12-11-24.
 //
 //
 #import <vector>
-#import "GameSadLevel.h"
+#import "GameSouSouSouLevel.h"
 #import <stack>
-@interface GameSadEditorLevel : LevelBase
+@interface GameSouSouSouEditorLevel : LevelBase
 {
 	BOOL m_show_act_range;
 	std::stack<std::vector<level_progress_trigger> > m_op_histroy;

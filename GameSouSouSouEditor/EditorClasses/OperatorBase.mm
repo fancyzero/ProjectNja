@@ -10,7 +10,7 @@
 #import "GameBase.h"
 #import "cocos2d.h"
 #import "GameScene.h"
-#import "GameSadEditorLevel.h"
+#import "GameSouSouSouEditorLevel.h"
 #import "EditorCommon.h"
 #import "AppDelegate.h"
 #import "SpriteProxy.h"
@@ -138,7 +138,7 @@
 	m_moved_since_mouse_down_ = FALSE;
 	std::vector<SpriteBase*> current_selected_sprites = m_selected_sprites.get_selection();
 	std::vector<SpriteBase*>::iterator it;
-    GameSadEditorLevel* edlvl = (GameSadEditorLevel*)[GameBase get_game].m_level;
+    GameSouSouSouEditorLevel* edlvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
     [self unselect_all];
 
 	std::vector<SpriteBase*> selected_sprites = [edlvl pick_sprite:event.loc_in_view :0];
@@ -163,7 +163,7 @@
 	{
 		if ( m_moved_since_mouse_down_ == FALSE )
 		{
-			[(GameSadEditorLevel*) [GameBase get_game].m_level push_histroy];
+			[(GameSouSouSouEditorLevel*) [GameBase get_game].m_level push_histroy];
 		}
 		m_moved_since_mouse_down_ = TRUE;
 		std::vector<SpriteBase*> selected_sprites = m_selected_sprites.get_selection();
@@ -232,7 +232,7 @@
 	}
     if ( event.key == 51 )
     {
-		GameSadEditorLevel* lvl = (GameSadEditorLevel*)[GameBase get_game].m_level;
+		GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
 		[lvl push_histroy];
         std::vector<int> trigger_ids;
         //get all trigger for these sprites
@@ -300,7 +300,7 @@
 
 	//then add it into level	
 	//int newtriggerid =
-	[(GameSadEditorLevel*)[GameBase get_game].m_level add_trigger_at_runtime:trigger];
+	[(GameSouSouSouEditorLevel*)[GameBase get_game].m_level add_trigger_at_runtime:trigger];
 	
 	//newtriggerid;
 	return TRUE;

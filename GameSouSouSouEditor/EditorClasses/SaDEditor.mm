@@ -9,9 +9,9 @@
 #import "SaDEditor.h"
 #import "cocos2d.h"
 #import "SpriteDefManager.h"
-#import "GameSadEditorLevel.h"
+#import "GameSouSouSouEditorLevel.h"
 #import "EditorController.h"
-#import "GameSadEditorLevel.h"
+
 @implementation SaDEditor
 
 
@@ -87,7 +87,7 @@
 	[super init_game];
 
 	m_controller_ = [EditorController new];
-    m_level_ = [GameSadEditorLevel new];
+    m_level_ = [GameSouSouSouEditorLevel new];
     [ m_level_ reset];
 	//[ m_level_ load_from_file:@"levels/test_level.xml"];
 }
@@ -134,7 +134,7 @@
 		[ m_current_level_filename release ];
 	m_current_level_filename = [filename copy];
 	[m_current_level_filename retain];
-	GameSadEditorLevel* lvl = (GameSadEditorLevel*) self.m_level ;
+	GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*) self.m_level ;
 	[lvl save_to_file:filename];
 
 }

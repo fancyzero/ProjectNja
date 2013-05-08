@@ -744,6 +744,16 @@ unsigned long long g_sprite_uid = 0;
 	return m_layer_;
 }
 
+-(void) on_begin_contact :( struct b2Contact* ) contact
+{
+    
+}
+
+-(void) on_end_contact :( struct b2Contact* ) contact
+{
+    
+}
+
 -(bool) is_batchable
 {
 	return m_batchable;

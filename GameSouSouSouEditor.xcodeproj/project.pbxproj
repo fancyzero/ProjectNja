@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04186FD7173928980055B83F /* CDXMacOSXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 04186FD4173928980055B83F /* CDXMacOSXSupport.m */; };
+		04186FD8173928980055B83F /* CDXPropertyModifierAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 04186FD6173928980055B83F /* CDXPropertyModifierAction.m */; };
+		04186FDD17392EA50055B83F /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04186FDA17392EA50055B83F /* Platform.mm */; };
+		04186FDE17392EA50055B83F /* PlatformBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04186FDC17392EA50055B83F /* PlatformBase.mm */; };
+		04186FEB173930190055B83F /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 04186FDF173930190055B83F /* fonts */; };
+		04186FEC173930190055B83F /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE0173930190055B83F /* fps_images-hd.png */; };
+		04186FED173930190055B83F /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE1173930190055B83F /* fps_images-ipadhd.png */; };
+		04186FEE173930190055B83F /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE2173930190055B83F /* fps_images.png */; };
+		04186FEF173930190055B83F /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE3173930190055B83F /* levels */; };
+		04186FF0173930190055B83F /* particles in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE4173930190055B83F /* particles */; };
+		04186FF1173930190055B83F /* pdb in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE5173930190055B83F /* pdb */; };
+		04186FF2173930190055B83F /* pic in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE6173930190055B83F /* pic */; };
+		04186FF3173930190055B83F /* sfx in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE7173930190055B83F /* sfx */; };
+		04186FF4173930190055B83F /* shaders in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE8173930190055B83F /* shaders */; };
+		04186FF5173930190055B83F /* sprite_components in Resources */ = {isa = PBXBuildFile; fileRef = 04186FE9173930190055B83F /* sprite_components */; };
+		04186FF6173930190055B83F /* sprites in Resources */ = {isa = PBXBuildFile; fileRef = 04186FEA173930190055B83F /* sprites */; };
 		0423ECA8163AEFF500A344A4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0423ECA7163AEFF500A344A4 /* QuartzCore.framework */; };
 		0423ECAA163AEFF500A344A4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0423ECA9163AEFF500A344A4 /* OpenGL.framework */; };
 		0423ECAC163AEFF500A344A4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0423ECAB163AEFF500A344A4 /* OpenAL.framework */; };
@@ -200,7 +216,7 @@
 		0477937C173638DC00BB85B2 /* EditorCommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04779361173638DC00BB85B2 /* EditorCommon.mm */; };
 		0477937D173638DC00BB85B2 /* EditorController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04779363173638DC00BB85B2 /* EditorController.mm */; };
 		0477937E173638DC00BB85B2 /* EditorVisualizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04779365173638DC00BB85B2 /* EditorVisualizer.mm */; };
-		0477937F173638DC00BB85B2 /* GameSadEditorLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04779367173638DC00BB85B2 /* GameSadEditorLevel.mm */; };
+		0477937F173638DC00BB85B2 /* GameSouSouSouEditorLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04779367173638DC00BB85B2 /* GameSouSouSouEditorLevel.mm */; };
 		04779380173638DC00BB85B2 /* OperatorBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04779369173638DC00BB85B2 /* OperatorBase.mm */; };
 		04779381173638DC00BB85B2 /* SaDEditor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477936B173638DC00BB85B2 /* SaDEditor.mm */; };
 		04779382173638DC00BB85B2 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477936D173638DC00BB85B2 /* GLES-Render.mm */; };
@@ -215,6 +231,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04186FD3173928980055B83F /* CDXMacOSXSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXMacOSXSupport.h; sourceTree = "<group>"; };
+		04186FD4173928980055B83F /* CDXMacOSXSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXMacOSXSupport.m; sourceTree = "<group>"; };
+		04186FD5173928980055B83F /* CDXPropertyModifierAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXPropertyModifierAction.h; sourceTree = "<group>"; };
+		04186FD6173928980055B83F /* CDXPropertyModifierAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXPropertyModifierAction.m; sourceTree = "<group>"; };
+		04186FD917392EA50055B83F /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
+		04186FDA17392EA50055B83F /* Platform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
+		04186FDB17392EA50055B83F /* PlatformBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformBase.h; sourceTree = "<group>"; };
+		04186FDC17392EA50055B83F /* PlatformBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlatformBase.mm; sourceTree = "<group>"; };
+		04186FDF173930190055B83F /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = Resources/fonts; sourceTree = SOURCE_ROOT; };
+		04186FE0173930190055B83F /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "Resources/fps_images-hd.png"; sourceTree = SOURCE_ROOT; };
+		04186FE1173930190055B83F /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-ipadhd.png"; path = "Resources/fps_images-ipadhd.png"; sourceTree = SOURCE_ROOT; };
+		04186FE2173930190055B83F /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/fps_images.png; sourceTree = SOURCE_ROOT; };
+		04186FE3173930190055B83F /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = Resources/levels; sourceTree = SOURCE_ROOT; };
+		04186FE4173930190055B83F /* particles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = particles; path = Resources/particles; sourceTree = SOURCE_ROOT; };
+		04186FE5173930190055B83F /* pdb */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pdb; path = Resources/pdb; sourceTree = SOURCE_ROOT; };
+		04186FE6173930190055B83F /* pic */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pic; path = Resources/pic; sourceTree = SOURCE_ROOT; };
+		04186FE7173930190055B83F /* sfx */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sfx; path = Resources/sfx; sourceTree = SOURCE_ROOT; };
+		04186FE8173930190055B83F /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shaders; path = Resources/shaders; sourceTree = SOURCE_ROOT; };
+		04186FE9173930190055B83F /* sprite_components */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sprite_components; path = Resources/sprite_components; sourceTree = SOURCE_ROOT; };
+		04186FEA173930190055B83F /* sprites */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sprites; path = Resources/sprites; sourceTree = SOURCE_ROOT; };
 		0423ECA3163AEFF500A344A4 /* GameSouSouSouEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameSouSouSouEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0423ECA7163AEFF500A344A4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0423ECA9163AEFF500A344A4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -616,8 +652,8 @@
 		04779363173638DC00BB85B2 /* EditorController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditorController.mm; sourceTree = "<group>"; };
 		04779364173638DC00BB85B2 /* EditorVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorVisualizer.h; sourceTree = "<group>"; };
 		04779365173638DC00BB85B2 /* EditorVisualizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditorVisualizer.mm; sourceTree = "<group>"; };
-		04779366173638DC00BB85B2 /* GameSadEditorLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSadEditorLevel.h; sourceTree = "<group>"; };
-		04779367173638DC00BB85B2 /* GameSadEditorLevel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameSadEditorLevel.mm; sourceTree = "<group>"; };
+		04779366173638DC00BB85B2 /* GameSouSouSouEditorLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSouSouSouEditorLevel.h; sourceTree = "<group>"; };
+		04779367173638DC00BB85B2 /* GameSouSouSouEditorLevel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameSouSouSouEditorLevel.mm; sourceTree = "<group>"; };
 		04779368173638DC00BB85B2 /* OperatorBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperatorBase.h; sourceTree = "<group>"; };
 		04779369173638DC00BB85B2 /* OperatorBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OperatorBase.mm; sourceTree = "<group>"; };
 		0477936A173638DC00BB85B2 /* SaDEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaDEditor.h; sourceTree = "<group>"; };
@@ -653,6 +689,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04186FD2173928980055B83F /* CocosDenshionExtras */ = {
+			isa = PBXGroup;
+			children = (
+				04186FD3173928980055B83F /* CDXMacOSXSupport.h */,
+				04186FD4173928980055B83F /* CDXMacOSXSupport.m */,
+				04186FD5173928980055B83F /* CDXPropertyModifierAction.h */,
+				04186FD6173928980055B83F /* CDXPropertyModifierAction.m */,
+			);
+			path = CocosDenshionExtras;
+			sourceTree = "<group>";
+		};
 		0423EC98163AEFF500A344A4 = {
 			isa = PBXGroup;
 			children = (
@@ -743,6 +790,7 @@
 		0477912D1736383D00BB85B2 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				04186FD2173928980055B83F /* CocosDenshionExtras */,
 				0477912E1736383D00BB85B2 /* Box2D */,
 				047791931736383E00BB85B2 /* CocosDenshion */,
 				0477919D1736383E00BB85B2 /* LICENSE_Box2D.txt */,
@@ -1235,6 +1283,10 @@
 		047792871736383E00BB85B2 /* LibSouSouSou */ = {
 			isa = PBXGroup;
 			children = (
+				04186FD917392EA50055B83F /* Platform.h */,
+				04186FDA17392EA50055B83F /* Platform.mm */,
+				04186FDB17392EA50055B83F /* PlatformBase.h */,
+				04186FDC17392EA50055B83F /* PlatformBase.mm */,
 				047792881736383E00BB85B2 /* Controller.h */,
 				047792891736383E00BB85B2 /* Controller.mm */,
 				0477928A1736383E00BB85B2 /* ControllerBase.h */,
@@ -1279,8 +1331,8 @@
 				04779363173638DC00BB85B2 /* EditorController.mm */,
 				04779364173638DC00BB85B2 /* EditorVisualizer.h */,
 				04779365173638DC00BB85B2 /* EditorVisualizer.mm */,
-				04779366173638DC00BB85B2 /* GameSadEditorLevel.h */,
-				04779367173638DC00BB85B2 /* GameSadEditorLevel.mm */,
+				04779366173638DC00BB85B2 /* GameSouSouSouEditorLevel.h */,
+				04779367173638DC00BB85B2 /* GameSouSouSouEditorLevel.mm */,
 				04779368173638DC00BB85B2 /* OperatorBase.h */,
 				04779369173638DC00BB85B2 /* OperatorBase.mm */,
 				0477936A173638DC00BB85B2 /* SaDEditor.h */,
@@ -1292,6 +1344,18 @@
 		0477936F173638DC00BB85B2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				04186FDF173930190055B83F /* fonts */,
+				04186FE0173930190055B83F /* fps_images-hd.png */,
+				04186FE1173930190055B83F /* fps_images-ipadhd.png */,
+				04186FE2173930190055B83F /* fps_images.png */,
+				04186FE3173930190055B83F /* levels */,
+				04186FE4173930190055B83F /* particles */,
+				04186FE5173930190055B83F /* pdb */,
+				04186FE6173930190055B83F /* pic */,
+				04186FE7173930190055B83F /* sfx */,
+				04186FE8173930190055B83F /* shaders */,
+				04186FE9173930190055B83F /* sprite_components */,
+				04186FEA173930190055B83F /* sprites */,
 				04779370173638DC00BB85B2 /* InfoPlist.strings */,
 				04779372173638DC00BB85B2 /* MainMenu.xib */,
 				04779374173638DC00BB85B2 /* Info.plist */,
@@ -1367,6 +1431,18 @@
 				04779386173638DC00BB85B2 /* blocks.png in Resources */,
 				04779387173638DC00BB85B2 /* fps_images.png in Resources */,
 				04779388173638DC00BB85B2 /* icon.icns in Resources */,
+				04186FEB173930190055B83F /* fonts in Resources */,
+				04186FEC173930190055B83F /* fps_images-hd.png in Resources */,
+				04186FED173930190055B83F /* fps_images-ipadhd.png in Resources */,
+				04186FEE173930190055B83F /* fps_images.png in Resources */,
+				04186FEF173930190055B83F /* levels in Resources */,
+				04186FF0173930190055B83F /* particles in Resources */,
+				04186FF1173930190055B83F /* pdb in Resources */,
+				04186FF2173930190055B83F /* pic in Resources */,
+				04186FF3173930190055B83F /* sfx in Resources */,
+				04186FF4173930190055B83F /* shaders in Resources */,
+				04186FF5173930190055B83F /* sprite_components in Resources */,
+				04186FF6173930190055B83F /* sprites in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1556,12 +1632,16 @@
 				0477937C173638DC00BB85B2 /* EditorCommon.mm in Sources */,
 				0477937D173638DC00BB85B2 /* EditorController.mm in Sources */,
 				0477937E173638DC00BB85B2 /* EditorVisualizer.mm in Sources */,
-				0477937F173638DC00BB85B2 /* GameSadEditorLevel.mm in Sources */,
+				0477937F173638DC00BB85B2 /* GameSouSouSouEditorLevel.mm in Sources */,
 				04779380173638DC00BB85B2 /* OperatorBase.mm in Sources */,
 				04779381173638DC00BB85B2 /* SaDEditor.mm in Sources */,
 				04779382173638DC00BB85B2 /* GLES-Render.mm in Sources */,
 				04779389173638DC00BB85B2 /* main.m in Sources */,
 				0477938A173638DC00BB85B2 /* obj_runtime_new.m in Sources */,
+				04186FD7173928980055B83F /* CDXMacOSXSupport.m in Sources */,
+				04186FD8173928980055B83F /* CDXPropertyModifierAction.m in Sources */,
+				04186FDD17392EA50055B83F /* Platform.mm in Sources */,
+				04186FDE17392EA50055B83F /* PlatformBase.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

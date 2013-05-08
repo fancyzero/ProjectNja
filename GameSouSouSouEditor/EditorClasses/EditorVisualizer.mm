@@ -9,11 +9,11 @@
 #import "EditorVisualizer.h"
 #import	"GameBase.h"
 #import	"World.h"
-#import	"GameSadEditorLevel.h"
+#import	"GameSouSouSouEditorLevel.h"
 @implementation EditorVisualizer
 -(void) draw
 {
-	GameSadEditorLevel* lvl = (GameSadEditorLevel*)[GameBase get_game].m_level;
+	GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
 	[lvl draw_acting_range];
 	//[lvl draw_selected_mark];
 }

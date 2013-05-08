@@ -117,29 +117,7 @@
 		}
 	}
     
-    if ( rand() %2 == 1 )
-    { 
-        Platform* p = [ Platform new ];
-
-        int side = rand() % 3;
-        float y = 0;
-        switch ( side )
-        {
-            case 0:
-                y = 30;
-                break;
-            case 1:
-                y = 768/2;
-                break;
-            case 2:
-                y = 700;
-                
-        }
-        [ p set_physic_position:0 :ccp( 1000, y)];
-        [p set_physic_linear_velocity:0 :-10 :0 ];
-        [[ GameBase get_game ].m_world add_gameobj:p];
-        
-    }
+ 
 }
 
 

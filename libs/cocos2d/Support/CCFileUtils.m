@@ -281,7 +281,11 @@ NSInteger ccLoadFileIntoMemory(const char *filename, unsigned char **out)
 
 	*resolutionType = kCCResolutionMac;
 
-	ret = [self getPath:relPath forSuffix:@""];
+	ret = [self getPath:relPath forSuffix:@"-ipad"];
+    if ( !ret )
+    {
+        ret = [self getPath:relPath forSuffix:@""];        
+    }
 
 #endif // __CC_PLATFORM_MAC
 	

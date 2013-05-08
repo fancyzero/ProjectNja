@@ -40,6 +40,66 @@
     m_velocity = ccp( 0, -4000 );
 }
 
+-(void) on_begin_contact :( struct b2Contact* ) contact
+{
+    b2Fixture* fa = contact->GetFixtureA();
+    b2Fixture* fb = contact->GetFixtureB();
+	PhysicsSprite* sprite_comp_A = (PhysicsSprite*)fa->GetUserData();
+	PhysicsSprite* sprite_comp_B = (PhysicsSprite*)fb->GetUserData();
+	SpriteBase* spriteA = NULL;
+	SpriteBase* spriteB = NULL;
+	if ( sprite_comp_A != NULL )
+		spriteA = sprite_comp_A.m_parent;
+	if ( sprite_comp_B != NULL )
+		spriteB = sprite_comp_B.m_parent;
+    SpriteBase* other;
+    if ( spriteA != self )
+        other = spriteB;
+    else
+        other = spriteA;
+    if ( other != NULL)
+    {
+        if ( [other isKindOfClass:[PlatformBase class]] )
+        {
+            PlatformBase* platform = (PlatformBase*) other;
+            switch ( [platform get_side] )
+            {
+                case ps_top:
+                    if (m_player_side == ps_can_land_bottom )
+                        contact->SetEnabled( false );
+                    break;
+                case ps_bottom:
+                    if (m_player_side == ps_can_land_top )
+                        contact->SetEnabled( false );
+                case ps_passable_top:
+                    if (m_player_side == ps_can_land_bottom )
+                        contact->SetEnabled( false );
+                    break;
+                case ps_passable_bottom:
+                    if (m_player_side == ps_can_land_top )
+                        contact->SetEnabled( false );
+                default:
+                    assert(0);
+            }
+        }
+    }
+        
+}
+
+-(void) on_end_contact :( struct b2Contact* ) contact
+{
+    
+}
+
+
+-(int) collied_with:(SpriteBase *)other :(Collision*) collision
+{
+    if ( [ other isKindOfClass:[PlatformBase class] ] )
+    {
+        
+    }
+    return 1;
+}
 
 -(void) update:(float)delta_time
 {

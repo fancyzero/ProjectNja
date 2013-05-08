@@ -10,7 +10,7 @@
 #import "GameBase.h"
 #import <vector>
 #include <string>
-@class GameSadEditorLevel;
+@class GameSouSouSouEditorLevel;
 @class ControllerBase;
 @class SpriteBase;
 

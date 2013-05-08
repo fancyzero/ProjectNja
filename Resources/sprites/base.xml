@@ -1,12 +1,35 @@
 <sprites>
-    <sprite name="brick" >
+    <sprite name="earth_1" >
 		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:brick" />
+			<sprite_component desc="sprite_components/base.xml:earth_1" />
 		</sprite_components>
     </sprite>
+    <sprite name="earth_2" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:earth_1" />
+		</sprite_components>
+    </sprite>
+    <sprite name="earth_3" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:earth_1" />
+		</sprite_components>
+    </sprite>
+    <sprite name="earth_4" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:earth_1" />
+		</sprite_components>
+    </sprite>
+    
     <sprite name="ninja" >
 		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:circle" />
+			<sprite_component desc="sprite_components/base.xml:ninja" />
 		</sprite_components>
     </sprite>
+    
+    <sprite name="bg1" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:bg1" />
+		</sprite_components>
+    </sprite>
+    
 </sprites>
