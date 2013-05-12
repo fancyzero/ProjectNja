@@ -165,6 +165,8 @@ struct sprite_def
 -(void) set_physic_rotation:(float) angle;
 -(void) set_physic_linear_velocity: (float) x :(float) y;
 -(void) set_physic_fixed_rotation: (bool) fixed;
+-(void) set_physic_friction:(float) f;
+-(void) set_physic_restitution:(float) r;
 -(void) apply_impulse:(float)speed_x :(float)speed_y;
 -(void) apply_impulse_at_world_location:(float)speed_x :(float)speed_y :(float) loc_x :(float) loc_y;
 -(void) apply_force_center:(float)force_x force_y:(float)force_y;

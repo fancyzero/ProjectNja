@@ -226,6 +226,8 @@
 		04563E581734DFAF005BF488 /* SSceneStaticObj.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04563E571734DFAF005BF488 /* SSceneStaticObj.mm */; };
 		0477938D17364CB200BB85B2 /* PlatformBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477938C17364CB200BB85B2 /* PlatformBase.mm */; };
 		0477939017364CD200BB85B2 /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477938F17364CD200BB85B2 /* Platform.mm */; };
+		04E0D138173E8AC200502491 /* icon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E0D134173E84A500502491 /* icon_small.png */; };
+		04E0D139173E8AD300502491 /* icon_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E0D136173E84B100502491 /* icon_big.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -659,6 +661,8 @@
 		0477938C17364CB200BB85B2 /* PlatformBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlatformBase.mm; sourceTree = "<group>"; };
 		0477938E17364CD200BB85B2 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		0477938F17364CD200BB85B2 /* Platform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
+		04E0D134173E84A500502491 /* icon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_small.png; sourceTree = "<group>"; };
+		04E0D136173E84B100502491 /* icon_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_big.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -684,6 +688,8 @@
 		0456395B1734AA0E005BF488 = {
 			isa = PBXGroup;
 			children = (
+				04E0D136173E84B100502491 /* icon_big.png */,
+				04E0D134173E84A500502491 /* icon_small.png */,
 				04563BE71734AD87005BF488 /* FESimple */,
 				04563C191734AD87005BF488 /* LibSouSouSou */,
 				045639791734AA0E005BF488 /* GameSouSouSou */,
@@ -1420,6 +1426,8 @@
 				04563E541734DA04005BF488 /* sprite_components in Resources */,
 				04563E551734DA04005BF488 /* sprites in Resources */,
 				042E7A0F17363748003D6FD7 /* Default-568h@2x.png in Resources */,
+				04E0D138173E8AC200502491 /* icon_small.png in Resources */,
+				04E0D139173E8AD300502491 /* icon_big.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,17 +6,17 @@
     </sprite>
     <sprite name="earth_2" >
 		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:earth_1" />
+			<sprite_component desc="sprite_components/base.xml:earth_2" />
 		</sprite_components>
     </sprite>
     <sprite name="earth_3" >
 		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:earth_1" />
+			<sprite_component desc="sprite_components/base.xml:earth_3" />
 		</sprite_components>
     </sprite>
     <sprite name="earth_4" >
 		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:earth_1" />
+			<sprite_component desc="sprite_components/base.xml:earth_4" />
 		</sprite_components>
     </sprite>
     
@@ -32,4 +32,20 @@
 		</sprite_components>
     </sprite>
     
+    
+    <sprite name="rock_1" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:rock_1" />
+		</sprite_components>
+    </sprite>
+    <sprite name="rock_2" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:rock_2" />
+		</sprite_components>
+    </sprite>
+    <sprite name="rock_3" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:rock_3" />
+		</sprite_components>
+    </sprite>
 </sprites>

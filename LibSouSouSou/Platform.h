@@ -9,8 +9,11 @@
 #import "PlatformBase.h"
 
 @interface Platform : PlatformBase
+{
+
+}
+
+
 @end
 
-@interface PassthroughPlatform : Platform
-@end
 

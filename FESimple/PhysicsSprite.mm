@@ -154,7 +154,7 @@ float m_physics_loading_scale = 0.5;
 			else
 			{
                 // TODO:  Inpixels or InPoints?
-				frame = [ CCSpriteFrame frameWithTexture:tex rect:CGRectMake( 0,0, tex.contentSizeInPixels.width, tex.contentSizeInPixels.height )];
+				frame = [ CCSpriteFrame frameWithTexture:tex rect:CGRectMake( 0,0, tex.contentSize.width, tex.contentSize.height )];
 				//NSLog(@"frame ratain count:%d",[frame retainCount]);
 
 				[Frames addObject:frame];
@@ -579,6 +579,33 @@ float m_physics_loading_scale = 0.5;
 	else
 	{
 		return ret;
+	}
+}
+-(void) set_physic_friction:(float) f
+{
+	if ( m_phy_body_ )
+	{
+		b2Fixture* fix = m_phy_body_->GetFixtureList();
+		while (fix)
+		{
+            fix->SetFriction(f);
+			fix = fix->GetNext();
+		}
+        
+	}
+}
+
+-(void) set_physic_restitution:(float) r
+{
+	if ( m_phy_body_ )
+	{
+		b2Fixture* fix = m_phy_body_->GetFixtureList();
+		while (fix)
+		{
+            fix->SetRestitution(r);
+			fix = fix->GetNext();
+		}
+        
 	}
 }
 

@@ -8,7 +8,7 @@
 
 #import "GameObjBase.h"
 #include <vector>
-
+#include "SpriteXMLParser.h"
 enum trigger_action_type
 {
     ta_unknown,
@@ -90,3 +90,17 @@ struct level_acting_range_keyframe
 @property (nonatomic, assign) int	m_next_trigger;
 @end
 
+@interface LevelParser : SPriteParserBase
+{
+@public
+	LevelBase*			m_level;
+	float				m_current_progress_parsed;
+    float               m_progress_offset;
+    CGPoint             m_position_offset;
+}
+
+-(void) set_progres_offset:(float) offset;
+-(void) set_position_offset:(CGPoint) offset;
+-(void) on_node_begin:(NSString*) cur_path  nodename:(NSString *)node_name attributes:(NSDictionary *)attributes;
+-(void) on_node_end:(NSString*) cur_path  nodename:(NSString* ) node_name;
+@end

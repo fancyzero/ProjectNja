@@ -68,7 +68,7 @@
 	[super init_game];
     m_level_ = [GameSouSouSouLevel new];
     [ m_level_ reset];
-	[ m_level_ load_from_file:@"levels/sector1.xml"];
+
 }
 
 -(void) init_duel

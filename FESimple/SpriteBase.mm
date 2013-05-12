@@ -326,6 +326,30 @@ unsigned long long g_sprite_uid = 0;
 {
 }
 
+-(void) set_physic_friction:(float) f
+{
+	for ( SPRITECOMPONENTS::iterator it = m_sprite_components.begin(); it != m_sprite_components.end(); ++it )
+	{
+		
+		if (*it != NULL )
+		{
+			[(*it) set_physic_friction: f];
+		}
+	}
+}
+
+-(void) set_physic_restitution:(float) r
+{
+	for ( SPRITECOMPONENTS::iterator it = m_sprite_components.begin(); it != m_sprite_components.end(); ++it )
+	{
+		
+		if (*it != NULL )
+		{
+			[(*it) set_physic_restitution: r];
+		}
+	}
+}
+
 -(void) set_collision_filter:(int)mask  cat:(int) cat
 {
 	for ( SPRITECOMPONENTS::iterator it = m_sprite_components.begin(); it != m_sprite_components.end(); ++it )
@@ -742,6 +766,9 @@ unsigned long long g_sprite_uid = 0;
 -(GameLayer*) get_layer
 {
 	return m_layer_;
+}
+-(void) on_pre_solve:(struct b2Contact*) contact :(const struct b2Manifold*) old_manifold
+{
 }
 
 -(void) on_begin_contact :( struct b2Contact* ) contact

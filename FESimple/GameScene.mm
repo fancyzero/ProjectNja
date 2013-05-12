@@ -69,6 +69,8 @@
 {
 	/*if ( delta_time > 25.0f/1 )
 		delta_time = 25.0f/1;*/
+
+
 	[ [ GameBase get_game ] update:delta_time ];
     [ [ GameBase get_game ].m_level update:delta_time ];
     [ [ GameBase get_game ].m_world update: delta_time ];
@@ -79,6 +81,7 @@
 	[ m_BGLayer1_ update:delta_time ];
 	[ m_BGLayer2_ update:delta_time ];
 	}
+
 }
 
 @end

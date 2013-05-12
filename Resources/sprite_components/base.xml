@@ -45,10 +45,36 @@
 		<physics_def>
 		</physics_def>
 		<animation_def>
-			<sequence name="default" animated="false" texture="pic/bg.png" framespeed="0"/>
+			<sequence  anchor_x="512" anchor_x="384" name="default" animated="false" texture="pic/bg.png" framespeed="0"/>
 		</animation_def>
 	</sprite_component>
     
+    <sprite_component name="rock_1">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:rock_1"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="rock_1.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
+    
+    <sprite_component name="rock_2">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:rock_2"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="rock_2.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
+    
+    <sprite_component name="rock_3">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:rock_3"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="rock_3.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
 </sprite_components>
 
 

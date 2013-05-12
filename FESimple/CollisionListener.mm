@@ -119,6 +119,33 @@ void CollisionListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 			}
 		}
 	}
+    else
+    {
+		Collision myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
+		PhysicsSprite* sprite_comp_A = (PhysicsSprite*)myContact.fixtureA->GetUserData();
+		PhysicsSprite* sprite_comp_B = (PhysicsSprite*)myContact.fixtureB->GetUserData();
+		SpriteBase* spriteA = NULL;
+		SpriteBase* spriteB = NULL;
+		if ( sprite_comp_A != NULL )
+			spriteA = sprite_comp_A.m_parent;
+		if ( sprite_comp_B != NULL )
+			spriteB = sprite_comp_B.m_parent;
+		if ( spriteA != spriteB )
+		{
+			if ( [spriteA isdead] || [spriteB isdead] )
+			{
+				contact->SetEnabled(false);
+			}
+            else
+            {
+                if ( spriteA )
+                    [spriteA on_pre_solve:contact :oldManifold];
+                
+                if ( spriteB )
+                    [spriteB on_pre_solve:contact :oldManifold];
+            }
+		}
+    }
 }
 
 void CollisionListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)

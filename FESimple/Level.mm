@@ -54,15 +54,7 @@ level_progress_trigger::~level_progress_trigger()
 	}
 }
 
-@interface LevelParser : SPriteParserBase
-{
-@public
-	LevelBase*			m_level;
-	float				m_current_progress_parsed;
-}
--(void) on_node_begin:(NSString*) cur_path  nodename:(NSString *)node_name attributes:(NSDictionary *)attributes;
--(void) on_node_end:(NSString*) cur_path  nodename:(NSString* ) node_name;
-@end
+
 
 @implementation LevelParser
 
@@ -71,6 +63,18 @@ level_progress_trigger::~level_progress_trigger()
 	self = [super init];
 	return self;
 }
+
+-(void) set_progres_offset:(float) offset
+{
+    m_progress_offset = offset;
+}
+
+-(void) set_position_offset:(CGPoint) offset
+{
+    m_position_offset = offset;
+}
+
+
 -(void) on_node_begin:(NSString *)cur_path nodename:(NSString *)node_name attributes:(NSDictionary *)attributes
 {
     if ( [ cur_path isEqualToString:@"/xml" ] )
@@ -104,6 +108,12 @@ level_progress_trigger::~level_progress_trigger()
 			m_current_progress_parsed = trigger.progress_pos;
 			trigger.set_params( [NSMutableDictionary dictionaryWithDictionary:attributes]);
 			//NSLog(@"add trigger %@",trigger.get_params());
+            if ( m_position_offset.x != 0 || m_position_offset.y != 0 )
+            {
+                CGPoint pt = read_CGPoint_value(trigger.get_params(), @"init_position", ccp(0,0));
+                pt = ccpAdd( pt, m_position_offset);
+                [trigger.get_params() setValue:[NSString stringWithFormat:@"%f,%f", pt.x, pt.y] forKey:@"init_position"];
+            }
 			[m_level add_trigger: trigger];
 			//NSLog(@"%p temp trigger %ld", &trigger, [trigger.get_params() retainCount]);
 			

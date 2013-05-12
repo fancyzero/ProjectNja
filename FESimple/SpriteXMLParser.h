@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "PhysicsSprite.h"
 @interface SpriteXMLParser : NSObject<NSXMLParserDelegate> 
 {
     @public

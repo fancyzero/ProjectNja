@@ -19,12 +19,16 @@
 #include <box2d.h>
 #import "Common.h"
 #import "Platform.h"
+#import "GameBase.h"
 @implementation GameSouSouSouLevel
-
+int reset_count = 0;
 -(void)reset
 {
-	
+	m_filename_ = nil;
 	[super reset];
+    m_move_speed = 400;
+    m_moved_pos = 0;
+    m_current_sector_width = 0;
     GameBase* game = [GameBase get_game];
     [ game cleanup_world ];
 	
@@ -34,8 +38,8 @@
     hero = [ Hero new];
     hero.m_name = @"Hero";
 	CGPoint spawnpos;
-	spawnpos.x = 300;
-	spawnpos.y = 1024 / 2 ;
+	spawnpos.x = 300 - 1024;
+	spawnpos.y = 768 / 2 ;
     [ hero set_physic_position:0 : spawnpos ];
     [ world add_gameobj:hero ];
     
@@ -45,8 +49,11 @@
     [ ctrl set_player:hero ];
 	[ hero set_controller: ctrl ];
     [ ctrl set_pose:single_player ];
-	
-
+    
+    m_bg1 = [SpriteBase new];
+    [m_bg1 init_with_xml:@"sprites/base.xml:bg1"];
+    [m_bg1 set_position: 0 y:368];
+    [[GameBase get_game].m_world add_gameobj:m_bg1 layer:@"bg2"];
     if ( 0 )
 	{
 		physics_debug_sprite* pds = [ physics_debug_sprite new ];
@@ -54,7 +61,20 @@
 		[[GameBase get_game].m_scene.m_layer addChild:pds ];
 	}
 	m_cur_path = 0;
-	
+    
+    [self attach_sector:@"levels/sector1.xml" :ccp(-1024,0)];
+    m_moved_pos = 1024;
+    m_level_progress_ = 0;
+}
+
+-(void) attach_sector:(NSString*) filename :(CGPoint) at_pos
+{
+    NSLog(@"attach sector at %f, %f", at_pos.x, at_pos.y);
+    m_acting_range_keyframes_.clear();
+    [self append_from_file:@"levels/sector1.xml" :at_pos];
+    m_level_progress_ = 0;
+    m_current_sector_width = m_acting_range_keyframes_[0].act_rect.size.width ;
+    m_moved_pos = 0;
 }
 
 -(void) updaet_acting_range_physic
@@ -66,14 +86,13 @@
         bodydef.type = b2_staticBody;
         bodydef.position = b2Vec2(0,0);
         b2Body* body = [GameBase get_game].m_world.m_physics_world->CreateBody(&bodydef);
-
-        float x1, y1,x2,y2;
-        x1 = 300/ptm;
-        y1 = 300/ptm;
-        x2 = (0 + 1024) / ptm;
-        y2 = (0 + 768) / ptm;
+        
+        float w = (1024 - 300)/ptm;
+        float h = 768 / ptm;
+        float xoffset = (-1024 + 300)/ptm;
+        
         b2PolygonShape shape;
-        shape.SetAsBox((1024-300)/2.0/ptm, 768/2.0/ptm, b2Vec2(300/ptm + (1024-300)/2.0/ptm, 768/2.0/ptm), 0);
+        shape.SetAsBox(w/2, h/2, b2Vec2(w/2 + xoffset, h/2), 0);
         b2Filter filter;
         filter.categoryBits=cg_acting_range;
         filter.maskBits=cg_player1 | cg_player2 | cg_acting_range;
@@ -82,11 +101,11 @@
         fix->SetFriction( 0 );
         fix->SetRestitution(0);
         fix->SetFilterData(filter);
-
+        
         
         m_acting_range_body_  = body;
     }
-
+    
 	
 }
 
@@ -97,13 +116,13 @@
 	
 	// update acting range
 	CGRect rc_act;
-    rc_act.origin = ccp(0,0);
+    rc_act.origin = ccp(-1024,0);
     rc_act.size.width = 1024;
     rc_act.size.height = 768;
-
+    
     [self set_acting_range:rc_act];
-
-
+    
+    
 	if ( super.m_next_trigger < m_level_triggers.size() )
 	{
 		for ( int i = super.m_next_trigger; i < m_level_triggers.size(); ++i )
@@ -120,9 +139,44 @@
 		}
 	}
     
- 
+    m_moved_pos += m_move_speed * delta_time;
+    
+    
+    
+    if ( m_moved_pos >= m_current_sector_width )
+    {
+        float fix = m_moved_pos - m_current_sector_width;
+        CGPoint at_pos = ccp( -fix, 0);
+        [ self attach_sector:@"levels/sector1.xml" :at_pos];
+        m_acting_range_keyframes_.clear();
+        m_moved_pos = fix;
+    }
+    
+    for (SpriteBase* obs in [GameBase get_game].m_world.m_gameobjects)
+    {
+        if ( [obs isKindOfClass:[PlatformBase class]] )
+            [obs set_physic_linear_velocity:0 :-m_move_speed/[GameBase get_ptm_ratio] :0];
+    }
 }
 
+-(void) append_from_file:(NSString*) filename :(CGPoint) at_pos
+{
+	m_filename_ = filename;
+    NSURL *xmlURL = [NSURL fileURLWithPath:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:filename]];
+    NSXMLParser* xmlparser = [[ NSXMLParser alloc ] initWithContentsOfURL:xmlURL];
+	SpriteXMLParser *sxmlparser = [[ SpriteXMLParser alloc] init:NULL];
+    LevelParser* my_parser = [ LevelParser new];
+    [my_parser set_position_offset:at_pos];
+	my_parser->m_level = self;
+	[ sxmlparser->m_parsers addObject: my_parser ];
+	[ xmlparser setDelegate:sxmlparser];
+	BOOL ret = [ xmlparser parse ];
+	assert( ret );
+	ret = 0;
+	
+	[sxmlparser release];
+	[xmlparser release];
+}
 
 -(void) on_sprite_dead: (SpriteBase*) sprite
 {

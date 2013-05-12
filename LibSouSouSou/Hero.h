@@ -21,6 +21,8 @@ enum player_side
     
     player_side     m_player_side;
     platform_side   m_touched_side;
+    int             m_platform_contacted;
+    PlatformBase*   m_landing_platform;
 
 }
 -(id) init;

@@ -102,7 +102,7 @@ typedef std::vector<drop_desc>		DROPDESCS;
 
 //logic
 @property (nonatomic, assign) float        m_health;
-
+-(void) on_pre_solve:(struct b2Contact*) contact :(const struct b2Manifold*) old_manifold;
 -(void) on_begin_contact :( struct b2Contact* ) contact;
 -(void) on_end_contact :( struct b2Contact* ) contact;
 -(int) init_default_values;
@@ -111,6 +111,8 @@ typedef std::vector<drop_desc>		DROPDESCS;
 -(void) set_batchable:(bool) batchable;
 -(void) set_color_override :( ccColor4F ) color   duration:(float) duration;
 -(void) set_scale:(float) scalex :(float) scaley;
+-(void) set_physic_friction:(float) f;
+-(void) set_physic_restitution:(float) r;
 -(void) set_collision_filter:(int)mask  cat:(int) cat;
 -(void) heal:(float)health;
 -(void) set_position: (float)x y:(float)y;
