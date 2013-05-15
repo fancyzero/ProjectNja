@@ -63,7 +63,8 @@ InputDeviceBase* g_input_device = NULL;
 }
 -(void) cleanup_world
 {
-
+    
+    [m_world_ enable_listener:false :true];
     if ( m_world_ != NULL )
     {
         [ m_world_ cleanup];// remove all objects in world
@@ -76,6 +77,7 @@ InputDeviceBase* g_input_device = NULL;
 		[ m_scene_.m_BGLayer2 cleanup ];
 		
     }
+    [m_world_ enable_listener:true :true];
 }
 -(void) cleanup
 {

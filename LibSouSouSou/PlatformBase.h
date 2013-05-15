@@ -21,11 +21,13 @@ platform_side string_to_platform_side( const char* str );
 @interface PlatformBase : SpriteBase
 {
     bool m_passable;
+    bool m_kill_touched;
     platform_side m_side;
 }
 
 -(CGPoint) get_passed_position:(platform_side) from_side :(CGPoint) from_pos;
 -(bool) passable;
+-(bool) kill_touched;
 -(platform_side) get_side;
 -(void) set_side:( platform_side ) side;
 

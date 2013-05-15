@@ -34,6 +34,11 @@ platform_side string_to_platform_side( NSString* str )
 {
     return m_side;
 }
+
+-(bool) kill_touched
+{
+    return m_kill_touched;
+}
 -(void) set_side:( platform_side ) side
 {
     m_side = side;
@@ -94,12 +99,10 @@ b2RayCastCallback * cb;
 -(id) init_with_spawn_params:(NSDictionary*) params
 {
     self = [super init_with_spawn_params:params];
-    if ( [params valueForKey:@"passable"] != nil )
-        m_passable = [[params valueForKey:@"passable"] boolValue];
-    else
-        m_passable = false;
+    m_passable = read_bool_value(params, @"passable", false);
+    m_kill_touched = read_bool_value(params, @"kill_touched", false);
     
-    m_side = string_to_platform_side([params valueForKey:@"side"]);
+    //m_side = string_to_platform_side([params valueForKey:@"side"]);
     return self;
 }
 

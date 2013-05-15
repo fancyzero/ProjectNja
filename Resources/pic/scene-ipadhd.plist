@@ -17,6 +17,19 @@
                 <key>sourceSize</key>
                 <string>{416,374}</string>
             </dict>
+            <key>coin.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1888,2},{100,110}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{100,110}}</string>
+                <key>sourceSize</key>
+                <string>{100,110}</string>
+            </dict>
             <key>earth_1.png</key>
             <dict>
                 <key>frame</key>
@@ -111,15 +124,15 @@
             <key>spike.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1633,2},{201,253}}</string>
+                <string>{{1633,2},{253,201}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{201,253}}</string>
+                <string>{{0,0},{253,201}}</string>
                 <key>sourceSize</key>
-                <string>{201,253}</string>
+                <string>{253,201}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -131,7 +144,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:436e932f49f29c8a702fb7b128810aa3$</string>
+            <string>$TexturePacker:SmartUpdate:7ffe00ae6d27698a67e8b85f68f319ac$</string>
             <key>textureFileName</key>
             <string>scene-ipadhd.png</string>
         </dict>

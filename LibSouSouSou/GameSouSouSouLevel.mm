@@ -20,13 +20,30 @@
 #import "Common.h"
 #import "Platform.h"
 #import "GameBase.h"
+#import "SCoin.h"
+#import "BumppingScoreDisplay.h"
 @implementation GameSouSouSouLevel
 int reset_count = 0;
+- (NSString *)applicationDocumentsDirectory
+{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
+}
+
+-(float) get_move_speed
+{
+    return m_move_speed;
+}
+
 -(void)reset
 {
 	m_filename_ = nil;
-	[super reset];
-    m_move_speed = 400;
+    [super reset];
+
+
+    m_move_speed = 300;
     m_moved_pos = 0;
     m_current_sector_width = 0;
     GameBase* game = [GameBase get_game];
@@ -62,16 +79,31 @@ int reset_count = 0;
 	}
 	m_cur_path = 0;
     
-    [self attach_sector:@"levels/sector1.xml" :ccp(-1024,0)];
+    NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: @"/levels/sector1.xml"];
+    
+    [self attach_sector:sector_file :ccp(-1024,0)];
     m_moved_pos = 1024;
     m_level_progress_ = 0;
+    if ( m_score_display != nil )
+    {
+        //TODO: memory leak?
+        
+        [m_score_display release];
+
+    }
+    m_score_display = [ [BumppingScoreDisplay alloc] initWithString:@"0" charMapFile:@"fonts/fps_images.png" itemWidth:11 itemHeight:12 startCharMap:'.'];
+    [m_score_display display_float_value];
+    [ m_score_display init_default ];
+    [[[GameBase get_game].m_scene get_layer_by_name:@"ui"] addChild:m_score_display];
+    [m_score_display retain];
+    
 }
 
 -(void) attach_sector:(NSString*) filename :(CGPoint) at_pos
 {
     NSLog(@"attach sector at %f, %f", at_pos.x, at_pos.y);
     m_acting_range_keyframes_.clear();
-    [self append_from_file:@"levels/sector1.xml" :at_pos];
+    [self append_from_file:filename :at_pos];
     m_level_progress_ = 0;
     m_current_sector_width = m_acting_range_keyframes_[0].act_rect.size.width ;
     m_moved_pos = 0;
@@ -113,7 +145,9 @@ int reset_count = 0;
 {
     [ super update:delta_time];
 	
-	
+	[m_score_display setPosition:ccp(30,730)];
+    float score = [(Hero*)get_player(-1) get_score ];
+    [m_score_display set_value:score ];
 	// update acting range
 	CGRect rc_act;
     rc_act.origin = ccp(-1024,0);
@@ -145,18 +179,21 @@ int reset_count = 0;
     
     if ( m_moved_pos >= m_current_sector_width )
     {
+        NSString* rnd_file =[NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 10 + 1 ];
+        NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
         float fix = m_moved_pos - m_current_sector_width;
         CGPoint at_pos = ccp( -fix, 0);
-        [ self attach_sector:@"levels/sector1.xml" :at_pos];
+        [ self attach_sector:sector_file :at_pos];
         m_acting_range_keyframes_.clear();
         m_moved_pos = fix;
     }
     
     for (SpriteBase* obs in [GameBase get_game].m_world.m_gameobjects)
     {
-        if ( [obs isKindOfClass:[PlatformBase class]] )
+        if ( [obs isKindOfClass:[PlatformBase class]] || [obs isKindOfClass:[SCoin class]] )
             [obs set_physic_linear_velocity:0 :-m_move_speed/[GameBase get_ptm_ratio] :0];
     }
+    m_move_speed += 4 * delta_time;
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos

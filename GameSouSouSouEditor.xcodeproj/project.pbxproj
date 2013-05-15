@@ -228,6 +228,8 @@
 		04779388173638DC00BB85B2 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 04779377173638DC00BB85B2 /* icon.icns */; };
 		04779389173638DC00BB85B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04779378173638DC00BB85B2 /* main.m */; };
 		0477938A173638DC00BB85B2 /* obj_runtime_new.m in Sources */ = {isa = PBXBuildFile; fileRef = 0477937A173638DC00BB85B2 /* obj_runtime_new.m */; };
+		04A4E309174256A600E84366 /* SCoin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E308174256A600E84366 /* SCoin.mm */; };
+		04A4E30C17425DDA00E84366 /* BumppingScoreDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E30B17425DDA00E84366 /* BumppingScoreDisplay.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -670,6 +672,10 @@
 		04779378173638DC00BB85B2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04779379173638DC00BB85B2 /* obj_runtime_new.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = obj_runtime_new.h; sourceTree = "<group>"; };
 		0477937A173638DC00BB85B2 /* obj_runtime_new.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = obj_runtime_new.m; sourceTree = "<group>"; };
+		04A4E307174256A600E84366 /* SCoin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCoin.h; sourceTree = "<group>"; };
+		04A4E308174256A600E84366 /* SCoin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCoin.mm; sourceTree = "<group>"; };
+		04A4E30A17425DDA00E84366 /* BumppingScoreDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BumppingScoreDisplay.h; sourceTree = "<group>"; };
+		04A4E30B17425DDA00E84366 /* BumppingScoreDisplay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BumppingScoreDisplay.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1283,6 +1289,10 @@
 		047792871736383E00BB85B2 /* LibSouSouSou */ = {
 			isa = PBXGroup;
 			children = (
+				04A4E30A17425DDA00E84366 /* BumppingScoreDisplay.h */,
+				04A4E30B17425DDA00E84366 /* BumppingScoreDisplay.mm */,
+				04A4E307174256A600E84366 /* SCoin.h */,
+				04A4E308174256A600E84366 /* SCoin.mm */,
 				04186FD917392EA50055B83F /* Platform.h */,
 				04186FDA17392EA50055B83F /* Platform.mm */,
 				04186FDB17392EA50055B83F /* PlatformBase.h */,
@@ -1642,6 +1652,8 @@
 				04186FD8173928980055B83F /* CDXPropertyModifierAction.m in Sources */,
 				04186FDD17392EA50055B83F /* Platform.mm in Sources */,
 				04186FDE17392EA50055B83F /* PlatformBase.mm in Sources */,
+				04A4E309174256A600E84366 /* SCoin.mm in Sources */,
+				04A4E30C17425DDA00E84366 /* BumppingScoreDisplay.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,4 +48,17 @@
 			<sprite_component desc="sprite_components/base.xml:rock_3" />
 		</sprite_components>
     </sprite>
+    
+    <sprite name="spike" >
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:spike" />
+		</sprite_components>
+    </sprite>
+    
+    <sprite name="coin">
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:coin" />
+		</sprite_components>
+    </sprite>
+    
 </sprites>

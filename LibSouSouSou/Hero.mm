@@ -9,12 +9,18 @@
 #import "Hero.h"
 #import "Common.h"
 #include <Box2D.h>
+#import "SCoin.h"
+#import "GameSouSouSouLevel.h"
+#import "GameBase.h"
 
 @implementation Hero
-
+bool play_dead = false;
 -(id) init
 {
+
     self = [super init];
+    m_score = 0;
+    play_dead = false;
     m_landing_platform = nil;
     m_platform_contacted = 0;
     m_touched_side = ps_top;
@@ -32,6 +38,12 @@
     self.m_time_before_remove_outof_actrange = 3;
     return self;
 }
+
+-(float ) get_score
+{
+    return m_score;
+}
+
 -(void) set_player_side:(player_side) side
 {
     if ( m_player_side != side )
@@ -223,7 +235,16 @@
 {
     if ( [ other isKindOfClass:[PlatformBase class] ] )
     {
-        
+        if ([( (PlatformBase*) other) kill_touched] )
+        {
+
+            play_dead = true;
+        }
+    }
+    if ( [ other isKindOfClass:[SCoin class] ] )
+    {
+        [other remove_from_game:true];
+        m_score += 10;
     }
     return 1;
 }
@@ -232,11 +253,18 @@
 -(void) update:(float)delta_time
 {
     [ super update:delta_time];
+    if ( play_dead )
+    {
+        sleep(2);
+        [self dead];
+    }
     [ self apply_force_center:0 :m_velocity.x force_y:m_velocity.y ];
 
 
     //if ( [self get_physic_position:0].x < 100 )
     [ self apply_force_center:0 :1000 force_y:0];
+    float s = [((GameSouSouSouLevel*)[GameBase get_game].m_level) get_move_speed ];
+    m_score += s * delta_time;
     //[self set_physic_linear_velocity:0 :m_velocity.x :m_velocity.y ];
 }
 @end

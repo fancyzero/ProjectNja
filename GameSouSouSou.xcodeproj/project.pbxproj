@@ -226,6 +226,8 @@
 		04563E581734DFAF005BF488 /* SSceneStaticObj.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04563E571734DFAF005BF488 /* SSceneStaticObj.mm */; };
 		0477938D17364CB200BB85B2 /* PlatformBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477938C17364CB200BB85B2 /* PlatformBase.mm */; };
 		0477939017364CD200BB85B2 /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477938F17364CD200BB85B2 /* Platform.mm */; };
+		04A4E306174252CC00E84366 /* SCoin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E305174252CC00E84366 /* SCoin.mm */; };
+		04A4E30F17425DEA00E84366 /* BumppingScoreDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E30E17425DEA00E84366 /* BumppingScoreDisplay.mm */; };
 		04E0D138173E8AC200502491 /* icon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E0D134173E84A500502491 /* icon_small.png */; };
 		04E0D139173E8AD300502491 /* icon_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E0D136173E84B100502491 /* icon_big.png */; };
 /* End PBXBuildFile section */
@@ -661,6 +663,10 @@
 		0477938C17364CB200BB85B2 /* PlatformBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlatformBase.mm; sourceTree = "<group>"; };
 		0477938E17364CD200BB85B2 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		0477938F17364CD200BB85B2 /* Platform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
+		04A4E304174252CC00E84366 /* SCoin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCoin.h; sourceTree = "<group>"; };
+		04A4E305174252CC00E84366 /* SCoin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCoin.mm; sourceTree = "<group>"; };
+		04A4E30D17425DEA00E84366 /* BumppingScoreDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BumppingScoreDisplay.h; sourceTree = "<group>"; };
+		04A4E30E17425DEA00E84366 /* BumppingScoreDisplay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BumppingScoreDisplay.mm; sourceTree = "<group>"; };
 		04E0D134173E84A500502491 /* icon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_small.png; sourceTree = "<group>"; };
 		04E0D136173E84B100502491 /* icon_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_big.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -835,6 +841,8 @@
 		04563C191734AD87005BF488 /* LibSouSouSou */ = {
 			isa = PBXGroup;
 			children = (
+				04A4E30D17425DEA00E84366 /* BumppingScoreDisplay.h */,
+				04A4E30E17425DEA00E84366 /* BumppingScoreDisplay.mm */,
 				0477938E17364CD200BB85B2 /* Platform.h */,
 				0477938F17364CD200BB85B2 /* Platform.mm */,
 				04563E561734DFAF005BF488 /* SSceneStaticObj.h */,
@@ -853,6 +861,8 @@
 				04563E381734B291005BF488 /* Hero.mm */,
 				0477938B17364CB200BB85B2 /* PlatformBase.h */,
 				0477938C17364CB200BB85B2 /* PlatformBase.mm */,
+				04A4E304174252CC00E84366 /* SCoin.h */,
+				04A4E305174252CC00E84366 /* SCoin.mm */,
 			);
 			path = LibSouSouSou;
 			sourceTree = "<group>";
@@ -1619,6 +1629,8 @@
 				04563E581734DFAF005BF488 /* SSceneStaticObj.mm in Sources */,
 				0477938D17364CB200BB85B2 /* PlatformBase.mm in Sources */,
 				0477939017364CD200BB85B2 /* Platform.mm in Sources */,
+				04A4E306174252CC00E84366 /* SCoin.mm in Sources */,
+				04A4E30F17425DEA00E84366 /* BumppingScoreDisplay.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1675,6 +1687,7 @@
 				GCC_PREFIX_HEADER = GameSouSouSou/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"libs/kazmath/include\"";
 				INFOPLIST_FILE = GameSouSouSou/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -1694,6 +1707,7 @@
 				GCC_PREFIX_HEADER = GameSouSouSou/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"libs/kazmath/include\"";
 				INFOPLIST_FILE = GameSouSouSou/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",

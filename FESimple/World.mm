@@ -150,6 +150,16 @@
 	}
 }
 
+-(void) enable_listener:(bool) enable :(bool) clear
+{
+    if( clear )
+        m_collision_listener->m_collisions.clear();
+    if ( enable )
+        m_physics_world->SetContactListener( m_collision_listener );
+    else
+        m_physics_world->SetContactListener( nil );
+}
+
 -(void) update:(float)delta_time
 {
     GameBase* game;
