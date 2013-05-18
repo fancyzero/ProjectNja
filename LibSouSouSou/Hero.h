@@ -23,9 +23,11 @@ enum player_side
     platform_side   m_touched_side;
     int             m_platform_contacted;
     PlatformBase*   m_landing_platform;
-    float             m_score;
-
+    float           m_score;
+    float           m_speed;
+    float           m_push_force;
 }
+
 -(float) get_score;
 -(id) init;
 -(void) go_left;

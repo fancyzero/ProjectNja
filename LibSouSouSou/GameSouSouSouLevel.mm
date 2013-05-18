@@ -22,6 +22,7 @@
 #import "GameBase.h"
 #import "SCoin.h"
 #import "BumppingScoreDisplay.h"
+#import "GlobalConfig.h"
 @implementation GameSouSouSouLevel
 int reset_count = 0;
 - (NSString *)applicationDocumentsDirectory
@@ -42,8 +43,11 @@ int reset_count = 0;
 	m_filename_ = nil;
     [super reset];
 
+    m_sector_attached = 0;
 
-    m_move_speed = 300;
+    m_move_speed = get_float_config(@"min_level_speed");
+    m_max_move_speed = get_float_config(@"max_level_speed");
+    m_move_acceleration = get_float_config(@"level_acceleration");
     m_moved_pos = 0;
     m_current_sector_width = 0;
     GameBase* game = [GameBase get_game];
@@ -71,7 +75,8 @@ int reset_count = 0;
     [m_bg1 init_with_xml:@"sprites/base.xml:bg1"];
     [m_bg1 set_position: 0 y:368];
     [[GameBase get_game].m_world add_gameobj:m_bg1 layer:@"bg2"];
-    if ( 0 )
+    
+    if ( get_float_config(@"debug_physic") > 1 )
 	{
 		physics_debug_sprite* pds = [ physics_debug_sprite new ];
 		pds.zOrder = 200;
@@ -101,7 +106,8 @@ int reset_count = 0;
 
 -(void) attach_sector:(NSString*) filename :(CGPoint) at_pos
 {
-    NSLog(@"attach sector at %f, %f", at_pos.x, at_pos.y);
+    NSLog(@"attach %d sector %@ at %f, %f", m_sector_attached, filename, at_pos.x, at_pos.y);
+    m_sector_attached ++;
     m_acting_range_keyframes_.clear();
     [self append_from_file:filename :at_pos];
     m_level_progress_ = 0;
@@ -179,7 +185,19 @@ int reset_count = 0;
     
     if ( m_moved_pos >= m_current_sector_width )
     {
-        NSString* rnd_file =[NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 10 + 1 ];
+        NSString* rnd_file;
+        if ( m_sector_attached == 1 )
+            rnd_file = @"/levels/sector2.xml";
+        else if ( (m_sector_attached % 10 == 0) && (m_sector_attached != 0) )
+        {
+            if ( rand() %2 )
+                rnd_file = @"/levels/sector11.xml";
+            else
+                rnd_file = @"/levels/sector10.xml";
+        }
+        else
+            rnd_file = [NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 7 +  3 ];
+
         NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
         float fix = m_moved_pos - m_current_sector_width;
         CGPoint at_pos = ccp( -fix, 0);
@@ -193,7 +211,9 @@ int reset_count = 0;
         if ( [obs isKindOfClass:[PlatformBase class]] || [obs isKindOfClass:[SCoin class]] )
             [obs set_physic_linear_velocity:0 :-m_move_speed/[GameBase get_ptm_ratio] :0];
     }
-    m_move_speed += 4 * delta_time;
+    m_move_speed += m_move_acceleration * delta_time;
+    if ( m_move_speed > m_max_move_speed )
+        m_move_speed = m_max_move_speed;
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos

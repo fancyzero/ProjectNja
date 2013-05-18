@@ -230,6 +230,8 @@
 		0477938A173638DC00BB85B2 /* obj_runtime_new.m in Sources */ = {isa = PBXBuildFile; fileRef = 0477937A173638DC00BB85B2 /* obj_runtime_new.m */; };
 		04A4E309174256A600E84366 /* SCoin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E308174256A600E84366 /* SCoin.mm */; };
 		04A4E30C17425DDA00E84366 /* BumppingScoreDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E30B17425DDA00E84366 /* BumppingScoreDisplay.mm */; };
+		04BC4A15174506F900845F6E /* GlobalConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A14174506F900845F6E /* GlobalConfig.mm */; };
+		04BC4A171745082000845F6E /* default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4A161745082000845F6E /* default.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -676,6 +678,9 @@
 		04A4E308174256A600E84366 /* SCoin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCoin.mm; sourceTree = "<group>"; };
 		04A4E30A17425DDA00E84366 /* BumppingScoreDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BumppingScoreDisplay.h; sourceTree = "<group>"; };
 		04A4E30B17425DDA00E84366 /* BumppingScoreDisplay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BumppingScoreDisplay.mm; sourceTree = "<group>"; };
+		04BC4A13174506F900845F6E /* GlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
+		04BC4A14174506F900845F6E /* GlobalConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GlobalConfig.mm; sourceTree = "<group>"; };
+		04BC4A161745082000845F6E /* default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = default.plist; path = Resources/default.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1289,6 +1294,8 @@
 		047792871736383E00BB85B2 /* LibSouSouSou */ = {
 			isa = PBXGroup;
 			children = (
+				04BC4A13174506F900845F6E /* GlobalConfig.h */,
+				04BC4A14174506F900845F6E /* GlobalConfig.mm */,
 				04A4E30A17425DDA00E84366 /* BumppingScoreDisplay.h */,
 				04A4E30B17425DDA00E84366 /* BumppingScoreDisplay.mm */,
 				04A4E307174256A600E84366 /* SCoin.h */,
@@ -1311,6 +1318,7 @@
 				047792931736383E00BB85B2 /* Hero.mm */,
 				047792941736383E00BB85B2 /* SSceneStaticObj.h */,
 				047792951736383E00BB85B2 /* SSceneStaticObj.mm */,
+				04BC4A161745082000845F6E /* default.plist */,
 			);
 			path = LibSouSouSou;
 			sourceTree = "<group>";
@@ -1453,6 +1461,7 @@
 				04186FF4173930190055B83F /* shaders in Resources */,
 				04186FF5173930190055B83F /* sprite_components in Resources */,
 				04186FF6173930190055B83F /* sprites in Resources */,
+				04BC4A171745082000845F6E /* default.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1663,7 @@
 				04186FDE17392EA50055B83F /* PlatformBase.mm in Sources */,
 				04A4E309174256A600E84366 /* SCoin.mm in Sources */,
 				04A4E30C17425DDA00E84366 /* BumppingScoreDisplay.mm in Sources */,
+				04BC4A15174506F900845F6E /* GlobalConfig.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

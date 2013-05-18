@@ -12,6 +12,7 @@
 #import "SCoin.h"
 #import "GameSouSouSouLevel.h"
 #import "GameBase.h"
+#import "GlobalConfig.h"
 
 @implementation Hero
 bool play_dead = false;
@@ -19,6 +20,8 @@ bool play_dead = false;
 {
 
     self = [super init];
+    m_push_force = get_float_config(@"push_force");
+    m_speed = get_float_config(@"ninja_speed");
     m_score = 0;
     play_dead = false;
     m_landing_platform = nil;
@@ -34,7 +37,7 @@ bool play_dead = false;
     [ self set_physic_friction:0];
     [ self set_zorder:100];
     m_player_side = ps_can_land_bottom;
-    m_velocity = ccp( 0, -6000);
+    m_velocity = ccp( 0, -m_speed);
     self.m_time_before_remove_outof_actrange = 3;
     return self;
 }
@@ -56,7 +59,7 @@ bool play_dead = false;
             anchor.x /= m_sprite_components[0].contentSize.width;
             anchor.y /= m_sprite_components[0].contentSize.height;
             [ m_sprite_components[0] setAnchorPoint: anchor ];
-            m_velocity = ccp( 0, 6000 );
+            m_velocity = ccp( 0, m_speed );
         }
         else
         {
@@ -66,7 +69,7 @@ bool play_dead = false;
             anchor.x /= m_sprite_components[0].contentSize.width;
             anchor.y /= m_sprite_components[0].contentSize.height;
             [ m_sprite_components[0] setAnchorPoint: anchor ];
-            m_velocity = ccp( 0, -6000 );
+            m_velocity = ccp( 0, -m_speed );
         }
     }
     m_player_side = side;
@@ -262,7 +265,7 @@ bool play_dead = false;
 
 
     //if ( [self get_physic_position:0].x < 100 )
-    [ self apply_force_center:0 :1000 force_y:0];
+    [ self apply_force_center:0 :m_push_force force_y:0];
     float s = [((GameSouSouSouLevel*)[GameBase get_game].m_level) get_move_speed ];
     m_score += s * delta_time;
     //[self set_physic_linear_velocity:0 :m_velocity.x :m_velocity.y ];
