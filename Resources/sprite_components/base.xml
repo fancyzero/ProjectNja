@@ -45,7 +45,7 @@
 		<physics_def>
 		</physics_def>
 		<animation_def>
-			<sequence  anchor_x="512" anchor_x="384" name="default" animated="false" texture="pic/bg.png" framespeed="0"/>
+			<sequence  anchor_x="512" anchor_y="384" name="default" animated="false" texture="pic/bg.png" framespeed="0"/>
 		</animation_def>
 	</sprite_component>
     

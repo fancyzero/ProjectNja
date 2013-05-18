@@ -103,6 +103,8 @@ b2RayCastCallback * cb;
     m_kill_touched = read_bool_value(params, @"kill_touched", false);
     
     //m_side = string_to_platform_side([params valueForKey:@"side"]);
+    [ self set_batchable:true];
+    m_time_before_remove_outof_actrange_ = 0.1;
     return self;
 }
 
@@ -112,6 +114,7 @@ b2RayCastCallback * cb;
     [ self set_collision_filter:cg_player1 | cg_player2 cat:cg_static];
     [ self set_physic_restitution: 0 ];
     [ self set_physic_friction:0 ];
+    [self set_batchable:true];
     return  0;
 }
 

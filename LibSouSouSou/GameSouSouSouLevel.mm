@@ -96,10 +96,13 @@ int reset_count = 0;
         [m_score_display release];
 
     }
-    m_score_display = [ [BumppingScoreDisplay alloc] initWithString:@"0" charMapFile:@"fonts/fps_images.png" itemWidth:11 itemHeight:12 startCharMap:'.'];
-    [m_score_display display_float_value];
+    m_score_display = [ [BumppingScoreDisplay alloc] initWithString:@"0" charMapFile:@"fonts/fps_images.png" itemWidth:12 itemHeight:32 startCharMap:'.'];
+    [m_score_display display_integer_value];
+
+    
     [ m_score_display init_default ];
     [[[GameBase get_game].m_scene get_layer_by_name:@"ui"] addChild:m_score_display];
+        [m_score_display set_auto_bump: false];
     [m_score_display retain];
     
 }
@@ -151,7 +154,7 @@ int reset_count = 0;
 {
     [ super update:delta_time];
 	
-	[m_score_display setPosition:ccp(30,730)];
+	[m_score_display setPosition:ccp(200,730)];
     float score = [(Hero*)get_player(-1) get_score ];
     [m_score_display set_value:score ];
 	// update acting range
@@ -191,9 +194,9 @@ int reset_count = 0;
         else if ( (m_sector_attached % 10 == 0) && (m_sector_attached != 0) )
         {
             if ( rand() %2 )
-                rnd_file = @"/levels/sector11.xml";
-            else
                 rnd_file = @"/levels/sector10.xml";
+            else
+                rnd_file = @"/levels/sector11.xml";
         }
         else
             rnd_file = [NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 7 +  3 ];
