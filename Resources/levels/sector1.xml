@@ -1,41 +1,23 @@
 <xml>
-	<level map_width="4096.00" map_height="768.00" >
+	<level map_width="2048.00" map_height="768.00" >
 		<acting_range>
-<keyframe progress="0.00" pos="0.00,0.00" size="4096.00,768.00"/>
-<keyframe progress="100000.00" pos="0.00,0.00" size="4096.00,768.00"/>
+<keyframe progress="0.00" pos="0.00,0.00" size="2048.00,768.00"/>
+<keyframe progress="100000.00" pos="0.00,0.00" size="2048.00,768.00"/>
 		</acting_range>
 		<actions>
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_3" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="589.65,-70.61" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_4" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="650.47,808.66" progress="0.000000" init_rotation="180" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="978.49,-79.99" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="4349.79,826.83" progress="0.000000" init_rotation="180" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="3145.65,-77.74" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_2" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="2226.41,-67.10" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_2" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="-38.60,-66.77" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_4" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="1826.04,811.65" progress="0.000000" init_rotation="180" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="2597.55,820.84" progress="0.000000" init_rotation="180" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:rock_1" layer="game" init_zorder="1" class="Platform" passable="true" init_scale="1" init_position="202.95,412.27" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:rock_1" layer="game" init_zorder="1" class="Platform" passable="true" init_scale="1" init_position="1205.58,397.51" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:rock_2" layer="game" init_zorder="1" class="Platform" passable="true" init_scale="1" init_position="2100.87,376.92" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:rock_2" layer="game" init_zorder="1" class="Platform" passable="true" init_scale="1" init_position="2801.52,364.99" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:spike" layer="game" init_zorder="1" class="Platform" kill_touched="true" init_scale="1" init_position="421.31,458.26" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:spike" layer="game" init_zorder="1" class="Platform" kill_touched="true" init_scale="1" init_position="915.06,390.00" progress="0.000000" init_rotation="180" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:spike" layer="game" init_zorder="1" class="Platform" kill_touched="true" init_scale="1" init_position="1370.74,28.07" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:spike" layer="game" init_zorder="1" class="Platform" kill_touched="true" init_scale="1" init_position="1555.16,435.57" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:spike" layer="game" init_zorder="1" class="Platform" kill_touched="true" init_scale="1" init_position="2379.05,45.13" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:spike" layer="game" init_zorder="1" class="Platform" kill_touched="true" init_scale="1" init_position="3745.79,726.13" progress="0.000000" init_rotation="180" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:spike" layer="game" init_zorder="1" class="Platform" kill_touched="true" init_scale="1" init_position="2369.75,417.78" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="205.98,122.52" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="284.66,122.52" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="378.81,97.90" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="456.41,115.86" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="577.19,111.70" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="701.63,111.70" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="806.92,113.62" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="915.55,106.96" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1015.11,106.96" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="865.98,118.94" progress="0.000000" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="746.71,122.94" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_3" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="589.65,-68.14" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="978.49,-75.05" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_2" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="-7.52,-103.91" progress="0.000000" init_rotation="4" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="1644.58,-72.11" progress="0.000000" init_rotation="0" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="978.49,-75.05" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_2" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="-7.52,-103.91" progress="0.000000" init_rotation="4" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="1644.58,-72.11" progress="0.000000" init_rotation="0" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="978.49,-75.05" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_2" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="-7.52,-103.91" progress="0.000000" init_rotation="4" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="1644.58,-72.11" progress="0.000000" init_rotation="0" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="978.49,-75.05" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_2" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="-7.52,-103.91" progress="0.000000" init_rotation="4" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="1644.58,-72.11" progress="0.000000" init_rotation="0" />
 		</actions>
 	</level>
 </xml>
