@@ -18,6 +18,7 @@
 			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="978.49,-75.05" progress="0.000000" />
 			<action act="add_obj" sprite_desc="sprites/base.xml:earth_2" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="-7.52,-103.91" progress="0.000000" init_rotation="4" />
 			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="1644.58,-72.11" progress="0.000000" init_rotation="0" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:saw" layer="game" init_zorder="1" class="Razor" init_scale="1" init_position="1444.16,207.47" progress="0.000000" fall_speed="-400" rotat_speed="-400" sweep_speed="0" sweep_range="0"/>
 		</actions>
 	</level>
 </xml>

@@ -10,6 +10,7 @@
 #import "GameBase.h"
 #include "Box2D.h"
 #import "World.h"
+#import "GameSouSouSouLevel.h"
 
 platform_side string_to_platform_side( NSString* str )
 {
@@ -116,6 +117,15 @@ b2RayCastCallback * cb;
     [ self set_physic_friction:0 ];
     [self set_batchable:true];
     return  0;
+}
+
+-(void) update:(float)delta_time
+{
+    [super update:delta_time];
+    GameSouSouSouLevel* lvl = (GameSouSouSouLevel*)[GameBase get_game].m_level;
+    float level_speed = [lvl get_move_speed];
+    
+    [self set_physic_linear_velocity:0 :-level_speed /[GameBase get_ptm_ratio]:0];
 }
 
 @end

@@ -7,7 +7,7 @@
             <key>ball.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{784,133},{208,187}}</string>
+                <string>{{784,148},{208,187}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>coin.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{948,2},{50,55}}</string>
+                <string>{{673,236},{50,55}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>earth_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{568,405},{443,113}}</string>
+                <string>{{568,420},{443,113}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>rock_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{673,322},{319,81}}</string>
+                <string>{{673,337},{319,81}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -121,10 +121,23 @@
                 <key>sourceSize</key>
                 <string>{319,81}</string>
             </dict>
+            <key>saw.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{819,2},{158,144}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{158,144}}</string>
+                <key>sourceSize</key>
+                <string>{160,144}</string>
+            </dict>
             <key>spike.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{819,2},{127,101}}</string>
+                <string>{{317,461},{127,101}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -144,7 +157,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:b4f12806786dadb98a8a7e4bac518a49$</string>
+            <string>$TexturePacker:SmartUpdate:d50d458e3b0af8c6c83ffcd4b6bf73de$</string>
             <key>textureFileName</key>
             <string>scene-ipad.png</string>
         </dict>

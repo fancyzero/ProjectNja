@@ -7,7 +7,7 @@
 //
 
 #import "GlobalConfig.h"
-
+static GlobalConfig g_global_config;
 float get_float_config(NSString* str)
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -18,4 +18,21 @@ float get_float_config(NSString* str)
     
     return [[dict valueForKey:str] floatValue];
 
+}
+
+void init_global_config()
+{
+    g_global_config.level_move_speed = get_float_config(@"min_level_speed");
+    g_global_config.level_move_speed_max = get_float_config(@"max_level_speed");
+    g_global_config.level_move_accleration = get_float_config(@"level_acceleration");
+    g_global_config.ninja_push_force = get_float_config(@"push_force");
+    g_global_config.ninja_jump_speed = get_float_config(@"ninja_speed");
+    
+}
+
+
+
+const GlobalConfig& get_global_config()
+{
+    return g_global_config;
 }

@@ -15,6 +15,13 @@ enum player_side
     ps_can_land_bottom,
 };
 
+enum input
+{
+    go_left,
+    go_right,
+    none
+};
+
 @interface Hero : PlayerBase
 {
     CGPoint m_velocity;
@@ -23,9 +30,8 @@ enum player_side
     platform_side   m_touched_side;
 
     float           m_score;
-    float           m_speed;
-    float           m_push_force;
     std::map<PlatformBase*, int> m_landing_platforms;
+    input m_next_input;
 }
 
 -(float) get_score;

@@ -93,7 +93,22 @@
 			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="coin.png" framespeed="0"/>
 		</animation_def>
 	</sprite_component>
-    
+    <sprite_component name="ball">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:ball"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="ball.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
+    <sprite_component name="saw">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:saw"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="saw.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
 </sprite_components>
 
 

@@ -6,8 +6,8 @@
 //
 //
 
-#import "SpriteBase.h"
+#import "PlatformBase.h"
 
-@interface SCoin : SpriteBase
+@interface SCoin : PlatformBase
 
 @end

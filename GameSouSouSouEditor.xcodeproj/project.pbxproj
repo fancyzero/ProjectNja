@@ -232,6 +232,7 @@
 		04A4E30C17425DDA00E84366 /* BumppingScoreDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E30B17425DDA00E84366 /* BumppingScoreDisplay.mm */; };
 		04BC4A15174506F900845F6E /* GlobalConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A14174506F900845F6E /* GlobalConfig.mm */; };
 		04BC4A171745082000845F6E /* default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4A161745082000845F6E /* default.plist */; };
+		04D54D25174906D800378012 /* DynamicObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D54D23174906D800378012 /* DynamicObject.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -681,6 +682,8 @@
 		04BC4A13174506F900845F6E /* GlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
 		04BC4A14174506F900845F6E /* GlobalConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GlobalConfig.mm; sourceTree = "<group>"; };
 		04BC4A161745082000845F6E /* default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = default.plist; path = Resources/default.plist; sourceTree = SOURCE_ROOT; };
+		04D54D23174906D800378012 /* DynamicObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DynamicObject.mm; sourceTree = "<group>"; };
+		04D54D24174906D800378012 /* DynamicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1294,6 +1297,8 @@
 		047792871736383E00BB85B2 /* LibSouSouSou */ = {
 			isa = PBXGroup;
 			children = (
+				04D54D23174906D800378012 /* DynamicObject.mm */,
+				04D54D24174906D800378012 /* DynamicObject.h */,
 				04BC4A13174506F900845F6E /* GlobalConfig.h */,
 				04BC4A14174506F900845F6E /* GlobalConfig.mm */,
 				04A4E30A17425DDA00E84366 /* BumppingScoreDisplay.h */,
@@ -1664,6 +1669,7 @@
 				04A4E309174256A600E84366 /* SCoin.mm in Sources */,
 				04A4E30C17425DDA00E84366 /* BumppingScoreDisplay.mm in Sources */,
 				04BC4A15174506F900845F6E /* GlobalConfig.mm in Sources */,
+				04D54D25174906D800378012 /* DynamicObject.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

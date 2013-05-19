@@ -40,14 +40,13 @@ int reset_count = 0;
 
 -(void)reset
 {
+    init_global_config();
 	m_filename_ = nil;
     [super reset];
 
     m_sector_attached = 0;
 
-    m_move_speed = get_float_config(@"min_level_speed");
-    m_max_move_speed = get_float_config(@"max_level_speed");
-    m_move_acceleration = get_float_config(@"level_acceleration");
+    m_move_speed = get_global_config().level_move_speed;
     m_moved_pos = 0;
     m_current_sector_width = 0;
     GameBase* game = [GameBase get_game];
@@ -84,7 +83,8 @@ int reset_count = 0;
 	}
 	m_cur_path = 0;
     
-    NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: @"/levels/sector1.xml"];
+    NSString* sector_file = @"levels/sector1.xml";
+    //[[self applicationDocumentsDirectory] stringByAppendingString: @"/levels/sector1.xml"];
     
     [self attach_sector:sector_file :ccp(-1024,0)];
     m_moved_pos = 1024;
@@ -190,18 +190,18 @@ int reset_count = 0;
     {
         NSString* rnd_file;
         if ( m_sector_attached == 1 )
-            rnd_file = @"/levels/sector2.xml";
+            rnd_file = @"levels/sector1.xml";
         else if ( (m_sector_attached % 10 == 0) && (m_sector_attached != 0) )
         {
             if ( rand() %2 )
-                rnd_file = @"/levels/sector10.xml";
+                rnd_file = @"levels/sector1.xml";
             else
-                rnd_file = @"/levels/sector11.xml";
+                rnd_file = @"levels/sector1.xml";
         }
         else
-            rnd_file = [NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 7 +  3 ];
+            rnd_file = [NSString stringWithFormat:@"levels/sector%d.xml", 1];//rand() % 7 +  3 ];
 
-        NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
+        NSString* sector_file = rnd_file;//[[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
         float fix = m_moved_pos - m_current_sector_width;
         CGPoint at_pos = ccp( -fix, 0);
         [ self attach_sector:sector_file :at_pos];
@@ -209,14 +209,10 @@ int reset_count = 0;
         m_moved_pos = fix;
     }
     
-    for (SpriteBase* obs in [GameBase get_game].m_world.m_gameobjects)
-    {
-        if ( [obs isKindOfClass:[PlatformBase class]] || [obs isKindOfClass:[SCoin class]] )
-            [obs set_physic_linear_velocity:0 :-m_move_speed/[GameBase get_ptm_ratio] :0];
-    }
-    m_move_speed += m_move_acceleration * delta_time;
-    if ( m_move_speed > m_max_move_speed )
-        m_move_speed = m_max_move_speed;
+
+    m_move_speed += get_global_config().level_move_accleration * delta_time;
+    if ( m_move_speed > get_global_config().level_move_speed_max )
+        m_move_speed = get_global_config().level_move_speed_max;
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos
