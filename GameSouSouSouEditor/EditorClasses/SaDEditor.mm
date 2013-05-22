@@ -11,7 +11,8 @@
 #import "SpriteDefManager.h"
 #import "GameSouSouSouEditorLevel.h"
 #import "EditorController.h"
-
+#import "AppDelegate.h"
+#import "EditorCommon.h"
 @implementation SaDEditor
 
 
@@ -119,6 +120,9 @@
 {
 	[[GameBase get_game] reset];
 	[[GameBase get_game].m_level load_from_file:filename];
+    m_current_level_filename = [filename copy];
+    [m_current_level_filename retain];
+    [get_main_window() setTitle:filename];
 	
 }
 
@@ -136,6 +140,7 @@
 	[m_current_level_filename retain];
 	GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*) self.m_level ;
 	[lvl save_to_file:filename];
+        [get_main_window() setTitle:filename];
 
 }
 

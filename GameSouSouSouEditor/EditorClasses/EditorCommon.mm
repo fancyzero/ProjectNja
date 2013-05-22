@@ -22,6 +22,30 @@ TriggerPropertyWindow* get_trigger_property_window()
 	
 }
 
+
+NSWindow* get_main_window()
+{
+	GameSaDEditorAppDelegate* dele;
+	dele = (GameSaDEditorAppDelegate* )[NSApplication sharedApplication].delegate;
+	return dele.window;
+}
+
+void clear_selected()
+{
+    std::vector<SpriteBase*> empty_array;
+	SaDEditor* editor;
+
+	editor = (SaDEditor*)[GameBase get_game];
+	if ( editor == NULL )
+        return;
+	EditorController* edctrl = (EditorController*)[editor get_controller];
+	if ( edctrl == NULL )
+        return;
+
+    [edctrl->m_op_add unselect_all];
+    [edctrl->m_op_navigator unselect_all];
+}
+
 std::vector<SpriteBase*> get_current_op_selected_sprites()
 {
 	std::vector<SpriteBase*> empty_array;

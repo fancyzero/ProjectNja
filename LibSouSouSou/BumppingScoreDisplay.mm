@@ -11,9 +11,9 @@
 @implementation BumppingScoreDisplay
 - (void) init_default
 {
-
-        m_current_value = 0;
-        m_bump_start = -1000;
+    
+    m_current_value = 0;
+    m_bump_start = -1000;
     m_bump_time = 0.5;
     m_stay_time = 0.5;
     m_fade_time = 0.5;
@@ -21,9 +21,9 @@
     m_auto_bump = true;
     m_default_scale = 1;
     m_bump_scale = 3;
-       self.anchorPoint=ccp(0.5,0.5);
+    self.anchorPoint=ccp(0.5,0.5);
     [self scheduleUpdate];
-
+    
 }
 -(void) set_bump_scale:(float) s
 {
@@ -39,7 +39,7 @@
     m_default_scale = s;
 }
 
--(void) set_hide_if_not_bumping:(bool) hide 
+-(void) set_hide_if_not_bumping:(bool) hide
 {
     m_hide_if_not_bumping = hide;
 }
@@ -64,7 +64,7 @@
     {
         [self setString:[ NSString stringWithFormat:@"%d", (int)value] ];
     }
-
+    
 }
 
 -(void) update: (ccTime) t
@@ -86,7 +86,7 @@
                 [self setOpacity:  op * 255];
             else
                 [self setOpacity:  255];
-            NSLog(@"%f", op);
+            //NSLog(@"%f", op);
         }
     }
     
@@ -94,7 +94,7 @@
         [self setVisible:FALSE];
     else
         [self setVisible:TRUE];
- 
+    
     
 }
 

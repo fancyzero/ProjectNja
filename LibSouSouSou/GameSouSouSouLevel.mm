@@ -72,7 +72,7 @@ int reset_count = 0;
     
     m_bg1 = [SpriteBase new];
     [m_bg1 init_with_xml:@"sprites/base.xml:bg1"];
-    [m_bg1 set_position: 0 y:368];
+    [m_bg1 set_position: 0 y:768/2];
     [[GameBase get_game].m_world add_gameobj:m_bg1 layer:@"bg2"];
     
     if ( get_float_config(@"debug_physic") > 1 )
@@ -83,8 +83,7 @@ int reset_count = 0;
 	}
 	m_cur_path = 0;
     
-    NSString* sector_file = @"levels/sector1.xml";
-    //[[self applicationDocumentsDirectory] stringByAppendingString: @"/levels/sector1.xml"];
+    NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: @"/levels/sector1.xml"];
     
     [self attach_sector:sector_file :ccp(-1024,0)];
     m_moved_pos = 1024;
@@ -111,6 +110,10 @@ int reset_count = 0;
 {
     NSLog(@"attach %d sector %@ at %f, %f", m_sector_attached, filename, at_pos.x, at_pos.y);
     m_sector_attached ++;
+    if ( (m_sector_attached % 5 == 0) && (m_sector_attached != 0) )
+        m_move_speed = get_global_config().level_move_speed  * get_global_config().level_move_accleration*(m_sector_attached / 5);
+    if ( m_move_speed > get_global_config().level_move_speed_max )
+        m_move_speed = get_global_config().level_move_speed_max;
     m_acting_range_keyframes_.clear();
     [self append_from_file:filename :at_pos];
     m_level_progress_ = 0;
@@ -190,18 +193,18 @@ int reset_count = 0;
     {
         NSString* rnd_file;
         if ( m_sector_attached == 1 )
-            rnd_file = @"levels/sector1.xml";
+            rnd_file = @"/levels/sector2.xml";
         else if ( (m_sector_attached % 10 == 0) && (m_sector_attached != 0) )
         {
             if ( rand() %2 )
-                rnd_file = @"levels/sector1.xml";
+                rnd_file = @"/levels/sector10.xml";
             else
-                rnd_file = @"levels/sector1.xml";
+                rnd_file = @"/levels/sector11.xml";
         }
         else
-            rnd_file = [NSString stringWithFormat:@"levels/sector%d.xml", 1];//rand() % 7 +  3 ];
+            rnd_file = [NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 7 +  3 ];
 
-        NSString* sector_file = rnd_file;//[[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
+        NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
         float fix = m_moved_pos - m_current_sector_width;
         CGPoint at_pos = ccp( -fix, 0);
         [ self attach_sector:sector_file :at_pos];
@@ -210,9 +213,9 @@ int reset_count = 0;
     }
     
 
-    m_move_speed += get_global_config().level_move_accleration * delta_time;
-    if ( m_move_speed > get_global_config().level_move_speed_max )
-        m_move_speed = get_global_config().level_move_speed_max;
+    //m_move_speed += get_global_config().level_move_accleration * delta_time;
+    //if ( m_move_speed > get_global_config().level_move_speed_max )
+     //   m_move_speed = get_global_config().level_move_speed_max;
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos

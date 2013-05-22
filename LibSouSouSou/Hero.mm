@@ -15,6 +15,7 @@
 #import "GlobalConfig.h"
 #include <algorithm>
 #import "World.h"
+#import "GameScene.h"
 @implementation Hero
 bool play_dead = false;
 -(void) clear_next_input
@@ -32,6 +33,12 @@ bool play_dead = false;
     
     m_touched_side = ps_top;
     [self init_with_xml:@"sprites/base.xml:ninja" ];
+  /*  soft_ball* b = [[soft_ball alloc] initWithFile:@"blocks.png"];
+   [ b init_physics:[GameBase get_game].m_world.m_physics_world :30];
+    [b setZOrder:100];
+    [b setVisible:TRUE];
+    [[[GameBase get_game].m_scene get_layer_by_name:@"game"] addChild:b];
+   // self->m_sprite_components.push_back(b);*/
     [ self set_physic_position:0 :ccp(0,0)];
     
     [ self set_collision_filter:collision_filter_player() cat:cg_player1];
@@ -42,7 +49,7 @@ bool play_dead = false;
     [ self set_zorder:100];
     m_player_side = ps_can_land_bottom;
     m_velocity = ccp( 0, -get_global_config().ninja_jump_speed);
-    self.m_time_before_remove_outof_actrange = 3;
+    self.m_time_before_remove_outof_actrange = 1;
     return self;
 }
 
@@ -221,7 +228,7 @@ bool play_dead = false;
     
     if ( [other isKindOfClass:[PlatformBase class]] )
     {
-        //NSLog(@"begin contact platform: %p", other);
+        NSLog(@"begin contact platform: %p", other);
         [self add_landing_platform:(PlatformBase*)other];
     }
     
@@ -246,7 +253,7 @@ bool play_dead = false;
         other = spriteB  ;
     if ( [other isKindOfClass:[PlatformBase class]] )
     {
-        //NSLog(@"end contact platform: %p", other);
+        NSLog(@"end contact platform: %p", other);
         [ self del_landing_platform:(PlatformBase*)other];
     }
 }
@@ -279,6 +286,7 @@ bool play_dead = false;
         sleep(2);
         [self dead];
     }
+   [ [self get_sprite_component:1] set_physic_position:[self get_physic_position:0]];
     [ self apply_force_center:0 :m_velocity.x force_y:m_velocity.y ];
     
     

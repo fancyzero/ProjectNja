@@ -20,10 +20,12 @@
 #import "SpriteProxy.h"
 #import	"EditorVisualizer.h"
 #import "GLES-Render.h"
+#import "EditorCommon.h"
 @implementation GameSouSouSouEditorLevel
 
 -(void)reset
 {
+    m_filename_ = nil;
 	m_show_act_range = FALSE;
 	[super reset];
     GameBase* game = [GameBase get_game];// get_instance];
@@ -40,7 +42,7 @@
 	if ( 1 )
 	{
 		physics_debug_sprite* pds = [ physics_debug_sprite new ];
-		pds.zOrder = 200;
+		pds.zOrder = 2000;
 		[[GameBase get_game].m_scene.m_layer addChild:pds ];
 	}
 	EditorVisualizer * act_vis = [ EditorVisualizer new];
@@ -391,7 +393,9 @@
 	
 	if ( m_op_histroy.size() == 0 )
 		return;
+    clear_selected();
 	[self push_redo_histroy];
+    
 	std::vector<level_progress_trigger> triggers;
 	triggers = m_op_histroy.top();
 	m_op_histroy.pop();
@@ -414,6 +418,7 @@
 
 	if ( m_op_redo_histroy.size() == 0 )
 		return;
+        clear_selected();
 		[self push_histroy];
 	std::vector<level_progress_trigger> triggers;
 	triggers = m_op_redo_histroy.top();
