@@ -19,6 +19,7 @@
     BumppingScoreDisplay* m_score_display;
     int     m_sector_attached;
     float m_move_speed;
+    float m_total_moved;
 }
 -(float) get_move_speed;
 -(void) update:(float)delta_time;

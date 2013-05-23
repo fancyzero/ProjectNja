@@ -43,9 +43,10 @@ int reset_count = 0;
     init_global_config();
 	m_filename_ = nil;
     [super reset];
-
+    m_total_moved = 0;
+    
     m_sector_attached = 0;
-
+    
     m_move_speed = get_global_config().level_move_speed;
     m_moved_pos = 0;
     m_current_sector_width = 0;
@@ -73,6 +74,13 @@ int reset_count = 0;
     m_bg1 = [SpriteBase new];
     [m_bg1 init_with_xml:@"sprites/base.xml:bg1"];
     [m_bg1 set_position: 0 y:768/2];
+    ccTexParams tp;
+    tp.magFilter = GL_LINEAR;
+    tp.minFilter = GL_LINEAR;
+    tp.wrapS = GL_REPEAT;
+    tp.wrapT = GL_REPEAT;
+    [[m_bg1 get_sprite_component:0].texture setTexParameters:&tp];
+    
     [[GameBase get_game].m_world add_gameobj:m_bg1 layer:@"bg2"];
     
     if ( get_float_config(@"debug_physic") > 1 )
@@ -93,15 +101,15 @@ int reset_count = 0;
         //TODO: memory leak?
         
         [m_score_display release];
-
+        
     }
     m_score_display = [ [BumppingScoreDisplay alloc] initWithString:@"0" charMapFile:@"fonts/fps_images.png" itemWidth:12 itemHeight:32 startCharMap:'.'];
     [m_score_display display_integer_value];
-
+    
     
     [ m_score_display init_default ];
     [[[GameBase get_game].m_scene get_layer_by_name:@"ui"] addChild:m_score_display];
-        [m_score_display set_auto_bump: false];
+    [m_score_display set_auto_bump: false];
     [m_score_display retain];
     
 }
@@ -111,7 +119,7 @@ int reset_count = 0;
     NSLog(@"attach %d sector %@ at %f, %f", m_sector_attached, filename, at_pos.x, at_pos.y);
     m_sector_attached ++;
     if ( (m_sector_attached % 5 == 0) && (m_sector_attached != 0) )
-        m_move_speed = get_global_config().level_move_speed  * get_global_config().level_move_accleration*(m_sector_attached / 5);
+        m_move_speed = get_global_config().level_move_speed  * (1 + get_global_config().level_move_accleration*(m_sector_attached / 5));
     if ( m_move_speed > get_global_config().level_move_speed_max )
         m_move_speed = get_global_config().level_move_speed_max;
     m_acting_range_keyframes_.clear();
@@ -186,7 +194,7 @@ int reset_count = 0;
 	}
     
     m_moved_pos += m_move_speed * delta_time;
-    
+    m_total_moved += m_move_speed * delta_time;
     
     
     if ( m_moved_pos >= m_current_sector_width )
@@ -203,7 +211,7 @@ int reset_count = 0;
         }
         else
             rnd_file = [NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 7 +  3 ];
-
+        
         NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
         float fix = m_moved_pos - m_current_sector_width;
         CGPoint at_pos = ccp( -fix, 0);
@@ -212,10 +220,14 @@ int reset_count = 0;
         m_moved_pos = fix;
     }
     
-
+    CGRect rc;
+    rc.origin = ccp(m_total_moved/3,0);
+    rc.size.width = 1024;
+    rc.size.height = 1024;
+    [[m_bg1 get_sprite_component:0] setTextureCoords:rc];
     //m_move_speed += get_global_config().level_move_accleration * delta_time;
     //if ( m_move_speed > get_global_config().level_move_speed_max )
-     //   m_move_speed = get_global_config().level_move_speed_max;
+    //   m_move_speed = get_global_config().level_move_speed_max;
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos
