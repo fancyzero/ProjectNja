@@ -251,7 +251,7 @@
         //删除所有trigger后选中的Sprite自然会被删除
 		
         //clear selection
-		m_selected_sprites.clear();
+        [self unselect_all];
         NSLog(@"delete");
     }
 	return  TRUE;
