@@ -53,6 +53,7 @@ public:
 {
 	@public
 	Selection<SpriteBase*> m_selected_sprites;
+    std::vector<level_progress_trigger> m_copied_triggers;//for copy and paste
 }
 -(void) apply_selection;
 -(void) unselect_all;
@@ -65,6 +66,8 @@ public:
 -(BOOL) on_key_down:(mouse_key_event) event;
 -(BOOL) on_key_up:(mouse_key_event) event;
 -(void) pre_sprtie_deleted:(SpriteBase*) spr;//即将要删除一个sprite时
+-(void) on_copy;
+-(void) on_paste;
 //-(void) on_sprite_added;
 @end
 

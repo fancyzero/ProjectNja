@@ -1854,27 +1854,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">copy:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="916278166"/>
-					</object>
-					<int key="connectionID">1123</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">cut:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="671313738"/>
 					</object>
 					<int key="connectionID">1124</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">paste:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="502744650"/>
-					</object>
-					<int key="connectionID">1129</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2003,6 +1987,22 @@
 						<reference key="destination" ref="29171092"/>
 					</object>
 					<int key="connectionID">1155</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">on_copy:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="916278166"/>
+					</object>
+					<int key="connectionID">1156</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">on_paste:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="502744650"/>
+					</object>
+					<int key="connectionID">1157</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3176,8 +3176,8 @@
 							<reference ref="352194494"/>
 							<reference ref="29171092"/>
 							<reference ref="776730848"/>
-							<reference ref="671313738"/>
 							<reference ref="916278166"/>
+							<reference ref="671313738"/>
 							<reference ref="502744650"/>
 						</object>
 						<reference key="parent" ref="327226881"/>
@@ -3547,7 +3547,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1155</int>
+			<int key="maxID">1157</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

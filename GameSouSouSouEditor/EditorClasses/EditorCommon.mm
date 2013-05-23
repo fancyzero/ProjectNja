@@ -46,6 +46,20 @@ void clear_selected()
     [edctrl->m_op_navigator unselect_all];
 }
 
+OperatorBase* get_current_op()
+{
+	std::vector<SpriteBase*> empty_array;
+	SaDEditor* editor;
+	
+	editor = (SaDEditor*)[GameBase get_game];
+	if ( editor == NULL )
+        return NULL;
+	EditorController* edctrl = (EditorController*)[editor get_controller];
+	if ( edctrl == NULL )
+        return NULL;
+    return edctrl->m_op_current;
+}
+
 std::vector<SpriteBase*> get_current_op_selected_sprites()
 {
 	std::vector<SpriteBase*> empty_array;

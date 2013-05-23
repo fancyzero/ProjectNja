@@ -14,7 +14,7 @@
 #import "EditorCommon.h"
 #import "AppDelegate.h"
 #import "SpriteProxy.h"
-
+#include <set>
 
 @implementation OperatorBase
 -(void) apply_selection
@@ -105,6 +105,35 @@
 -(BOOL) on_key_up:(mouse_key_event) event
 {
 	return TRUE;
+}
+
+-(void) on_copy
+{
+    if ( m_selected_sprites.get_selection().size() == 0 )
+        return;
+    m_copied_triggers.clear();
+    //copy triggers
+    std::set<int> trigger_ids;
+    for ( std::vector<SpriteBase*>::iterator it = m_selected_sprites.get_selection().begin(); it != m_selected_sprites.get_selection().end(); ++it )
+    {
+        trigger_ids.insert([(*it) get_trigger_id]);
+    }
+    for ( std::set<int>::iterator it = trigger_ids.begin(); it != trigger_ids.end(); ++it )
+    {
+        level_progress_trigger t = *([[GameBase get_game].m_level get_trigger_by_id: (*it)]);
+        m_copied_triggers.push_back(t);
+    }
+    
+}
+-(void) on_paste;
+{
+    GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*) [GameBase get_game].m_level;
+
+    //[ lvl push_histroy];
+    for ( std::vector<level_progress_trigger>::iterator it = m_copied_triggers.begin(); it != m_copied_triggers.end(); ++it )
+    {
+        [lvl add_trigger_at_runtime:*it];
+    }
 }
 
 @end
@@ -285,7 +314,11 @@
 	NSString* strlayer = [wnd.trigger_layer stringValue];
 	if ( [strlayer isEqualToString:@""] )
 		strlayer = @"game";
-	
+	if ( [[wnd.trigger_sprite_desc stringValue] isEqualToString:@""] )
+        return FALSE;
+    if ([[wnd.sprite_class stringValue] isEqualToString:@""] )
+        return FALSE;
+    
 	spawn_loc = [[[GameBase get_game].m_scene get_layer_by_name:strlayer ] convertToNodeSpace:spawn_loc];
 	trigger.set_params(  [NSMutableDictionary dictionary] );
 //	[trigger.get_params() retain];

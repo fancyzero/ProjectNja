@@ -18,7 +18,7 @@
 #import "Level.h"
 #import "EditorCommon.h"
 #import "GameSouSouSouEditorLevel.h"
-
+#import "EditorCommon.h"
 typedef void *Cache;
 #import "obj_runtime_new.h"
 #import <Cocoa/Cocoa.h>
@@ -213,6 +213,16 @@ void clear_other_params (NSMutableDictionary* init_params )
 {
 	SaDEditor* game = (SaDEditor*)[GameBase get_game];
 	[(GameSouSouSouEditorLevel*) game.m_level  pop_redo_histroy];
+}
+
+- (IBAction)on_copy:(id)sender
+{
+    [ get_current_op() on_copy ];
+}
+
+- (IBAction)on_paste:(id)sender
+{
+    [get_current_op() on_paste];
 }
 
 - (IBAction)toggleFullScreen: (id)sender

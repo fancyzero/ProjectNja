@@ -98,6 +98,8 @@ struct level_progress_trigger;
 - (IBAction)on_file_save:(id)sender;
 - (IBAction)on_undo:(id)sender;
 - (IBAction)on_redo:(id)sender;
+- (IBAction)on_copy:(id)sender;
+- (IBAction)on_paste:(id)sender;
 
 - (IBAction)toggleFullScreen:(id)sender;
 - (IBAction)toggle_show_act_range:(id)sender;
