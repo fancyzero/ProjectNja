@@ -18,7 +18,34 @@
 			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="978.49,-75.05" progress="0.000000" />
 			<action act="add_obj" sprite_desc="sprites/base.xml:earth_2" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="-7.52,-103.91" progress="0.000000" init_rotation="4" />
 			<action act="add_obj" sprite_desc="sprites/base.xml:earth_1" layer="game" init_zorder="1" class="Platform" init_scale="1" init_position="1644.58,-72.11" progress="0.000000" init_rotation="0" />
-			<action act="add_obj" sprite_desc="sprites/base.xml:saw" layer="game" init_zorder="1" class="Razor" init_scale="1" init_position="1444.16,207.47" progress="0.000000" fall_speed="-400" rotat_speed="-400" sweep_speed="0" sweep_range="0"/>
+			<action act="add_obj" sprite_desc="sprites/base.xml:magnet" layer="game" init_zorder="1" class="PickupMagnet" duration="3" value="500" init_scale="1" init_position="377.34,124.58" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="751.50,143.83" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="838.31,143.83" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="939.57,137.87" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1009.49,137.87" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1069.20,181.32" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1096.39,271.38" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1167.49,217.18" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1103.44,120.97" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1205.88,117.91" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1273.36,169.76" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1257.10,244.47" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1365.14,245.64" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1326.02,88.37" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="SCoin" init_scale="1" init_position="1397.84,130.55" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1474.53,287.41" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1488.98,241.61" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1498.64,155.34" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1552.84,66.73" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1571.73,167.98" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1607.85,275.40" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1615.09,230.77" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1620.51,210.27" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1643.99,93.82" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1710.93,131.76" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1713.37,140.26" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1801.36,158.41" progress="0.000000" />
+			<action act="add_obj" sprite_desc="sprites/base.xml:coin" layer="game" init_zorder="1" class="PickupMagnet" init_scale="1" init_position="1891.96,158.41" progress="0.000000" />
 		</actions>
 	</level>
 </xml>

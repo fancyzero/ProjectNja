@@ -35,7 +35,7 @@ int reset_count = 0;
 
 -(float) get_move_speed
 {
-    return m_move_speed;
+    return m_move_speed + [(Hero*)(get_player(-1)) get_speed];
 }
 
 -(void)reset
@@ -217,8 +217,8 @@ int reset_count = 0;
 		}
 	}
     
-    m_moved_pos += m_move_speed * delta_time;
-    m_total_moved += m_move_speed * delta_time;
+    m_moved_pos += [self get_move_speed] * delta_time;
+    m_total_moved += [self get_move_speed] * delta_time;
     
     
     if ( m_moved_pos >= m_current_sector_width )
@@ -239,9 +239,7 @@ int reset_count = 0;
     rc.size.width = 1024;
     rc.size.height = 1024;
     [[m_bg1 get_sprite_component:0] setTextureCoords:rc];
-    //m_move_speed += get_global_config().level_move_accleration * delta_time;
-    //if ( m_move_speed > get_global_config().level_move_speed_max )
-    //   m_move_speed = get_global_config().level_move_speed_max;
+
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos

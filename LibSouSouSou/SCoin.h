@@ -9,5 +9,9 @@
 #import "PlatformBase.h"
 
 @interface SCoin : PlatformBase
-
+{
+    bool m_attracted;
+    float m_attracted_time;
+}
 @end
+

@@ -27,6 +27,8 @@ bool play_dead = false;
     
     self = [super init];
     [self clear_next_input];
+    m_speed.reset();
+    m_magnet.reset();
     m_score = 0;
     play_dead = false;
     m_landing_platforms.clear();
@@ -228,7 +230,7 @@ bool play_dead = false;
     
     if ( [other isKindOfClass:[PlatformBase class]] )
     {
-        NSLog(@"begin contact platform: %p", other);
+        //NSLog(@"begin contact platform: %p", other);
         [self add_landing_platform:(PlatformBase*)other];
     }
     
@@ -253,7 +255,7 @@ bool play_dead = false;
         other = spriteB  ;
     if ( [other isKindOfClass:[PlatformBase class]] )
     {
-        NSLog(@"end contact platform: %p", other);
+        //NSLog(@"end contact platform: %p", other);
         [ self del_landing_platform:(PlatformBase*)other];
     }
 }
@@ -275,6 +277,36 @@ bool play_dead = false;
         m_score += 10;
     }
     return 1;
+}
+
+-(void) set_magnet:(float) v
+{
+    m_magnet.base_value = v;
+}
+
+-(void) set_speed:(float) v
+{
+    m_speed.base_value = v;
+}
+
+-(void) set_magnet_boost:(float) v :(float) time
+{
+    m_magnet.boost( time, v);
+}
+
+-(void) set_speed_boost:(float) v :(float) time;
+{
+    m_speed.boost( time, v);
+}
+
+-(float) get_magnet
+{
+    return m_magnet;
+}
+
+-(float) get_speed
+{
+    return m_speed;
 }
 
 

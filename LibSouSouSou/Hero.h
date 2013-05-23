@@ -9,6 +9,7 @@
 #import "PlayerBase.h"
 #import "PlatformBase.h"
 #include <map>
+#include "common.h"
 enum player_side
 {
     ps_can_land_top,
@@ -22,6 +23,35 @@ enum input
     none
 };
 
+template<typename T>
+struct boostable_value
+{
+    T base_value;
+    T boost_value;
+    float boost_time;
+    float boost_start;
+    void reset()
+    {
+        boost_time = 0;
+        boost_start = 0;
+        boost_value = 0;
+        base_value = 0;
+    }
+    void boost( float time, float value )
+    {
+        boost_time = time;
+        boost_start = current_game_time();
+        boost_value = value;
+    }
+    operator T()
+    {
+        if ( current_game_time() - boost_start > boost_time )
+            return base_value;
+        else
+            return base_value + boost_value;
+    }
+};
+
 @interface Hero : PlayerBase
 {
     CGPoint m_velocity;
@@ -32,8 +62,22 @@ enum input
     float           m_score;
     std::map<PlatformBase*, int> m_landing_platforms;
     input m_next_input;
+    boostable_value<float>           m_magnet;
+    boostable_value<float>           m_speed;
+    
 }
 
+-(bool) is_buff;
+-(bool) is_magnet;
+-(bool) is_boost;
+
+-(void) set_magnet:(float) v;
+-(void) set_speed:(float) v;
+-(void) set_magnet_boost:(float) v :(float) time;
+-(void) set_speed_boost:(float) v :(float) time;
+
+-(float) get_magnet;
+-(float) get_speed;
 -(float) get_score;
 -(id) init;
 -(void) go_left;

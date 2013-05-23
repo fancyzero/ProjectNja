@@ -69,5 +69,9 @@
 			<sprite_component desc="sprite_components/base.xml:coin" />
 		</sprite_components>
     </sprite>
-    
+    <sprite name="magnet">
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:magnet" />
+		</sprite_components>
+    </sprite>
 </sprites>
