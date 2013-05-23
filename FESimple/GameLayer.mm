@@ -36,7 +36,7 @@
 	//	
 	[sprite set_layer:self];
 
-	if ( [sprite is_batchable] )
+	if ( [sprite is_batchable] && ![[GameBase get_game] is_editor])
 	{
 		[self->m_batch_sprite_manager add_sprite:sprite];
 	}
