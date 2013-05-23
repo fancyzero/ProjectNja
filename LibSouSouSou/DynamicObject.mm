@@ -15,7 +15,7 @@
 -(id) init_with_spawn_params:(NSDictionary *)params
 {
     self = [super init_with_spawn_params:params];
-
+    
     m_fall_speed = read_float_value(params, @"fall_speed", 0);
     m_rotat_speed = read_float_value(params, @"rotat_speed", 0);
     
@@ -29,7 +29,7 @@
     [ self set_physic_angular_velocity:0 :m_rotat_speed ];
     GameSouSouSouLevel* lvl = (GameSouSouSouLevel*)[GameBase get_game].m_level;
     float level_speed = [ lvl get_move_speed ];
-    float move_speed = level_speed;
+    float move_speed = level_speed/[ GameBase get_ptm_ratio ];
     if ( self.m_position.x <= 512 )
         move_speed = (level_speed + m_fall_speed)/[ GameBase get_ptm_ratio ];
     [ self set_physic_linear_velocity:0 :-move_speed  :0 ];
