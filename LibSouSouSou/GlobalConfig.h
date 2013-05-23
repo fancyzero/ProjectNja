@@ -16,6 +16,7 @@ struct GlobalConfig
     float ninja_push_force;
     float level_move_speed_max;
     float level_move_accleration;
+    NSArray* test_maps;
 };
 
 void init_global_config();

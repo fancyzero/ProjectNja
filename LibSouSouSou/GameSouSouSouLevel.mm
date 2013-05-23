@@ -91,7 +91,7 @@ int reset_count = 0;
 	}
 	m_cur_path = 0;
     
-    NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: @"/levels/sector1.xml"];
+    NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: [self rand_next_sector]];
     
     [self attach_sector:sector_file :ccp(-1024,0)];
     m_moved_pos = 1024;
@@ -160,6 +160,30 @@ int reset_count = 0;
     
 	
 }
+-(NSString*) rand_next_sector
+{
+    NSString* rnd_file;
+    if ( [ get_global_config().test_maps count ] > 0 )
+    {
+        return [get_global_config().test_maps objectAtIndex: m_sector_attached % [ get_global_config().test_maps count ]];
+    }
+    
+
+    if ( m_sector_attached == 0 )
+        rnd_file = @"/levels/sector1.xml";
+    if ( m_sector_attached == 1 )
+        rnd_file = @"/levels/sector2.xml";
+    else if ( (m_sector_attached % 10 == 0) && (m_sector_attached != 0) )
+    {
+        if ( rand() %2 )
+            rnd_file = @"/levels/sector10.xml";
+        else
+            rnd_file = @"/levels/sector11.xml";
+    }
+    else
+        rnd_file = [NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 7 +  3 ];
+    return rnd_file;
+};
 
 -(void)update:(float)delta_time
 {
@@ -200,18 +224,8 @@ int reset_count = 0;
     if ( m_moved_pos >= m_current_sector_width )
     {
         NSString* rnd_file;
-        if ( m_sector_attached == 1 )
-            rnd_file = @"/levels/sector2.xml";
-        else if ( (m_sector_attached % 10 == 0) && (m_sector_attached != 0) )
-        {
-            if ( rand() %2 )
-                rnd_file = @"/levels/sector10.xml";
-            else
-                rnd_file = @"/levels/sector11.xml";
-        }
-        else
-            rnd_file = [NSString stringWithFormat:@"/levels/sector%d.xml", rand() % 7 +  3 ];
-        
+
+        rnd_file = [ self rand_next_sector ];
         NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
         float fix = m_moved_pos - m_current_sector_width;
         CGPoint at_pos = ccp( -fix, 0);
