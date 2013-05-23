@@ -25,6 +25,7 @@ typedef void *Cache;
 #import "SpriteDefManager.h"
 #import "EditorController.h"
 
+
 NSMutableDictionary* get_other_params (NSMutableDictionary* init_params)
 {
 	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithDictionary:init_params];
@@ -155,7 +156,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 
 - (IBAction)on_file_open:(id)sender
 {
-
+    
 	NSOpenPanel* openDlg = [NSOpenPanel openPanel];
 	
     // Enable the selection of files in the dialog.
@@ -163,7 +164,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 	
     // Enable the selection of directories in the dialog.
     [openDlg setCanChooseDirectories:YES];
-
+    
 	
     // Display the dialog.  If the OK button was pressed,
     // process the files.
@@ -245,10 +246,10 @@ void clear_other_params (NSMutableDictionary* init_params )
 - (IBAction)on_level_progress_changed:(id)sender
 {
 	GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
-		float value = [sender floatValue];
+    float value = [sender floatValue];
 	[ lvl set_progress :value];
-
-
+    
+    
 	[ current_progress_slider setFloatValue:value];
 	[ current_progress_txt setFloatValue:value];
 	
@@ -278,10 +279,10 @@ void clear_other_params (NSMutableDictionary* init_params )
 
 -(void) select_class:(NSString*) classname
 {
-
+    
     if ( classname != NULL )
         [sprite_class_ setStringValue:classname];
-
+    
 }
 
 - (IBAction)on_param_changed:(id)sender
@@ -289,45 +290,51 @@ void clear_other_params (NSMutableDictionary* init_params )
 	level_progress_trigger* trigger;
 	NSString* identifier = [sender identifier];
 	NSString* strval = [sender stringValue];
-
+    
 	GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
 	EditorController* edctrl = (EditorController*)[ (SaDEditor*)[GameBase get_game] get_controller];
 	
 	if ( [edctrl get_edit_mode] == sed_modify )
+    {
 		[lvl push_histroy];
-	std::vector<SpriteBase*> selected_sprites =get_current_op_selected_sprites();
-
-	for( std::vector<SpriteBase*>::iterator it = selected_sprites.begin(); it != selected_sprites.end(); ++it )
-	{
-		trigger = [[GameBase get_game].m_level get_trigger_by_id:[(*it) get_trigger_id ] ];
-		if ( [identifier isEqualToString:@"trigger_class"] )
-			[trigger->get_params() setObject:strval forKey:@"class"];
-		
-		if ( [identifier isEqualToString:@"trigger_progress_pos"] )
-		{
-			trigger->progress_pos = [sender floatValue];
-			[trigger->get_params() setObject:strval forKey:@"progress"];
-		}
-		if ( [identifier isEqualToString:@"trigger_init_position"] )
-			[trigger->get_params() setObject:strval forKey:@"init_position"];
-
-		if ( [identifier isEqualToString:@"trigger_init_rotation"] )
-			[trigger->get_params() setObject:strval forKey:@"init_rotation"];
-		
-		if ( [identifier isEqualToString:@"trigger_init_scale"] )
-			[trigger->get_params() setObject:strval forKey:@"init_scale"];
-		
-		if ( [identifier isEqualToString:@"trigger_init_zorder"] )
-			[trigger->get_params() setObject:strval forKey:@"init_zorder"];
-		
-		if ( [identifier isEqualToString:@"trigger_sprite_desc"] )
-			[trigger->get_params() setObject:strval forKey:@"sprite_desc"];
-		
-		if ( [identifier isEqualToString:@"trigger_layer"] )
-			[trigger->get_params() setObject:strval forKey:@"layer"];
-		
-		[lvl  on_trigger_changed: [(*it) get_trigger_id] ];
-	}
+        std::vector<SpriteBase*> selected_sprites =get_current_op_selected_sprites();
+        
+        for( std::vector<SpriteBase*>::iterator it = selected_sprites.begin(); it != selected_sprites.end(); ++it )
+        {
+            trigger = [[GameBase get_game].m_level get_trigger_by_id:[(*it) get_trigger_id ] ];
+            if ( [identifier isEqualToString:@"trigger_class"] )
+                [trigger->get_params() setObject:strval forKey:@"class"];
+            
+            if ( [identifier isEqualToString:@"trigger_progress_pos"] )
+            {
+                trigger->progress_pos = [sender floatValue];
+                [trigger->get_params() setObject:strval forKey:@"progress"];
+            }
+            if ( [identifier isEqualToString:@"trigger_init_position"] )
+                [trigger->get_params() setObject:strval forKey:@"init_position"];
+            
+            if ( [identifier isEqualToString:@"trigger_init_rotation"] )
+                [trigger->get_params() setObject:strval forKey:@"init_rotation"];
+            
+            if ( [identifier isEqualToString:@"trigger_init_scale"] )
+                [trigger->get_params() setObject:strval forKey:@"init_scale"];
+            
+            if ( [identifier isEqualToString:@"trigger_init_zorder"] )
+                [trigger->get_params() setObject:strval forKey:@"init_zorder"];
+            
+            if ( [identifier isEqualToString:@"trigger_sprite_desc"] )
+                [trigger->get_params() setObject:strval forKey:@"sprite_desc"];
+            
+            if ( [identifier isEqualToString:@"trigger_layer"] )
+                [trigger->get_params() setObject:strval forKey:@"layer"];
+            
+            [lvl  on_trigger_changed: [(*it) get_trigger_id] ];
+        }
+    }
+    else
+    {
+        [ get_current_op() on_param_changed:sender ];
+    }
 }
 
 - (IBAction)on_other_param_add_row:(id)sender
@@ -367,7 +374,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 		[sprite_class_collections->sprite_classes release];
 	sprite_class_collections->sprite_classes = [a copy];
 	[sprite_class_collections->sprite_classes retain];
-
+    
 	m_trigger = trigger;
 	[ self update_content ];
 }
@@ -380,7 +387,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 		[ trigger_id setIntValue: m_trigger->id ];
 		if (  [m_trigger->get_params() valueForKey:@"init_position"] != NULL )
 			[trigger_init_position setStringValue: [m_trigger->get_params() valueForKey:@"init_position"] ];
-
+        
 		else
 			[trigger_init_position setStringValue: @"0,0"];
 		if ( [m_trigger->get_params() objectForKey:@"init_rotation"] != NULL )
@@ -396,7 +403,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 			[trigger_sprite_desc setStringValue: [m_trigger->get_params() objectForKey:@"sprite_desc"]];
 		else
 			[trigger_sprite_desc setStringValue: @"" ];
-
+        
 		if ( [ m_trigger->get_params() objectForKey:@"layer" ] )
 			[trigger_layer setStringValue: [m_trigger->get_params() objectForKey:@"layer"]];
 		else
@@ -434,7 +441,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-	
+//	[get_current_op() get_other_params];
 	std::vector<SpriteBase*> selected_sprites = get_current_op_selected_sprites();
 	for( std::vector<SpriteBase*>::iterator it = selected_sprites.begin(); it != selected_sprites.end(); ++it )
 	{
@@ -467,7 +474,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 			return NULL;
 		if ( row < 0 )
 			return NULL;
-
+        
 		if ( [tableColumn.identifier isEqualToString: @"col_key"])
 			return keys[row];
 		if ( [tableColumn.identifier isEqualToString: @"col_value"])
@@ -481,9 +488,9 @@ void clear_other_params (NSMutableDictionary* init_params )
 
 -(void)MessageBox:(NSString *) header:(NSString *) message
 {
-
+    
 	CFUserNotificationDisplayAlert(0, 0, 0, 0, 0, (CFStringRef)header, (CFStringRef)message, 0, 0, 0, 0);
-
+    
 	return;
 }
 
@@ -502,7 +509,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 			return ;
 		if ( row < 0 )
 			return ;
-	
+        
 		NSString* old_key;
 		NSString* old_value;
 		NSString* new_key;
@@ -530,7 +537,7 @@ void clear_other_params (NSMutableDictionary* init_params )
 		[tableView reloadData];
 		GameSouSouSouEditorLevel* lvl = (GameSouSouSouEditorLevel*)[GameBase get_game].m_level;
 		[lvl  on_trigger_changed: trigger->id];
-
+        
 		break;
 	}
 }

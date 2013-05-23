@@ -135,7 +135,9 @@
         [lvl add_trigger_at_runtime:*it];
     }
 }
-
+-(void) on_param_changed:(id)sender
+{
+}
 @end
 
 @implementation NavigatorOperator
@@ -285,6 +287,11 @@
     }
 	return  TRUE;
 }
+
+-(void) on_param_changed:(id) sender
+{
+}
+
 -(BOOL) on_key_up:(mouse_key_event) event
 {
 	if ( event.key == 49 )
@@ -295,6 +302,48 @@
 @end
 
 @implementation AddOperator
+
+-(void) on_param_changed:(id) sender
+{
+	level_progress_trigger* trigger;
+	NSString* identifier = [sender identifier];
+	NSString* strval = [sender stringValue];
+    
+    trigger = &m_template_trigger;
+    if ( trigger->get_params() == nil )
+    {
+        trigger->set_params([NSMutableDictionary dictionary]);
+    }
+    
+    if ( [identifier isEqualToString:@"trigger_class"] )
+        [trigger->get_params() setObject:strval forKey:@"class"];
+    
+    if ( [identifier isEqualToString:@"trigger_progress_pos"] )
+    {
+        trigger->progress_pos = [sender floatValue];
+        [trigger->get_params() setObject:strval forKey:@"progress"];
+    }
+    if ( [identifier isEqualToString:@"trigger_init_position"] )
+        [trigger->get_params() setObject:strval forKey:@"init_position"];
+    
+    if ( [identifier isEqualToString:@"trigger_init_rotation"] )
+        [trigger->get_params() setObject:strval forKey:@"init_rotation"];
+    
+    if ( [identifier isEqualToString:@"trigger_init_scale"] )
+        [trigger->get_params() setObject:strval forKey:@"init_scale"];
+    
+    if ( [identifier isEqualToString:@"trigger_init_zorder"] )
+        [trigger->get_params() setObject:strval forKey:@"init_zorder"];
+    
+    if ( [identifier isEqualToString:@"trigger_sprite_desc"] )
+        [trigger->get_params() setObject:strval forKey:@"sprite_desc"];
+    
+    if ( [identifier isEqualToString:@"trigger_layer"] )
+        [trigger->get_params() setObject:strval forKey:@"layer"];
+    
+    
+    
+}
 
 -(void) on_activated
 {

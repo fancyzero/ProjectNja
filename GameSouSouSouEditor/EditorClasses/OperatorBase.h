@@ -68,6 +68,7 @@ public:
 -(void) pre_sprtie_deleted:(SpriteBase*) spr;//即将要删除一个sprite时
 -(void) on_copy;
 -(void) on_paste;
+-(void) on_param_changed:(id) sender;
 //-(void) on_sprite_added;
 @end
 
@@ -87,6 +88,7 @@ public:
 -(BOOL) on_mouse_scroll:(mouse_key_event) event;
 -(BOOL) on_key_down:(mouse_key_event) event;
 -(BOOL) on_key_up:(mouse_key_event) event;
+-(void) on_param_changed:(id) sender;
 @end
 
 @interface AddOperator : OperatorBase
@@ -94,5 +96,6 @@ public:
 	struct level_progress_trigger m_template_trigger;//for add operator	
 }
 -(void) on_activated;
+-(void) on_param_changed:(id) sender;
 -(BOOL) on_mouse_down:(mouse_key_event) event;
 @end
