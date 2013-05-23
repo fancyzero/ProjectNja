@@ -7,7 +7,7 @@
             <key>ball.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1564,292},{416,374}}</string>
+                <string>{{1564,261},{416,374}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>coin.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1342,465},{100,110}}</string>
+                <string>{{1888,2},{100,110}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>earth_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1132,831},{886,226}}</string>
+                <string>{{1132,820},{886,226}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,33 +111,20 @@
             <key>rock_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1342,668},{638,161}}</string>
+                <string>{{1342,637},{637,181}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{638,161}}</string>
+                <string>{{0,0},{637,181}}</string>
                 <key>sourceSize</key>
-                <string>{638,161}</string>
-            </dict>
-            <key>saw.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1633,2},{314,288}}</string>
-                <key>offset</key>
-                <string>{-3,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{314,288}}</string>
-                <key>sourceSize</key>
-                <string>{320,288}</string>
+                <string>{637,181}</string>
             </dict>
             <key>spike.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{630,911},{253,201}}</string>
+                <string>{{1633,2},{253,201}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -157,7 +144,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:217922a4e6d85200a9a2de215b4b58b9$</string>
+            <string>$TexturePacker:SmartUpdate:1a2bd9eaee55c10d619f1c06ac35c8cd$</string>
             <key>textureFileName</key>
             <string>scene-ipadhd.png</string>
         </dict>

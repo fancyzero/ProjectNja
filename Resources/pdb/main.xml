@@ -1,50 +1,37 @@
 <bodies>
 
-<body name="earth_1" id="0" anchor_rel="0.000,0.000" anchor_abs="0.000,0.000" size="1629.000,257.000">
-<polygon vertices=" 1631.000,128.000 ,1592.000,210.000 ,0.000,210.000 ,139.000,31.000 ,1518.000,27.000" is_sensor="false" />
+<body name="earth_1" id="0" anchor_rel="0.500,0.500" anchor_abs="814.500,128.500" size="1629.000,257.000">
+<polygon vertices=" -814.500,81.500 ,-814.500,-128.500 ,815.500,-128.500 ,815.500,81.500" is_sensor="false" />
 </body>
-<body name="earth_2" id="0" anchor_rel="0.000,0.000" anchor_abs="0.000,0.000" size="1338.000,242.000">
-<polygon vertices=" 0.000,143.000 ,138.000,20.000 ,1161.000,17.000 ,1337.000,155.000 ,1311.000,215.000 ,56.000,220.000" is_sensor="false" />
+<body name="earth_2" id="0" anchor_rel="0.500,0.500" anchor_abs="669.000,121.000" size="1338.000,242.000">
+<polygon vertices=" 671.000,89.000 ,-669.000,89.000 ,-669.000,-121.000 ,671.000,-121.000" is_sensor="false" />
 </body>
-<body name="earth_3" id="0" anchor_rel="0.000,0.000" anchor_abs="0.000,0.000" size="886.000,226.000">
-<polygon vertices=" 885.000,133.000 ,843.000,200.000 ,0.000,200.000 ,3.000,140.000 ,90.000,43.000 ,763.000,20.000" is_sensor="false" />
+<body name="earth_3" id="0" anchor_rel="0.500,0.500" anchor_abs="443.000,113.000" size="886.000,226.000">
+<polygon vertices=" 447.000,97.000 ,-443.000,97.000 ,-443.000,-113.000 ,447.000,-113.000" is_sensor="false" />
 </body>
-<body name="earth_4" id="0" anchor_rel="0.000,0.000" anchor_abs="0.000,0.000" size="626.000,238.000">
-<polygon vertices=" 90.000,19.000 ,538.000,21.000 ,602.000,200.000 ,8.000,202.000 ,0.000,177.000" is_sensor="false" />
-<polygon vertices=" 626.000,149.000 ,602.000,200.000 ,538.000,21.000" is_sensor="false" />
+<body name="earth_4" id="0" anchor_rel="0.500,0.500" anchor_abs="313.000,119.000" size="626.000,238.000">
+<polygon vertices=" 312.000,91.000 ,-313.000,91.000 ,-313.000,-119.000 ,312.000,-119.000" is_sensor="false" />
 </body>
-<body name="rock_1" id="0" anchor_rel="0.000,0.475" anchor_abs="0.000,96.000" size="1560.000,202.000">
-<polygon vertices=" 0.000,-3.000 ,36.000,-81.000 ,1532.000,-76.000 ,1556.000,-11.000 ,1522.000,79.000 ,39.000,79.000" is_sensor="false" />
+<body name="rock_1" id="0" anchor_rel="0.500,0.500" anchor_abs="780.000,101.000" size="1560.000,202.000">
+<polygon vertices=" -780.000,-81.000 ,780.000,-81.000 ,780.000,74.000 ,-780.000,74.000" is_sensor="false" />
 </body>
-<body name="rock_2" id="0" anchor_rel="0.000,0.490" anchor_abs="0.000,98.000" size="1128.000,200.000">
-<polygon vertices=" -4.000,-13.000 ,64.000,-78.000 ,1104.000,-78.000 ,1071.000,77.000 ,67.000,77.000" is_sensor="false" />
-<polygon vertices=" 1128.000,-4.000 ,1071.000,77.000 ,1104.000,-78.000" is_sensor="false" />
+<body name="rock_2" id="0" anchor_rel="0.500,0.500" anchor_abs="564.000,100.000" size="1128.000,200.000">
+<polygon vertices=" 566.000,-80.000 ,566.000,75.000 ,-564.000,75.000 ,-564.000,-80.000" is_sensor="false" />
 </body>
-<body name="rock_3" id="0" anchor_rel="0.000,0.435" anchor_abs="0.000,70.000" size="638.000,161.000">
-<polygon vertices=" 641.000,-7.000 ,571.000,85.000 ,29.000,85.000 ,65.000,-70.000 ,575.000,-70.000" is_sensor="false" />
-<polygon vertices=" -6.000,20.000 ,65.000,-70.000 ,29.000,85.000" is_sensor="false" />
+<body name="rock_3" id="0" anchor_rel="0.500,0.500" anchor_abs="318.500,90.500" size="637.000,181.000">
+<polygon vertices=" 316.500,-70.500 ,316.500,84.500 ,-318.500,84.500 ,-318.500,-70.500" is_sensor="false" />
 </body>
 <body name="pic1" id="0" anchor_rel="0.000,0.000" anchor_abs="0.000,0.000" size="64.000,64.000">
 <circle radius="32.280" is_sensor="false" />
 </body>
-<body name="ninja_run" id="0" anchor_rel="0.680,0.317" anchor_abs="220.370,102.770" size="324.000,324.000">
-<circle radius="70.711" is_sensor="false" />
+<body name="ninja_run" id="0" anchor_rel="0.678,0.332" anchor_abs="219.580,107.450" size="324.000,324.000">
+<circle radius="59.076" is_sensor="false" />
 </body>
-<body name="spike" id="0" anchor_rel="0.000,0.000" anchor_abs="0.000,0.000" size="253.000,201.000">
-<polygon vertices=" 226.000,0.000 ,225.000,143.000 ,140.000,193.000 ,31.000,135.000 ,26.000,0.000" is_sensor="false" />
+<body name="spike" id="0" anchor_rel="0.500,0.000" anchor_abs="126.500,0.000" size="253.000,201.000">
+<polygon vertices=" 99.500,0.000 ,98.500,143.000 ,13.500,193.000 ,-95.500,135.000 ,-100.500,0.000" is_sensor="false" />
 </body>
 <body name="coin" id="0" anchor_rel="0.500,0.500" anchor_abs="50.000,55.000" size="100.000,110.000">
 <circle radius="59.034" is_sensor="true" />
-</body>
-<body name="ball" id="0" anchor_rel="0.541,0.540" anchor_abs="225.000,202.000" size="416.000,374.000">
-<polygon vertices=" 191.000,-23.000 ,105.000,159.000 ,33.000,172.000 ,-47.000,172.000 ,-222.000,33.000 ,-224.000,13.000 ,-205.000,-36.000 ,85.000,-170.000" is_sensor="false" />
-<polygon vertices=" -131.000,-147.000 ,25.000,-202.000 ,48.000,-197.000 ,85.000,-170.000 ,-205.000,-36.000" is_sensor="false" />
-<polygon vertices=" -105.000,165.000 ,-222.000,33.000 ,-47.000,172.000" is_sensor="false" />
-<polygon vertices=" -225.500,14.000 ,-134.000,-145.500 ,32.500,-201.000 ,105.500,-144.000 ,179.500,-46.000 ,-45.000,172.500 ,-46.000,172.500 ,-113.000,158.500" is_sensor="false" />
-<polygon vertices=" 104.500,159.000 ,-45.000,172.500 ,179.500,-46.000 ,188.500,-7.000" is_sensor="false" />
-</body>
-<body name="saw" id="0" anchor_rel="0.500,0.500" anchor_abs="160.000,144.000" size="320.000,288.000">
-<circle radius="125.172" is_sensor="false" />
 </body>
 </bodies>
         
