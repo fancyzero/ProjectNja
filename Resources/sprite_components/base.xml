@@ -93,6 +93,16 @@
 			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="coin.png" framespeed="0"/>
 		</animation_def>
 	</sprite_component>
+
+    <sprite_component name="coin1">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:coin"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="coin1.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
+    
     <sprite_component name="ball">
 		<physics_def>
 			<body type="kinematic" url="pdb/main.xml:ball"/>

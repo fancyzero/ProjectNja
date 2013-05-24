@@ -7,7 +7,7 @@
             <key>ball.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1564,292},{416,374}}</string>
+                <string>{{1564,331},{416,374}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,20 @@
             <key>coin.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1342,465},{100,110}}</string>
+                <string>{{1888,114},{100,110}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{100,110}}</string>
+                <key>sourceSize</key>
+                <string>{100,110}</string>
+            </dict>
+            <key>coin1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1888,2},{100,110}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +72,7 @@
             <key>earth_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1132,831},{886,226}}</string>
+                <string>{{1132,890},{886,226}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,15 +98,15 @@
             <key>magnet.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{885,911},{230,200}}</string>
+                <string>{{1633,205},{90,124}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{-2,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{230,200}}</string>
+                <string>{{17,2},{90,124}}</string>
                 <key>sourceSize</key>
-                <string>{230,200}</string>
+                <string>{128,128}</string>
             </dict>
             <key>rock_1.png</key>
             <dict>
@@ -124,33 +137,20 @@
             <key>rock_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1342,668},{638,161}}</string>
+                <string>{{1342,707},{637,181}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{638,161}}</string>
+                <string>{{0,0},{637,181}}</string>
                 <key>sourceSize</key>
-                <string>{638,161}</string>
-            </dict>
-            <key>saw.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1633,2},{314,288}}</string>
-                <key>offset</key>
-                <string>{-3,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{314,288}}</string>
-                <key>sourceSize</key>
-                <string>{320,288}</string>
+                <string>{637,181}</string>
             </dict>
             <key>spike.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{630,911},{253,201}}</string>
+                <string>{{1633,2},{253,201}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -170,7 +170,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:08f2671ed09f39ad1b7864d994e401eb$</string>
+            <string>$TexturePacker:SmartUpdate:5e7ccb164c615aaa7e4769c45cb379ad$</string>
             <key>textureFileName</key>
             <string>scene-ipadhd.png</string>
         </dict>

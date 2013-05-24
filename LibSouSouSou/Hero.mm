@@ -274,7 +274,7 @@ bool play_dead = false;
     if ( [ other isKindOfClass:[SCoin class] ] )
     {
         [other remove_from_game:true];
-        m_score += 10;
+        m_score += [(SCoin*)other get_points];
     }
     return 1;
 }
@@ -325,7 +325,7 @@ bool play_dead = false;
     //if ( [self get_physic_position:0].x < 100 )
     [ self apply_force_center:0 :get_global_config().ninja_push_force force_y:0];
     float s = [((GameSouSouSouLevel*)[GameBase get_game].m_level) get_move_speed ];
-    m_score += s * delta_time;
+    m_score += (s * delta_time)*0.1;
     
     /*
      debug ---

@@ -7,7 +7,7 @@
             <key>ball.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{394,76},{104,94}}</string>
+                <string>{{394,88},{104,94}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,20 @@
             <key>coin.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{339,121},{25,28}}</string>
+                <string>{{476,32},{25,28}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{25,28}}</string>
+                <key>sourceSize</key>
+                <string>{25,28}</string>
+            </dict>
+            <key>coin1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{476,2},{25,28}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +72,7 @@
             <key>earth_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{286,214},{222,57}}</string>
+                <string>{{286,184},{222,57}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +85,7 @@
             <key>earth_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,236},{157,60}}</string>
+                <string>{{2,283},{157,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,15 +98,15 @@
             <key>magnet.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{226,236},{58,50}}</string>
+                <string>{{411,54},{24,32}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{-1,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{58,50}}</string>
+                <string>{{3,0},{24,32}}</string>
                 <key>sourceSize</key>
-                <string>{58,50}</string>
+                <string>{32,32}</string>
             </dict>
             <key>rock_1.png</key>
             <dict>
@@ -124,33 +137,20 @@
             <key>rock_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{339,172},{160,40}}</string>
+                <string>{{2,236},{159,45}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{160,40}}</string>
+                <string>{{0,0},{159,45}}</string>
                 <key>sourceSize</key>
-                <string>{160,40}</string>
-            </dict>
-            <key>saw.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{411,2},{80,72}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{80,72}}</string>
-                <key>sourceSize</key>
-                <string>{80,72}</string>
+                <string>{159,45}</string>
             </dict>
             <key>spike.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{161,236},{63,50}}</string>
+                <string>{{411,2},{63,50}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -170,7 +170,7 @@
             <key>size</key>
             <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:3f7bc19e571f7fa9bd397322c3c554e0$</string>
+            <string>$TexturePacker:SmartUpdate:fbe019e422fa94f83c2a918eb2e2f9ce$</string>
             <key>textureFileName</key>
             <string>scene.png</string>
         </dict>

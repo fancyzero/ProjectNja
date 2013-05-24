@@ -68,6 +68,8 @@
 	[super init_game];
     m_level_ = [GameSouSouSouLevel new];
     [ m_level_ reset];
+    [[GameBase get_game].m_scene setScale:0.5];
+    [[GameBase get_game].m_scene setPosition:ccp(0,-100)];
 
 }
 

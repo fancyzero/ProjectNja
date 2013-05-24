@@ -12,6 +12,10 @@
 {
     bool m_attracted;
     float m_attracted_time;
+    float m_points;
 }
+
+-(float) get_points;
+
 @end
 

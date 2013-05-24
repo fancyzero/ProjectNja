@@ -28,11 +28,17 @@
     return  0;
 }
 
+-(float) get_points
+{
+    return m_points;
+}
+
 -(id) init_with_spawn_params:(NSDictionary*) params
 {
     self = [super init_with_spawn_params:params];
     [ self set_batchable:true];
         m_time_before_remove_outof_actrange_ = 0.1;
+    m_points = read_float_value(params, @"points", 1);
     return self;
 }
 
