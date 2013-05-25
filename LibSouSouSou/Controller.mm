@@ -75,7 +75,7 @@ float g_dir_len_power = 3;
 -(BOOL) on_touch_begin: (CGPoint) pos
 {
 
-    if( pos.y > 512 )
+    if( pos.y > [[CCDirector sharedDirector] winSize].height/2 )
         [ m_player go_right];
     else
         [ m_player go_left];
