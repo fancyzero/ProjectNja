@@ -23,6 +23,7 @@
 #import "SCoin.h"
 #import "BumppingScoreDisplay.h"
 #import "GlobalConfig.h"
+#import "RepeatBG.h"
 @implementation GameSouSouSouLevel
 int reset_count = 0;
 - (NSString *)applicationDocumentsDirectory
@@ -71,17 +72,18 @@ int reset_count = 0;
 	[ hero set_controller: ctrl ];
     [ ctrl set_pose:single_player ];
     
-    m_bg1 = [SpriteBase new];
-    [m_bg1 init_with_xml:@"sprites/base.xml:bg1"];
-    [m_bg1 set_position: 0 y:768/2];
+    m_bg1 = [[RepeatBG new] initWithFile:@"pic/bg.png"];
+    [m_bg1 setAnchorPoint:ccp(0,0)];
+    [m_bg1 setPosition:ccp(-1024,0)];
+    m_bg1.m_width = [[CCDirector sharedDirector] winSize].width;
     ccTexParams tp;
     tp.magFilter = GL_LINEAR;
     tp.minFilter = GL_LINEAR;
     tp.wrapS = GL_REPEAT;
     tp.wrapT = GL_REPEAT;
-    [[m_bg1 get_sprite_component:0].texture setTexParameters:&tp];
+    [m_bg1.texture setTexParameters:&tp];
     
-    [[GameBase get_game].m_world add_gameobj:m_bg1 layer:@"bg2"];
+    [[GameBase get_game].m_scene.m_layer addChild:m_bg1 ];
     
     if ( get_float_config(@"debug_physic") > 1 )
 	{
@@ -105,9 +107,10 @@ int reset_count = 0;
     }
     m_score_display = [ [BumppingScoreDisplay alloc] initWithString:@"0" charMapFile:@"fonts/fps_images.png" itemWidth:12 itemHeight:32 startCharMap:'.'];
     [m_score_display display_integer_value];
-    
+    [m_score_display setRotation:90];
     
     [ m_score_display init_default ];
+    
     [[[GameBase get_game].m_scene get_layer_by_name:@"ui"] addChild:m_score_display];
     [m_score_display set_auto_bump: false];
     [m_score_display retain];
@@ -139,9 +142,9 @@ int reset_count = 0;
         bodydef.position = b2Vec2(0,0);
         b2Body* body = [GameBase get_game].m_world.m_physics_world->CreateBody(&bodydef);
         
-        float w = (1024 - 300)/ptm;
+        float w = (1024 - 300 )/ptm;
         float h = 768 / ptm;
-        float xoffset = (-1024 + 300)/ptm;
+        float xoffset = -(1024 - 300)/ptm;
         
         b2PolygonShape shape;
         shape.SetAsBox(w/2, h/2, b2Vec2(w/2 + xoffset, h/2), 0);
@@ -189,7 +192,8 @@ int reset_count = 0;
 {
     [ super update:delta_time];
 	
-	[m_score_display setPosition:ccp(200,730)];
+	[m_score_display setPosition:ccp(1200,768/2)];
+    [m_score_display set_default_scale: 3];
     float score = [(Hero*)get_player(-1) get_score ];
     [m_score_display set_value:score ];
 	// update acting range
@@ -219,7 +223,7 @@ int reset_count = 0;
     
     m_moved_pos += [self get_move_speed] * delta_time;
     m_total_moved += [self get_move_speed] * delta_time;
-    
+    m_bg1.m_offset = fmod(m_total_moved/3.0,1024);
     
     if ( m_moved_pos >= m_current_sector_width )
     {
@@ -233,18 +237,12 @@ int reset_count = 0;
         m_acting_range_keyframes_.clear();
         m_moved_pos = fix;
     }
-    
-    CGRect rc;
-    rc.origin = ccp(m_total_moved/3,0);
-    rc.size.width = 1024;
-    rc.size.height = 1024;
-    [[m_bg1 get_sprite_component:0] setTextureCoords:rc];
-
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos
 {
 	m_filename_ = filename;
+
     NSURL *xmlURL = [NSURL fileURLWithPath:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:filename]];
     NSXMLParser* xmlparser = [[ NSXMLParser alloc ] initWithContentsOfURL:xmlURL];
 	SpriteXMLParser *sxmlparser = [[ SpriteXMLParser alloc] init:NULL];

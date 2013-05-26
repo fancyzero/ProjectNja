@@ -68,8 +68,12 @@
 	[super init_game];
     m_level_ = [GameSouSouSouLevel new];
     [ m_level_ reset];
-    [[GameBase get_game].m_scene setScale:0.5];
-    [[GameBase get_game].m_scene setPosition:ccp(0,-100)];
+    [[GameBase get_game].m_scene setAnchorPoint:ccp(0,0)];
+    CGSize device_size = [[CCDirector sharedDirector] winSize];
+    float ratio = device_size.width / 768.0;
+    [[GameBase get_game].m_scene setScale: ratio ];
+ 
+    [[GameBase get_game].m_scene setPosition:ccp(0,0)];//(1024 - device_size.height) * ratio,0) ];
 
 }
 

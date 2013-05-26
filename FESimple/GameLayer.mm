@@ -125,9 +125,10 @@
 	float layerscale = self.scale;
 	CGPoint layer_pt = self.position;
 	layer_pt = ccpMult( layer_pt, 1/(self.m_move_scale*layerscale));
-	
-    viewport_size.x = ([CCDirector sharedDirector].winSize.width)/layerscale;
-    viewport_size.y = ([CCDirector sharedDirector].winSize.height)/layerscale;
+	//float ww = [[CCDirector sharedDirector] winSize].height ;
+    float ratio = [[CCDirector sharedDirector] winSize].height / 768.0;//fix me use a global function ,and count device oretation in
+    viewport_size.x = ([CCDirector sharedDirector].winSize.width)/layerscale/ratio;
+    viewport_size.y = ([CCDirector sharedDirector].winSize.height)/layerscale/ratio;
 	
     CGRect acting_rect = [ GameBase get_game].m_level.m_acting_range;
 	
