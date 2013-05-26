@@ -16,6 +16,7 @@
 #include <algorithm>
 #import "World.h"
 #import "GameScene.h"
+#include "Box2D.h"
 @implementation Hero
 bool play_dead = false;
 -(void) clear_next_input
@@ -26,7 +27,9 @@ bool play_dead = false;
 {
     
     self = [super init];
+    [self set_god_mode:1];
     [self clear_next_input];
+    m_next_action = none;
     m_speed.reset();
     m_magnet.reset();
     m_score = 0;
@@ -88,6 +91,11 @@ bool play_dead = false;
     m_player_side = side;
 }
 
+-(void) play_jump_sfx
+{
+    play_sfx(@"sfx/jump.wav",1 + (rand() / (float)RAND_MAX - 0.5) * 0.1);
+}
+
 -(void) go_left
 {
     if ( m_landing_platforms.size() <= 0 )
@@ -96,7 +104,7 @@ bool play_dead = false;
         NSLog(@"denined");
         return;
     }
-    
+    [self play_jump_sfx];
     [self set_player_side: ps_can_land_top ];
     if ( m_landing_platforms.size() > 0 )
     {
@@ -140,8 +148,8 @@ bool play_dead = false;
         return;
     }
     
+    [self play_jump_sfx];
     [self set_player_side: ps_can_land_bottom ];
-    
     if ( m_landing_platforms.size() > 0 )
     {
         if ( [self first_touching_passable_platform ] != nil )
@@ -267,16 +275,42 @@ bool play_dead = false;
     {
         if ([( (PlatformBase*) other) kill_touched] )
         {
-            
-            play_dead = true;
+            if ( [self is_god] )
+            {
+                [(PlatformBase*)other set_killed];
+                float angle = frandom() * 3.1415926f * 2;
+                [other set_physic_linear_velocity:0 :cos(angle)*100 :sin(angle)*100];
+                [other set_physic_angular_velocity:0 :3000];
+            }
+            else
+            {
+                play_dead = true;
+            }
         }
     }
     if ( [ other isKindOfClass:[SCoin class] ] )
     {
+//        static float32 p = 1;
+        play_sfx(@"sfx/coin.wav");//, p+=0.01f);
         [other remove_from_game:true];
         m_score += [(SCoin*)other get_points];
     }
     return 1;
+}
+
+-(bool) is_god
+{
+    return m_god_mode != 0;
+}
+
+-(void) set_god_mode:(int) v
+{
+    m_god_mode.base_value = v;
+}
+
+-(void) set_god_mode_boost:(int)v :(float) time
+{
+    m_god_mode.boost(time, v );
 }
 
 -(void) set_magnet:(float) v
@@ -309,15 +343,57 @@ bool play_dead = false;
     return m_speed;
 }
 
+-(void) turn_on_god_mode
+{
+    b2Body* bdy = [self get_sprite_component:0].m_phy_body;
+    b2Fixture * fix;
+    fix = bdy->GetFixtureList();
+    while( fix )
+    {
+        fix->SetSensor(true);
+        fix = fix->GetNext();
+    }
+}
+
+-(void) turn_off_god_mode
+{
+    b2Body* bdy = [self get_sprite_component:0].m_phy_body;
+    b2Fixture * fix;
+    fix = bdy->GetFixtureList();
+    while( fix )
+    {
+        fix->SetSensor(false);
+        fix = fix->GetNext();
+    }
+    
+}
 
 -(void) update:(float)delta_time
 {
     [ super update:delta_time];
+    
+    switch (m_next_action)
+    {
+        case go_left:
+            [self go_left];
+            break;
+        case go_right:
+            [self go_right];
+            break;
+        default:
+            break;
+    }
+    m_next_action = none;
     if ( play_dead )
     {
         sleep(2);
         [self dead];
     }
+   /* if ( [self is_god] )
+        [self turn_on_god_mode];
+    else
+        [self turn_off_god_mode];
+    */
    [ [self get_sprite_component:1] set_physic_position:[self get_physic_position:0]];
     [ self apply_force_center:0 :m_velocity.x force_y:m_velocity.y ];
     
@@ -357,16 +433,9 @@ bool play_dead = false;
         
         if ( m_next_input != input::none )
         {
-            switch (m_next_input) {
-                case input::go_left:
-                    [self go_left];
-                    break;
-                case input::go_right:
-                    [self go_right];
-                    break;
-            }
+            m_next_action = m_next_input;
         }
-            [self clear_next_input];
+        [self clear_next_input];
     }
 }
 

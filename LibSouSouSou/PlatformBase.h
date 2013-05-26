@@ -25,7 +25,9 @@ platform_side string_to_platform_side( const char* str );
     bool m_kill_touched;
     platform_side m_side;
     float m_move_speed;
+    bool m_killed;//killed by player;
 }
+-(void) set_killed;
 -(CGPoint) get_passed_position:(platform_side) from_side :(CGPoint) from_pos;
 -(bool) passable;
 -(bool) kill_touched;

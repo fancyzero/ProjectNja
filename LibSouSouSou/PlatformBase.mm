@@ -102,13 +102,18 @@ b2RayCastCallback * cb;
     self = [super init_with_spawn_params:params];
     m_passable = read_bool_value(params, @"passable", false);
     m_kill_touched = read_bool_value(params, @"kill_touched", false);
-    
+    m_killed = false;
     //m_side = string_to_platform_side([params valueForKey:@"side"]);
     [ self set_batchable:true];
     m_time_before_remove_outof_actrange_ = 0.1;
     return self;
 }
-
+-(void) set_killed
+{
+    m_killed = true;
+    [self set_physic_fixed_rotation:0 :false];
+    [self set_collision_filter:0 cat:0];
+}
 -(int) init_with_xml:(NSString *)filename
 {
     [super init_with_xml:filename];
@@ -124,8 +129,8 @@ b2RayCastCallback * cb;
     [super update:delta_time];
     GameSouSouSouLevel* lvl = (GameSouSouSouLevel*)[GameBase get_game].m_level;
     float level_speed = [lvl get_move_speed];
-    
-    [self set_physic_linear_velocity:0 :-level_speed /[GameBase get_ptm_ratio]:0];
+    if ( !m_killed )
+        [self set_physic_linear_velocity:0 :-level_speed /[GameBase get_ptm_ratio]:0];
 }
 
 @end

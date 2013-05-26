@@ -230,6 +230,7 @@
 		04A4E30F17425DEA00E84366 /* BumppingScoreDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E30E17425DEA00E84366 /* BumppingScoreDisplay.mm */; };
 		04A73641174E6B9900524BE0 /* Pickup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A73640174E6B9900524BE0 /* Pickup.mm */; };
 		04BC4A121744FE0700845F6E /* GlobalConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A111744FE0700845F6E /* GlobalConfig.mm */; };
+		04C151C2175116AD001D8E47 /* RepeatBG.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04C151C1175116AD001D8E47 /* RepeatBG.mm */; };
 		04D54D221748CA8F00378012 /* DynamicObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D54D211748CA8F00378012 /* DynamicObject.mm */; };
 		04E0D138173E8AC200502491 /* icon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E0D134173E84A500502491 /* icon_small.png */; };
 		04E0D139173E8AD300502491 /* icon_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E0D136173E84B100502491 /* icon_big.png */; };
@@ -674,6 +675,8 @@
 		04A73640174E6B9900524BE0 /* Pickup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Pickup.mm; sourceTree = "<group>"; };
 		04BC4A101744FE0600845F6E /* GlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
 		04BC4A111744FE0700845F6E /* GlobalConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GlobalConfig.mm; sourceTree = "<group>"; };
+		04C151C0175116AD001D8E47 /* RepeatBG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatBG.h; sourceTree = "<group>"; };
+		04C151C1175116AD001D8E47 /* RepeatBG.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RepeatBG.mm; sourceTree = "<group>"; };
 		04D54D201748CA8F00378012 /* DynamicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicObject.h; sourceTree = "<group>"; };
 		04D54D211748CA8F00378012 /* DynamicObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DynamicObject.mm; sourceTree = "<group>"; };
 		04E0D134173E84A500502491 /* icon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_small.png; sourceTree = "<group>"; };
@@ -878,6 +881,8 @@
 				04D54D211748CA8F00378012 /* DynamicObject.mm */,
 				04A7363F174E6B9900524BE0 /* Pickup.h */,
 				04A73640174E6B9900524BE0 /* Pickup.mm */,
+				04C151C0175116AD001D8E47 /* RepeatBG.h */,
+				04C151C1175116AD001D8E47 /* RepeatBG.mm */,
 			);
 			path = LibSouSouSou;
 			sourceTree = "<group>";
@@ -1649,6 +1654,7 @@
 				04BC4A121744FE0700845F6E /* GlobalConfig.mm in Sources */,
 				04D54D221748CA8F00378012 /* DynamicObject.mm in Sources */,
 				04A73641174E6B9900524BE0 /* Pickup.mm in Sources */,
+				04C151C2175116AD001D8E47 /* RepeatBG.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

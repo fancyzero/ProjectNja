@@ -62,17 +62,20 @@ struct boostable_value
     float           m_score;
     std::map<PlatformBase*, int> m_landing_platforms;
     input m_next_input;
+    input m_next_action;
     boostable_value<float>           m_magnet;
     boostable_value<float>           m_speed;
+    boostable_value<int>             m_god_mode;//0 off, other on
     
 }
 
--(bool) is_buff;
--(bool) is_magnet;
--(bool) is_boost;
 
+-(bool) is_god;
+
+-(void) set_god_mode:(int) v;
 -(void) set_magnet:(float) v;
 -(void) set_speed:(float) v;
+-(void) set_god_mode_boost:(int)v :(float) time;
 -(void) set_magnet_boost:(float) v :(float) time;
 -(void) set_speed_boost:(float) v :(float) time;
 
@@ -87,4 +90,5 @@ struct boostable_value
 -(void) on_end_contact :( struct b2Contact* ) contact;
 -(void) add_landing_platform:(PlatformBase*) platform;
 -(void) del_landing_platform:(PlatformBase*) platform;
+
 @end
