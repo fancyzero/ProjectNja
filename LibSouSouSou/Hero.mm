@@ -110,6 +110,7 @@ bool play_dead = false;
     {
         if ( [self first_touching_passable_platform ] != nil )
         {
+
             CGPoint pos = [self get_physic_position:0];
             PlatformBase* p = [self first_touching_passable_platform];
             CGPoint platform_pos = [p get_physic_position:0];
@@ -124,6 +125,14 @@ bool play_dead = false;
                     [self set_player_side: ps_can_land_bottom ];
                     
                 }
+                else
+                {
+                    NSLog(@"fuke %p, %f, %f", p, pos.x, pos.y);
+                    pos = [self get_physic_position:0];
+                    pos = [p get_passed_position:ps_passable_bottom :pos ];
+
+                }
+                
             }
         }
     }
@@ -222,24 +231,31 @@ bool play_dead = false;
 {
     b2Fixture* fa = contact->GetFixtureA();
     b2Fixture* fb = contact->GetFixtureB();
-	PhysicsSprite* sprite_comp_A = get_sprite(fa);
-	PhysicsSprite* sprite_comp_B = get_sprite(fb);
-	SpriteBase* spriteA = NULL;
-	SpriteBase* spriteB = NULL;
-	if ( sprite_comp_A != NULL )
-		spriteA = sprite_comp_A.m_parent;
-	if ( sprite_comp_B != NULL )
-		spriteB = sprite_comp_B.m_parent;
+	SpriteBase* spriteA = get_sprite_base(fa);
+	SpriteBase* spriteB = get_sprite_base(fb);
     SpriteBase* other;
+    b2Fixture* myself;
+    if ( spriteA == nil || spriteB == nil )
+        return;
     if ( spriteA != self )
-        other = spriteA;
-    else
-        other = spriteB  ;
-    
-    if ( [other isKindOfClass:[PlatformBase class]] )
     {
-//        NSLog(@"begin contact platform: %p", other);
-        [self add_landing_platform:(PlatformBase*)other];
+        myself = fb;
+        other = spriteA;
+    }
+    else
+    {
+        other = spriteB;
+        myself = fa;
+    }
+    
+    if ( [self is_valid_fixture:myself] )
+    {
+        if ( [other isKindOfClass:[PlatformBase class]] )
+        {
+            NSLog(@"begin contact platform: %p, ", other, other );
+            [self add_landing_platform:(PlatformBase*)other];
+            [other set_color_override:ccc4f(1, 1, 1, 1) duration:10000];
+        }
     }
     
 }
@@ -248,23 +264,30 @@ bool play_dead = false;
 {
     b2Fixture* fa = contact->GetFixtureA();
     b2Fixture* fb = contact->GetFixtureB();
-	PhysicsSprite* sprite_comp_A = get_sprite(fa);
-	PhysicsSprite* sprite_comp_B = get_sprite(fb);
-	SpriteBase* spriteA = NULL;
-	SpriteBase* spriteB = NULL;
-	if ( sprite_comp_A != NULL )
-		spriteA = sprite_comp_A.m_parent;
-	if ( sprite_comp_B != NULL )
-		spriteB = sprite_comp_B.m_parent;
+	SpriteBase* spriteA = get_sprite_base(fa);
+	SpriteBase* spriteB = get_sprite_base(fb);
     SpriteBase* other;
+    b2Fixture* myself;
+    if ( spriteA == nil || spriteB == nil )
+        return;
     if ( spriteA != self )
-        other = spriteA;
-    else
-        other = spriteB  ;
-    if ( [other isKindOfClass:[PlatformBase class]] )
     {
-//        NSLog(@"end contact platform: %p", other);
-        [ self del_landing_platform:(PlatformBase*)other];
+        myself = fb;
+        other = spriteA;
+    }
+    else
+    {
+        other = spriteB;
+        myself = fa;
+    }
+    if ( [self is_valid_fixture:myself])
+    {
+        if ( [other isKindOfClass:[PlatformBase class]] )
+        {
+            //        NSLog(@"end contact platform: %p", other);
+            [ self del_landing_platform:(PlatformBase*)other];
+                        [other set_color_override:ccc4f(1, 1, 1, 0) duration:10000];
+        }
     }
 }
 
