@@ -68,9 +68,10 @@
         if ( [h is_valid_fixture:other_fix] )
         {
             [  h set_magnet_boost:m_magnet_value  :m_magnet_time ];
+                    [self remove_from_game:true];
         }
     }
-        [self remove_from_game:true];
+
     return 0;
 }
 
