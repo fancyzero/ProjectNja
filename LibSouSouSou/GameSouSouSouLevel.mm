@@ -74,8 +74,11 @@ int reset_count = 0;
     
     m_bg1 = [[RepeatBG new] initWithFile:@"pic/bg.png"];
     [m_bg1 setAnchorPoint:ccp(0,0)];
-    [m_bg1 setPosition:ccp(-1024,0)];
-    m_bg1.m_width = [[CCDirector sharedDirector] winSize].width;
+
+    float ratio = [[CCDirector sharedDirector] winSize].height / [[CCDirector sharedDirector] winSize].width;
+    [m_bg1 setPosition:ccp(-1024*ratio,0)];
+    m_bg1.m_width = 1024*ratio;
+    m_bg1.scale = ratio;
     ccTexParams tp;
     tp.magFilter = GL_LINEAR;
     tp.minFilter = GL_LINEAR;
