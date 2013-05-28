@@ -12,6 +12,8 @@
 #import "World.h"
 #import "GameSouSouSouLevel.h"
 
+
+
 platform_side string_to_platform_side( NSString* str )
 {
     if ( [str isEqualToString:@"top"] )
@@ -26,6 +28,12 @@ platform_side string_to_platform_side( NSString* str )
 }
 
 @implementation PlatformBase
+
+- (void)dealloc
+{
+    [super dealloc];
+}
+
 -(int) init_default_values
 {
     [ super init_default_values];
@@ -56,9 +64,9 @@ public:
     }
     virtual float32 ReportFixture(	b2Fixture* fixture, const b2Vec2& point,const b2Vec2& normal, float32 fraction)
     {
-        if ( fixture->GetUserData() != nil )
+        PhysicsSprite* spr = get_sprite(fixture);
+        if ( spr )
         {
-            PhysicsSprite* spr = (PhysicsSprite*)fixture->GetUserData();
             if ( spr.m_parent == from_platform )
             {
                 hited = true;
@@ -106,7 +114,18 @@ b2RayCastCallback * cb;
     //m_side = string_to_platform_side([params valueForKey:@"side"]);
     [ self set_batchable:true];
     m_time_before_remove_outof_actrange_ = 0.1;
+    m_excellented = false;
     return self;
+}
+
+-(void) set_excellented
+{
+    m_excellented = true;
+}
+
+-(bool) get_excellented
+{
+    return m_excellented;
 }
 -(void) set_killed
 {

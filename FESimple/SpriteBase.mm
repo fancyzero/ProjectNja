@@ -491,8 +491,8 @@ unsigned long long g_sprite_uid = 0;
     float real_dmg = dmg;
     LevelBase* lvl = [GameBase get_game].m_level;
     
-    PhysicsSprite* sprite_comp_A = (PhysicsSprite*)collision->fixtureA->GetUserData();
-    PhysicsSprite* sprite_comp_B = (PhysicsSprite*)collision->fixtureB->GetUserData();
+    PhysicsSprite* sprite_comp_A = get_sprite( collision->fixtureA);
+    PhysicsSprite* sprite_comp_B = get_sprite( collision->fixtureB);
     
 
     if ( last_health > 0 && m_health <= 0)
@@ -838,83 +838,4 @@ unsigned long long g_sprite_uid = 0;
         }
     }
 }
-
-//collision process
-/*
--(void) add_collision: ( const Collision&) c
-{
-    m_collisions.push_back(c);
-}
--(void) remove_collision: ( const Collision&) c
-{
-    std::vector<Collision>::iterator new_end;
-    new_end = std::remove(m_collisions.begin(), m_collisions.end(), c);
-    m_collisions.resize(new_end - m_collisions.begin());
-}
--(const std::vector<Collision>&) get_collisions
-{
-    return m_collisions;
-}
-
-struct collison_sprites
-{
-    PhysicsSprite* spr_a;
-    PhysicsSprite* spr_b;
-    SpriteBase* sprite_a;
-    SpriteBase* sprite_b;
-};
-
--(collison_sprites) get_collision_sprites : (Collision&) c
-{
-    collison_sprites result;
-    result.spr_a = (PhysicsSprite*)c.fixtureA->GetUserData();
-    result.spr_b = (PhysicsSprite*)c.fixtureB->GetUserData();
-    result.sprite_a = NULL;
-    result.sprite_b = NULL;
-    if ( result.spr_a != NULL )
-        result.sprite_a = (SpriteBase* )result.spr_a.parent;
-    if ( result.spr_b != NULL )
-        result.sprite_b = (SpriteBase* )result.spr_b.parent;
-    return result;
-}
-
--(void) process_with_collisions
-{
-    std::vector<Collision>::iterator it;
-    for ( it = m_collisions.begin(); it != m_collisions.end(); ++it )
-    {
-        collison_sprites cs = [self get_collision_sprites:*it];
-       
-        if ( cs.sprite_a == self && cs.sprite_b != NULL)
-        {
-            [ self collied_with:cs.sprite_b :&(*it) ];
-        }
-        else if ( cs.sprite_b == self && cs.sprite_a != NULL)
-        {
-            [ self collied_with:cs.sprite_a :&(*it) ];
-        }
-    }
-}*/
-/*
- 从和他发生碰撞的所有sprites中删除有关他的碰撞信息
-*/
-/*
--(void) clear_related_collisions
-{
-    std::vector<Collision>::iterator it;
-    for ( it = m_collisions.begin(); it != m_collisions.end(); ++it )
-    {
-        collison_sprites cs = [self get_collision_sprites:*it];
-        if ( cs.sprite_a == self && cs.sprite_b != NULL)
-        {
-            [cs.sprite_b remove_collision:*it];
-        }
-        else if ( cs.sprite_b == self && cs.sprite_a != NULL)
-        {
-            [ cs.sprite_a remove_collision:*it ];
-        }
-
-    }
-}
-*/
 @end

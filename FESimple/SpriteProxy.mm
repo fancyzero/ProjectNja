@@ -25,7 +25,7 @@ public:
 	std::vector<PhysicsSprite*>* sprites;
 	virtual bool ReportFixture(b2Fixture* fixture)
 	{
-		PhysicsSprite* spr = (PhysicsSprite*)fixture->GetUserData();
+		PhysicsSprite* spr = get_sprite(fixture);
 		if ( spr == NULL )
 			return true;
 		else

@@ -90,5 +90,5 @@ struct boostable_value
 -(void) on_end_contact :( struct b2Contact* ) contact;
 -(void) add_landing_platform:(PlatformBase*) platform;
 -(void) del_landing_platform:(PlatformBase*) platform;
-
+-(bool) is_valid_fixture:(class b2Fixture*) fix;
 @end

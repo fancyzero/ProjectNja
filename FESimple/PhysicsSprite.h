@@ -10,6 +10,13 @@
 #include <vector>
 
 @class GameLayer;
+@class PhysicsSprite;
+struct fixture_data
+{
+    int identity;
+    PhysicsSprite* sprite;
+};
+
 struct anim_sequence_def
 {
     int cell_w;
@@ -44,7 +51,9 @@ struct phy_shape_def
     float rotation;
     bool  is_sensor;
 	bool  is_dynamic;
+    int   identity;
 	int	  index;
+    float density;
     union
     {
         float w;

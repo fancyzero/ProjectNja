@@ -13,6 +13,7 @@
 #import "GameScene.h"
 #import "SpriteBase.h"
 #import "GameBase.h"
+#import "common.h"
 
 @implementation World
 
@@ -201,13 +202,8 @@
          it != m_collision_listener->m_collisions.end(); 
          ++it )
     {
-        //NSLog( @"Collision fixtureA: %p fixtureB: %p, data: A%p  data B:%p",(*it).fixtureA, (*it).fixtureB, (*it).fixtureA->GetUserData(), (*it).fixtureB->GetUserData() );
-       // if ( (*it).fixtureA->GetUserData() != NULL &&
-        //    (*it).fixtureB->GetUserData() != NULL )
-       // {
-		
-		PhysicsSprite* sprite_comp_A = (PhysicsSprite*)(*it).fixtureA->GetUserData();
-		PhysicsSprite* sprite_comp_B = (PhysicsSprite*)(*it).fixtureB->GetUserData();
+        PhysicsSprite* sprite_comp_A = get_sprite((*it).fixtureA);
+        PhysicsSprite* sprite_comp_B = get_sprite((*it).fixtureB);
 		SpriteBase* spriteA = NULL;
 		SpriteBase* spriteB = NULL;
 		if ( sprite_comp_A != NULL )

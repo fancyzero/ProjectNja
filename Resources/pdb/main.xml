@@ -1,43 +1,44 @@
 <bodies>
 
 <body name="earth_1" id="0" anchor_rel="0.500,0.500" anchor_abs="814.500,128.500" size="1629.000,257.000">
-<polygon vertices=" -814.500,81.500 ,-814.500,-128.500 ,815.500,-128.500 ,815.500,81.500" is_sensor="false" />
+<polygon vertices=" -814.500,81.500 ,-814.500,-128.500 ,815.500,-128.500 ,815.500,81.500" is_sensor="false" identity="0" />
 </body>
 <body name="earth_2" id="0" anchor_rel="0.500,0.500" anchor_abs="669.000,121.000" size="1338.000,242.000">
-<polygon vertices=" 671.000,89.000 ,-669.000,89.000 ,-669.000,-121.000 ,671.000,-121.000" is_sensor="false" />
+<polygon vertices=" 671.000,89.000 ,-669.000,89.000 ,-669.000,-121.000 ,671.000,-121.000" is_sensor="false" identity="0" />
 </body>
 <body name="earth_3" id="0" anchor_rel="0.500,0.500" anchor_abs="443.000,113.000" size="886.000,226.000">
-<polygon vertices=" 447.000,97.000 ,-443.000,97.000 ,-443.000,-113.000 ,447.000,-113.000" is_sensor="false" />
+<polygon vertices=" 447.000,97.000 ,-443.000,97.000 ,-443.000,-113.000 ,447.000,-113.000" is_sensor="false" identity="0" />
 </body>
 <body name="earth_4" id="0" anchor_rel="0.500,0.500" anchor_abs="313.000,119.000" size="626.000,238.000">
-<polygon vertices=" 312.000,91.000 ,-313.000,91.000 ,-313.000,-119.000 ,312.000,-119.000" is_sensor="false" />
+<polygon vertices=" 312.000,91.000 ,-313.000,91.000 ,-313.000,-119.000 ,312.000,-119.000" is_sensor="false" identity="0" />
 </body>
 <body name="rock_1" id="0" anchor_rel="0.500,0.500" anchor_abs="780.000,101.000" size="1560.000,202.000">
-<polygon vertices=" -780.000,-81.000 ,780.000,-81.000 ,780.000,74.000 ,-780.000,74.000" is_sensor="false" />
+<polygon vertices=" -780.000,-81.000 ,780.000,-81.000 ,780.000,74.000 ,-780.000,74.000" is_sensor="false" identity="0" />
 </body>
 <body name="rock_2" id="0" anchor_rel="0.500,0.500" anchor_abs="564.000,100.000" size="1128.000,200.000">
-<polygon vertices=" 566.000,-80.000 ,566.000,75.000 ,-564.000,75.000 ,-564.000,-80.000" is_sensor="false" />
+<polygon vertices=" 566.000,-80.000 ,566.000,75.000 ,-564.000,75.000 ,-564.000,-80.000" is_sensor="false" identity="0" />
 </body>
 <body name="rock_3" id="0" anchor_rel="0.500,0.500" anchor_abs="318.500,90.500" size="637.000,181.000">
-<polygon vertices=" 316.500,-70.500 ,316.500,84.500 ,-318.500,84.500 ,-318.500,-70.500" is_sensor="false" />
+<polygon vertices=" 316.500,-70.500 ,316.500,84.500 ,-318.500,84.500 ,-318.500,-70.500" is_sensor="false" identity="0" />
 </body>
 <body name="pic1" id="0" anchor_rel="0.000,0.000" anchor_abs="0.000,0.000" size="64.000,64.000">
-<circle radius="32.280" is_sensor="false" />
+<circle radius="32.280" identity="0" is_sensor="false" />
 </body>
 <body name="ninja_run" id="0" anchor_rel="0.678,0.332" anchor_abs="219.580,107.450" size="324.000,324.000">
-<circle radius="59.076" is_sensor="false" />
+<circle radius="59.076" identity="0" is_sensor="false" />
+<polygon density="0.00001" vertices=" -39.580,63.550 ,-39.580,-82.450 ,180.420,-82.450 ,180.420,63.550" is_sensor="true" identity="1" />
 </body>
 <body name="spike" id="0" anchor_rel="0.500,0.000" anchor_abs="126.500,0.000" size="253.000,201.000">
-<polygon vertices=" 99.500,0.000 ,98.500,143.000 ,13.500,193.000 ,-95.500,135.000 ,-100.500,0.000" is_sensor="false" />
+<polygon vertices=" 99.500,0.000 ,98.500,143.000 ,13.500,193.000 ,-95.500,135.000 ,-100.500,0.000" is_sensor="false" identity="0" />
 </body>
 <body name="coin" id="0" anchor_rel="0.500,0.500" anchor_abs="50.000,55.000" size="100.000,110.000">
-<circle radius="59.034" is_sensor="true" />
+<circle radius="59.034" identity="0" is_sensor="true" />
 </body>
 <body name="ball" id="0" anchor_rel="0.500,0.500" anchor_abs="208.000,187.000" size="416.000,374.000">
-<circle radius="159.003" is_sensor="false" />
+<circle radius="159.003" identity="0" is_sensor="false" />
 </body>
 <body name="magnet" id="0" anchor_rel="0.516,0.469" anchor_abs="66.000,60.000" size="128.000,128.000">
-<circle radius="64.498" is_sensor="false" />
+<circle radius="64.498" identity="0" is_sensor="true" />
 </body>
 </bodies>
         

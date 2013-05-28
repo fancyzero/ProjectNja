@@ -160,6 +160,9 @@ bool read_phy_shapde_def( phy_shape_def* newshape, NSString* node_name, NSDictio
 		newshape->is_sensor = sensor;
 		return true;
 	}
+    
+    newshape->identity = [[attributes valueForKey:@"identity"] integerValue];
+    newshape->density = read_float_value(attributes, @"density", 1);
 	if ( [ node_name isEqualToString:@"circle" ] )
 	{
 		float r = [[ attributes valueForKey:@"radius" ] floatValue];

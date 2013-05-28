@@ -223,7 +223,7 @@ int reset_count = 0;
     
     m_moved_pos += [self get_move_speed] * delta_time;
     m_total_moved += [self get_move_speed] * delta_time;
-    m_bg1.m_offset = fmod(m_total_moved/3.0,1024);
+    m_bg1.m_offset = fmod(m_total_moved/6.0,1024);
     
     if ( m_moved_pos >= m_current_sector_width )
     {

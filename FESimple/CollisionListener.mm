@@ -12,7 +12,7 @@
 #include "CollisionListener.h"
 #import "SpriteBase.h"
 #import "PhysicsSprite.h"
-
+#import "common.h"
 CollisionListener::CollisionListener()
 {
 	m_collision_process_mode = collision_process_after_simulation;
@@ -29,8 +29,8 @@ void CollisionListener::BeginContact(b2Contact* contact)
 	// NSLog(@"on contact %p %p", contact->GetFixtureA(), contact->GetFixtureB() );
     assert ( (contact->GetFixtureA() != NULL) && (contact->GetFixtureB() != NULL) );
     Collision myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
-	PhysicsSprite* sprite_comp_A = (PhysicsSprite*)myContact.fixtureA->GetUserData();
-	PhysicsSprite* sprite_comp_B = (PhysicsSprite*)myContact.fixtureB->GetUserData();
+	PhysicsSprite* sprite_comp_A = get_sprite(myContact.fixtureA);
+	PhysicsSprite* sprite_comp_B = get_sprite(myContact.fixtureB);
     b2WorldManifold world_manifold;
     contact->GetWorldManifold( &world_manifold );
     b2Vec2 tmp = world_manifold.points[1] - world_manifold.points[0];
@@ -75,8 +75,8 @@ void CollisionListener::EndContact(b2Contact* contact)
 {
     assert ( (contact->GetFixtureA() != NULL) && (contact->GetFixtureB() != NULL) );
     Collision myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
-	PhysicsSprite* sprite_comp_A = (PhysicsSprite*)myContact.fixtureA->GetUserData();
-	PhysicsSprite* sprite_comp_B = (PhysicsSprite*)myContact.fixtureB->GetUserData();
+	PhysicsSprite* sprite_comp_A = get_sprite(myContact.fixtureA);
+	PhysicsSprite* sprite_comp_B = get_sprite(myContact.fixtureB);
 	SpriteBase* spriteA = NULL;
 	SpriteBase* spriteB = NULL;
 	if ( sprite_comp_A != NULL )
@@ -103,8 +103,8 @@ void CollisionListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 	if ( m_collision_process_mode == collision_process_durring_simulation )
 	{
 		Collision myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
-		PhysicsSprite* sprite_comp_A = (PhysicsSprite*)myContact.fixtureA->GetUserData();
-		PhysicsSprite* sprite_comp_B = (PhysicsSprite*)myContact.fixtureB->GetUserData();
+        PhysicsSprite* sprite_comp_A = get_sprite(myContact.fixtureA);
+        PhysicsSprite* sprite_comp_B = get_sprite(myContact.fixtureB);
 		SpriteBase* spriteA = NULL;
 		SpriteBase* spriteB = NULL;
 		if ( sprite_comp_A != NULL )
@@ -122,8 +122,8 @@ void CollisionListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
     else
     {
 		Collision myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
-		PhysicsSprite* sprite_comp_A = (PhysicsSprite*)myContact.fixtureA->GetUserData();
-		PhysicsSprite* sprite_comp_B = (PhysicsSprite*)myContact.fixtureB->GetUserData();
+        PhysicsSprite* sprite_comp_A = get_sprite(myContact.fixtureA);
+        PhysicsSprite* sprite_comp_B = get_sprite(myContact.fixtureB);
 		SpriteBase* spriteA = NULL;
 		SpriteBase* spriteB = NULL;
 		if ( sprite_comp_A != NULL )

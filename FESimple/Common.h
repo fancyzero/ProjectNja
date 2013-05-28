@@ -8,7 +8,8 @@
 @class Hero;
 @class CCParticleSystem;
 @class CCNode;
-
+@class SpriteBase;
+@class PhysicsSprite;
 float dir_to_angle( CGPoint dir );
 CGPoint angle_to_dir( float angle );
 bool normalize_point( CGPoint* pt );
@@ -74,3 +75,8 @@ CGAffineTransform convert_transform_to_layer_space( CCNode* node );
 struct b2Vec2 PTM_vec2(const CGPoint& p);
 CGPoint MTP_vec2(const struct b2Vec2& p);
 NSString* CGPoint_to_string( const CGPoint& pt );
+
+void get_self_fixture( SpriteBase* the_self, struct Collision* collision, class b2Fixture*& self_fixture, class b2Fixture*& other_fixture);
+
+PhysicsSprite* get_sprite( class b2Fixture* fix );
+SpriteBase* get_sprite_base( class b2Fixture* fix );

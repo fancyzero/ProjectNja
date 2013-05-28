@@ -188,12 +188,25 @@ float m_physics_loading_scale = 0.5;
 {
 	GameBase* game = [ GameBase get_game];
 
+    std::vector<fixture_data*> fixes;
 	if ( m_phy_body_ != NULL )
 	{
+        b2Fixture* fix = m_phy_body_->GetFixtureList();
+        while( fix )
+        {
+            fixture_data* d = (fixture_data*)fix->GetUserData();
+            fixes.push_back(d);
+            fix = fix->GetNext();
+        }
+        
 		game.m_world.m_physics_world->DestroyBody(m_phy_body_);
 	}
-    
-	m_phy_body_ = NULL;
+    for( std::vector<fixture_data*>::iterator it = fixes.begin(); it != fixes.end(); ++it )
+    {
+        if ( *it != nil )
+            delete *it;
+    }
+	m_phy_body_ = nil;
 	
 }
 
@@ -266,8 +279,11 @@ float m_physics_loading_scale = 0.5;
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = b2s;
 		fixtureDef.isSensor = s->is_sensor;
-		fixtureDef.userData = self;
-		fixtureDef.density = 1;
+        fixture_data* data = new fixture_data();
+        data->identity = s->identity;
+        data->sprite = self;
+		fixtureDef.userData = data;
+		fixtureDef.density = s->density;
         fixtureDef.restitution = def->restitution;
 		bdy->CreateFixture(&fixtureDef);
 		bdy->SetAwake(true);

@@ -177,8 +177,8 @@ bool play_dead = false;
     return;
     b2Fixture* fa = contact->GetFixtureA();
     b2Fixture* fb = contact->GetFixtureB();
-	PhysicsSprite* sprite_comp_A = (PhysicsSprite*)fa->GetUserData();
-	PhysicsSprite* sprite_comp_B = (PhysicsSprite*)fb->GetUserData();
+	PhysicsSprite* sprite_comp_A = get_sprite(fa);
+	PhysicsSprite* sprite_comp_B = get_sprite(fb);
 	SpriteBase* spriteA = NULL;
 	SpriteBase* spriteB = NULL;
 	if ( sprite_comp_A != NULL )
@@ -222,8 +222,8 @@ bool play_dead = false;
 {
     b2Fixture* fa = contact->GetFixtureA();
     b2Fixture* fb = contact->GetFixtureB();
-	PhysicsSprite* sprite_comp_A = (PhysicsSprite*)fa->GetUserData();
-	PhysicsSprite* sprite_comp_B = (PhysicsSprite*)fb->GetUserData();
+	PhysicsSprite* sprite_comp_A = get_sprite(fa);
+	PhysicsSprite* sprite_comp_B = get_sprite(fb);
 	SpriteBase* spriteA = NULL;
 	SpriteBase* spriteB = NULL;
 	if ( sprite_comp_A != NULL )
@@ -238,7 +238,7 @@ bool play_dead = false;
     
     if ( [other isKindOfClass:[PlatformBase class]] )
     {
-        //NSLog(@"begin contact platform: %p", other);
+//        NSLog(@"begin contact platform: %p", other);
         [self add_landing_platform:(PlatformBase*)other];
     }
     
@@ -248,8 +248,8 @@ bool play_dead = false;
 {
     b2Fixture* fa = contact->GetFixtureA();
     b2Fixture* fb = contact->GetFixtureB();
-	PhysicsSprite* sprite_comp_A = (PhysicsSprite*)fa->GetUserData();
-	PhysicsSprite* sprite_comp_B = (PhysicsSprite*)fb->GetUserData();
+	PhysicsSprite* sprite_comp_A = get_sprite(fa);
+	PhysicsSprite* sprite_comp_B = get_sprite(fb);
 	SpriteBase* spriteA = NULL;
 	SpriteBase* spriteB = NULL;
 	if ( sprite_comp_A != NULL )
@@ -263,7 +263,7 @@ bool play_dead = false;
         other = spriteB  ;
     if ( [other isKindOfClass:[PlatformBase class]] )
     {
-        //NSLog(@"end contact platform: %p", other);
+//        NSLog(@"end contact platform: %p", other);
         [ self del_landing_platform:(PlatformBase*)other];
     }
 }
@@ -271,24 +271,45 @@ bool play_dead = false;
 
 -(int) collied_with:(SpriteBase *)other :(Collision*) collision
 {
+    b2Fixture* self_fixture;
+    b2Fixture* other_fixture;
+    get_self_fixture(self, collision, self_fixture, other_fixture );
+
+    
     if ( [ other isKindOfClass:[PlatformBase class] ] )
     {
+        
+        //touch killer platform with valid_fixture
         if ([( (PlatformBase*) other) kill_touched] )
         {
-            if ( [self is_god] )
+            if ( [self is_valid_fixture:self_fixture])
             {
-                [(PlatformBase*)other set_killed];
-                float angle = frandom() * 3.1415926f * 2;
-                [other set_physic_linear_velocity:0 :cos(angle)*100 :sin(angle)*100];
-                [other set_physic_angular_velocity:0 :3000];
+                if ( [self is_god] )
+                {
+                    [(PlatformBase*)other set_killed];
+                    float angle = frandom() * 3.1415926f * 2;
+                    [other set_physic_linear_velocity:0 :cos(angle)*100 :sin(angle)*100];
+                    [other set_physic_angular_velocity:0 :3000];
+                }
+                else
+                {
+                    play_dead = true;
+                }
             }
             else
             {
-                play_dead = true;
+                //绝妙
+                PlatformBase* p = (PlatformBase*)other;
+                if ( ![p get_excellented] )
+                {
+                    [ p set_excellented];
+                    m_score += 100;
+                }
             }
         }
+        
     }
-    if ( [ other isKindOfClass:[SCoin class] ] )
+    if ( [self is_valid_fixture:self_fixture] &&[ other isKindOfClass:[SCoin class] ] )
     {
 //        static float32 p = 1;
         play_sfx(@"sfx/coin.wav");//, p+=0.01f);
@@ -422,6 +443,7 @@ bool play_dead = false;
 
 -(void) add_landing_platform:(PlatformBase*) platform
 {
+    //NSLog(@"add platform %p",platform);
     int old_count = m_landing_platforms.size();
     if ( m_landing_platforms.find(platform) != m_landing_platforms.end() )
     {
@@ -441,6 +463,8 @@ bool play_dead = false;
 
 -(void) del_landing_platform:(PlatformBase*) platform
 {
+    
+    //NSLog(@"del platform %p",platform);
     if ( m_landing_platforms.find(platform) == m_landing_platforms.end() )
     {
         //assert(0);
@@ -455,5 +479,9 @@ bool play_dead = false;
     }
 }
 
+-(bool) is_valid_fixture:(b2Fixture*) fix
+{
+    return ((fixture_data*)fix->GetUserData())->identity == 0;
+}
 
 @end

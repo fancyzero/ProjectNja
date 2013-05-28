@@ -13,7 +13,7 @@
 #import "GameScene.h"
 #import "World.h"
 #import "GameBase.h"
-
+#include "CollisionListener.h"
 float dir_to_angle( CGPoint dir )
 {
     float ret;
@@ -573,3 +573,36 @@ NSString* CGPoint_to_string( const CGPoint& pt )
     return str;
 }
 
+
+void get_self_fixture( SpriteBase* the_self, Collision* collision, b2Fixture*& self_fixture, b2Fixture*& other_fixture)
+{
+    fixture_data* dataA = (fixture_data*)collision->fixtureA->GetUserData();
+    //    fixture_data* dataB = (fixture_data*)collision->fixtureB->GetUserData();
+    if ( dataA != NULL && dataA->sprite != nil && dataA->sprite.m_parent == the_self )
+    {
+        self_fixture = collision->fixtureA;
+        other_fixture = collision->fixtureB;
+    }
+    else
+    {
+        self_fixture = collision->fixtureB;
+        other_fixture = collision->fixtureA;
+    }
+}
+
+PhysicsSprite* get_sprite( class b2Fixture* fix )
+{
+    if ( fix && fix->GetUserData() )
+    {
+        return ((fixture_data*)fix->GetUserData())->sprite;
+    }
+    return nil;
+}
+SpriteBase* get_sprite_base( class b2Fixture* fix )
+{
+    if ( get_sprite(fix) )
+    {
+        return get_sprite(fix).m_parent;
+    }
+    return nil;
+}
