@@ -96,6 +96,90 @@ bool play_dead = false;
     play_sfx(@"sfx/jump.wav",1 + (rand() / (float)RAND_MAX - 0.5) * 0.1);
 }
 
+
+-(PlatformBase*) first_touching_passable_platform
+{
+    std::map<PlatformBase*, int>::const_iterator it = std::find_if(m_landing_platforms.begin(), m_landing_platforms.end(), [] ( std::map<PlatformBase*, int>::const_reference p){ return [p.first passable]; } );
+    if ( it != m_landing_platforms.end() )
+        return it->first;
+    else
+        return nil;
+}
+class rccb : public b2RayCastCallback
+{
+public:
+    b2Vec2 hit_pos;
+    b2Vec2 from_pos;
+    bool hited;
+    platform_side from_side;
+    std::map<PlatformBase*, int> m_from_platforms;
+    rccb()
+    :hited(false)
+    {
+    }
+    virtual float32 ReportFixture(	b2Fixture* fixture, const b2Vec2& point,const b2Vec2& normal, float32 fraction)
+    {
+        PhysicsSprite* spr = get_sprite(fixture);
+        if ( spr && spr.m_parent )
+        {
+            if ( [spr.m_parent isKindOfClass:[PlatformBase class]]
+                && m_from_platforms.find((PlatformBase*)spr.m_parent) != m_from_platforms.end()
+                && [ ((PlatformBase*)(spr.m_parent))  passable])
+            {
+                float ptm = [GameBase get_ptm_ratio];
+                float platofrm_y = [spr.m_parent get_physic_position:0].y;
+                if ( from_side == platform_side::ps_passable_top && platofrm_y >= from_pos.y * ptm )
+                    return -1;
+                if ( from_side == platform_side::ps_passable_bottom && platofrm_y < from_pos.y * ptm )
+                    return -1;
+
+                if ( !hited )//alwayse take first hitpoint
+                {
+                    
+                    hited = true;
+                    hit_pos = point;
+                }
+                else
+                {
+                    // then alwayse use further hitpoint
+                    if ( (hit_pos - from_pos).Length() < (point - from_pos).Length() )
+                    {
+                        hit_pos = point;
+                    }
+                }
+                return -1;
+            }
+        }
+        return -1;
+    }
+};
+
+
+-(CGPoint) get_passed_position:(platform_side) from_side :(CGPoint) from_pos
+{
+    b2Vec2 start, end;
+    float ptm = [ GameBase get_ptm_ratio];
+    if ( from_side == ps_passable_top )
+    {
+        end = b2Vec2( from_pos.x / ptm, 2048 / ptm ) ;
+        start = b2Vec2( from_pos.x / ptm, -100 / ptm ) ;
+    }
+    else
+    {
+        start = b2Vec2( from_pos.x / ptm, 2048 / ptm ) ;
+        end = b2Vec2( from_pos.x / ptm, -100 / ptm ) ;
+    }
+    rccb ccb;
+    ccb.from_side = from_side;
+    ccb.m_from_platforms = m_landing_platforms;
+    ccb.from_pos = b2Vec2( from_pos.x / ptm, from_pos.y / ptm);
+    [ GameBase get_game ].m_world.m_physics_world->RayCast(&ccb, start, end );
+    CGPoint ret = ccp(-10000,-10000);
+    if ( ccb.hited )
+        ret = ccp(ccb.hit_pos.x * ptm, ccb.hit_pos.y * ptm );
+    return ret;
+}
+
 -(void) go_left
 {
     if ( m_landing_platforms.size() <= 0 )
@@ -104,49 +188,24 @@ bool play_dead = false;
         NSLog(@"denined");
         return;
     }
+    
     [self play_jump_sfx];
     [self set_player_side: ps_can_land_top ];
-    if ( m_landing_platforms.size() > 0 )
+    if ( [self first_touching_passable_platform] )
     {
-        if ( [self first_touching_passable_platform ] != nil )
+        CGPoint pos = [self get_physic_position:0];
+        pos = [self get_passed_position:ps_passable_bottom :pos ];
+        if ( pos.x != -10000 && pos.y != -10000 )
         {
-
-            CGPoint pos = [self get_physic_position:0];
-            PlatformBase* p = [self first_touching_passable_platform];
-            CGPoint platform_pos = [p get_physic_position:0];
+            pos.y += 30;
+            [self set_physic_position:0 :pos ];
+            [self set_player_side: ps_can_land_bottom ];
             
-            if ( pos.y < platform_pos.y )
-            {
-                pos = [p get_passed_position:ps_passable_bottom :pos ];
-                if ( pos.x != -10000 && pos.y != -10000 )
-                {
-                    pos.y += 35;
-                    [self set_physic_position:0 :pos ];
-                    [self set_player_side: ps_can_land_bottom ];
-                    
-                }
-                else
-                {
-                    NSLog(@"fuke %p, %f, %f", p, pos.x, pos.y);
-                    pos = [self get_physic_position:0];
-                    pos = [p get_passed_position:ps_passable_bottom :pos ];
-
-                }
-                
-            }
         }
+        
     }
-    
 }
 
--(PlatformBase*) first_touching_passable_platform
-{
-    std::map<PlatformBase*, int>::const_iterator it = std::find_if(m_landing_platforms.begin(), m_landing_platforms.end(), [] ( std::map<PlatformBase*, int>::const_reference p){ return [p.first passable]; } );
-    if ( it != m_landing_platforms.end() )
-        return it->first;
-    else
-        return NULL;
-}
 
 -(void) go_right
 {
@@ -159,26 +218,18 @@ bool play_dead = false;
     
     [self play_jump_sfx];
     [self set_player_side: ps_can_land_bottom ];
-    if ( m_landing_platforms.size() > 0 )
+    if ( [self first_touching_passable_platform] )
     {
-        if ( [self first_touching_passable_platform ] != nil )
+        CGPoint pos = [self get_physic_position:0];
+        pos = [self get_passed_position:ps_passable_top :pos ];
+        if ( pos.x != -10000 && pos.y != -10000 )
         {
-            CGPoint pos = [self get_physic_position:0];
-            PlatformBase* p = [self first_touching_passable_platform];
-            CGPoint platform_pos = [p get_physic_position:0];
-            if ( pos.y >= platform_pos.y )
-            {
-                pos = [p get_passed_position:ps_passable_top :pos ];
-                if ( pos.x != -10000 && pos.y != -10000 )
-                {
-                    pos.y -= 35;
-                    [self set_physic_position:0 :pos ];
-                    [self set_player_side: ps_can_land_top ];
-                    
-                }
-            }
+            pos.y -= 30;
+            [self set_physic_position:0 :pos ];
+            [self set_player_side: ps_can_land_top ];
         }
     }
+
 }
 
 -(void) on_pre_solve:(struct b2Contact*) contact :(const struct b2Manifold*) old_manifold
@@ -235,16 +286,19 @@ bool play_dead = false;
 	SpriteBase* spriteB = get_sprite_base(fb);
     SpriteBase* other;
     b2Fixture* myself;
+    b2Fixture* otherfix;
     if ( spriteA == nil || spriteB == nil )
         return;
     if ( spriteA != self )
     {
         myself = fb;
+        otherfix = fa;
         other = spriteA;
     }
     else
     {
         other = spriteB;
+        otherfix = fb;
         myself = fa;
     }
     
@@ -252,9 +306,8 @@ bool play_dead = false;
     {
         if ( [other isKindOfClass:[PlatformBase class]] )
         {
-            NSLog(@"begin contact platform: %p, ", other, other );
+            //NSLog(@"begin contact platform: %p, %p,  %p", other, otherfix, otherfix->GetUserData() );
             [self add_landing_platform:(PlatformBase*)other];
-            [other set_color_override:ccc4f(1, 1, 1, 1) duration:10000];
         }
     }
     
@@ -286,7 +339,6 @@ bool play_dead = false;
         {
             //        NSLog(@"end contact platform: %p", other);
             [ self del_landing_platform:(PlatformBase*)other];
-                        [other set_color_override:ccc4f(1, 1, 1, 0) duration:10000];
         }
     }
 }
@@ -415,7 +467,9 @@ bool play_dead = false;
 -(void) update:(float)delta_time
 {
     [ super update:delta_time];
-    
+   // static int gogotest2 = 0;
+    //gogotest2++;
+    //m_next_action = (input)(gogotest2 % 2);
     switch (m_next_action)
     {
         case go_left:

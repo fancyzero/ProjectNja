@@ -204,7 +204,10 @@ float m_physics_loading_scale = 0.5;
     for( std::vector<fixture_data*>::iterator it = fixes.begin(); it != fixes.end(); ++it )
     {
         if ( *it != nil )
+        {
+            //NSLog(@"%p deleted", *it);
             delete *it;
+        }
     }
 	m_phy_body_ = nil;
 	
