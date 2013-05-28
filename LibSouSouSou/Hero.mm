@@ -27,7 +27,7 @@ bool play_dead = false;
 {
     
     self = [super init];
-    [self set_god_mode:1];
+    //[self set_god_mode:1];
     [self clear_next_input];
     m_next_action = none;
     m_speed.reset();
