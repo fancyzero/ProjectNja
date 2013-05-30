@@ -53,10 +53,10 @@ int reset_count = 0;
 	m_filename_ = nil;
     [super reset];
     m_total_moved = 0;
-    m_god_safe_insert_pos = 0;
-    m_cur_god_safe_insert_pos = -1024;
-    m_sector_attached = 0;
-    m_god_safe_insert_pos = 0;
+
+    m_god_safe_insert_pos_begin = m_cur_god_safe_insert_pos = -god_safe_width*3;
+    m_god_safe_insert_pos = god_safe_width*5 + m_cur_god_safe_insert_pos;//m_god_safe_insert_pos必须是god_safe_width的整数倍
+    m_sector_attached = 
     m_move_speed = get_global_config().level_move_speed;
     m_moved_pos = 0;
     m_current_sector_width = 0;
@@ -238,6 +238,8 @@ int reset_count = 0;
     m_moved_pos += [self get_move_speed] * delta_time;
     m_total_moved += [self get_move_speed] * delta_time;
     m_cur_god_safe_insert_pos -= [self get_move_speed] * delta_time;
+    if ( m_cur_god_safe_insert_pos < m_god_safe_insert_pos_begin )
+        m_cur_god_safe_insert_pos = m_god_safe_insert_pos_begin;
     m_bg1.m_offset = fmod(m_total_moved/6.0,1024);
     
     if ( m_moved_pos >= m_current_sector_width )
@@ -269,10 +271,11 @@ int reset_count = 0;
 //        [ safe_platform set_scale:1 :1];
         [ safe_platform set_physic_position:0 :ccp(m_cur_god_safe_insert_pos,768)];
         [safe_platform set_zorder:300];
+        [safe_platform set_physic_rotation:0 :180];
         [[GameBase get_game].m_world add_gameobj:safe_platform layer:@"game"];
-        
+       // NSLog(@"new safe insert pos %f", m_cur_god_safe_insert_pos );
         m_cur_god_safe_insert_pos += god_safe_width;
-        //NSLog(@"new safe insert pos %f", m_cur_god_safe_insert_pos );
+
     }
 }
 

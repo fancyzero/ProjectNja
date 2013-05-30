@@ -190,7 +190,7 @@ public:
     {
         if ( [self current_moved] - m_move_distance_when_leave_platform > hover_distance )
         {
-            NSLog(@"denined");
+           // NSLog(@"denined");
             return;
         }
     }
@@ -220,7 +220,7 @@ public:
     {
         if ( [self current_moved] - m_move_distance_when_leave_platform > hover_distance )
         {
-            NSLog(@"denined");
+           // NSLog(@"denined");
             return;
         }
     }

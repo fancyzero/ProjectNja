@@ -21,6 +21,7 @@ class b2PhysicBody;
     int     m_sector_attached;
     float m_move_speed;
     float m_total_moved;
+    float m_god_safe_insert_pos_begin;
     float m_god_safe_insert_pos;
     float m_cur_god_safe_insert_pos;
 
