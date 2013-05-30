@@ -21,8 +21,11 @@ class b2PhysicBody;
     int     m_sector_attached;
     float m_move_speed;
     float m_total_moved;
+    float m_god_safe_insert_pos;
+    float m_cur_god_safe_insert_pos;
 
 }
+-(float) get_total_moved;
 -(float) get_move_speed;
 -(void) update:(float)delta_time;
 

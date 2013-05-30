@@ -17,19 +17,18 @@
 #import "World.h"
 #import "GameScene.h"
 #include "Box2D.h"
+const float invalid_distance = -10000;
+const float hover_distance = 100;
 @implementation Hero
 bool play_dead = false;
--(void) clear_next_input
-{
-        m_next_input = input::none;
-}
 -(id) init
 {
     
     self = [super init];
-    //[self set_god_mode:1];
-    [self clear_next_input];
-    m_next_action = none;
+    [self set_god_mode_boost:2 :10];
+
+    m_hovering = false;
+    m_move_distance_when_leave_platform = invalid_distance;
     m_speed.reset();
     m_magnet.reset();
     m_score = 0;
@@ -38,12 +37,12 @@ bool play_dead = false;
     
     m_touched_side = ps_top;
     [self init_with_xml:@"sprites/base.xml:ninja" ];
-  /*  soft_ball* b = [[soft_ball alloc] initWithFile:@"blocks.png"];
-   [ b init_physics:[GameBase get_game].m_world.m_physics_world :30];
-    [b setZOrder:100];
-    [b setVisible:TRUE];
-    [[[GameBase get_game].m_scene get_layer_by_name:@"game"] addChild:b];
-   // self->m_sprite_components.push_back(b);*/
+    /*  soft_ball* b = [[soft_ball alloc] initWithFile:@"blocks.png"];
+     [ b init_physics:[GameBase get_game].m_world.m_physics_world :30];
+     [b setZOrder:100];
+     [b setVisible:TRUE];
+     [[[GameBase get_game].m_scene get_layer_by_name:@"game"] addChild:b];
+     // self->m_sprite_components.push_back(b);*/
     [ self set_physic_position:0 :ccp(0,0)];
     
     [ self set_collision_filter:collision_filter_player() cat:cg_player1];
@@ -132,7 +131,7 @@ public:
                     return -1;
                 if ( from_side == platform_side::ps_passable_bottom && platofrm_y < from_pos.y * ptm )
                     return -1;
-
+                
                 if ( !hited )//alwayse take first hitpoint
                 {
                     
@@ -180,15 +179,23 @@ public:
     return ret;
 }
 
+-(float) current_moved
+{
+    return [(GameSouSouSouLevel*)[GameBase get_game].m_level get_total_moved ];
+}
+
 -(void) go_left
 {
     if ( m_landing_platforms.size() <= 0 )
     {
-        m_next_input = input::go_left;
-        NSLog(@"denined");
-        return;
+        if ( [self current_moved] - m_move_distance_when_leave_platform > hover_distance )
+        {
+            NSLog(@"denined");
+            return;
+        }
     }
-    
+    m_move_distance_when_leave_platform = invalid_distance;
+    m_under_user_will = true;
     [self play_jump_sfx];
     [self set_player_side: ps_can_land_top ];
     if ( [self first_touching_passable_platform] )
@@ -211,11 +218,14 @@ public:
 {
     if ( m_landing_platforms.size() <= 0 )
     {
-        m_next_input = input::go_right;
-        NSLog(@"denined");
-        return;
+        if ( [self current_moved] - m_move_distance_when_leave_platform > hover_distance )
+        {
+            NSLog(@"denined");
+            return;
+        }
     }
-    
+    m_move_distance_when_leave_platform = invalid_distance;
+    m_under_user_will = true;
     [self play_jump_sfx];
     [self set_player_side: ps_can_land_bottom ];
     if ( [self first_touching_passable_platform] )
@@ -229,12 +239,12 @@ public:
             [self set_player_side: ps_can_land_top ];
         }
     }
-
+    
 }
 
 -(void) on_pre_solve:(struct b2Contact*) contact :(const struct b2Manifold*) old_manifold
 {
-    return;
+    //return;
     b2Fixture* fa = contact->GetFixtureA();
     b2Fixture* fb = contact->GetFixtureB();
 	PhysicsSprite* sprite_comp_A = get_sprite(fa);
@@ -255,24 +265,13 @@ public:
         if ( [other isKindOfClass:[PlatformBase class]] )
         {
             PlatformBase* platform = (PlatformBase*) other;
-            switch ( [platform get_side] )
+            if ( [platform passable])
             {
-                case ps_top:
-                    if (m_player_side == ps_can_land_bottom )
-                        contact->SetEnabled( false );
-                    break;
-                case ps_bottom:
-                    if (m_player_side == ps_can_land_top )
-                        contact->SetEnabled( false );
-                case ps_passable_top:
-                    if (m_player_side == ps_can_land_bottom )
-                        contact->SetEnabled( false );
-                    break;
-                case ps_passable_bottom:
-                    if (m_player_side == ps_can_land_top )
-                        contact->SetEnabled( false );
-                default:
-                    assert(0);
+                CGPoint platform_pos = [platform get_physic_position:0];
+                if ( self.m_position.y > platform_pos.y && m_player_side == ps_can_land_top )
+                    contact->SetEnabled(false);
+                if ( self.m_position.y <= platform_pos.y && m_player_side == ps_can_land_bottom )
+                    contact->SetEnabled(false);
             }
         }
     }
@@ -307,7 +306,13 @@ public:
         if ( [other isKindOfClass:[PlatformBase class]] )
         {
             //NSLog(@"begin contact platform: %p, %p,  %p", other, otherfix, otherfix->GetUserData() );
+            PlatformBase* platform = (PlatformBase*)other;
+            
+            if ( m_hovering && [platform passable] )//滞空的时候碰到可翻越平台，取消滞空条件
+                m_move_distance_when_leave_platform = invalid_distance;
+                
             [self add_landing_platform:(PlatformBase*)other];
+            m_under_user_will = false;
         }
     }
     
@@ -349,13 +354,13 @@ public:
     b2Fixture* self_fixture;
     b2Fixture* other_fixture;
     get_self_fixture(self, collision, self_fixture, other_fixture );
-
+    
     
     if ( [ other isKindOfClass:[PlatformBase class] ] )
     {
         
         //touch killer platform with valid_fixture
-        if ([( (PlatformBase*) other) kill_touched] )
+        if ([( (PlatformBase*) other) kill_touched] || [( (PlatformBase*) other) passable])
         {
             if ( [self is_valid_fixture:self_fixture])
             {
@@ -366,7 +371,7 @@ public:
                     [other set_physic_linear_velocity:0 :cos(angle)*100 :sin(angle)*100];
                     [other set_physic_angular_velocity:0 :3000];
                 }
-                else
+                else if ([( (PlatformBase*) other) kill_touched])
                 {
                     play_dead = true;
                 }
@@ -374,19 +379,20 @@ public:
             else
             {
                 //绝妙
-                PlatformBase* p = (PlatformBase*)other;
+               /* PlatformBase* p = (PlatformBase*)other;
                 if ( ![p get_excellented] )
                 {
                     [ p set_excellented];
                     m_score += 100;
                 }
+                */
             }
         }
         
     }
     if ( [self is_valid_fixture:self_fixture] &&[ other isKindOfClass:[SCoin class] ] )
     {
-//        static float32 p = 1;
+        //        static float32 p = 1;
         play_sfx(@"sfx/coin.wav");//, p+=0.01f);
         [other remove_from_game:true];
         m_score += [(SCoin*)other get_points];
@@ -401,12 +407,31 @@ public:
 
 -(void) set_god_mode:(int) v
 {
+    bool old_is_god = [self is_god ];
     m_god_mode.base_value = v;
+    if ( old_is_god != [self is_god] )
+    {
+       // if ( [self is_god] )
+       // {
+         //   [self set_scale:2 :2];
+        //}
+        //else
+           // [self set_scale:1 :1];
+    }
 }
 
 -(void) set_god_mode_boost:(int)v :(float) time
 {
+
+    bool old_is_god = [self is_god ];
     m_god_mode.boost(time, v );
+    //if ( old_is_god != [self is_god] )
+    //{
+      //  if ( [self is_god] )
+        //    [self set_scale:2 :2];
+       // else
+         //   [self set_scale:1 :1];
+    //}
 }
 
 -(void) set_magnet:(float) v
@@ -467,75 +492,57 @@ public:
 -(void) update:(float)delta_time
 {
     [ super update:delta_time];
-   // static int gogotest2 = 0;
+    // static int gogotest2 = 0;
     //gogotest2++;
     //m_next_action = (input)(gogotest2 % 2);
-    switch (m_next_action)
-    {
-        case go_left:
-            [self go_left];
-            break;
-        case go_right:
-            [self go_right];
-            break;
-        default:
-            break;
-    }
-    m_next_action = none;
     if ( play_dead )
     {
         sleep(2);
         [self dead];
     }
-   /* if ( [self is_god] )
-        [self turn_on_god_mode];
-    else
-        [self turn_off_god_mode];
-    */
-   [ [self get_sprite_component:1] set_physic_position:[self get_physic_position:0]];
+    /* if ( [self is_god] )
+     [self turn_on_god_mode];
+     else
+     [self turn_off_god_mode];
+     */
+    [ [self get_sprite_component:1] set_physic_position:[self get_physic_position:0]];
     [ self apply_force_center:0 :m_velocity.x force_y:m_velocity.y ];
     
     
     //if ( [self get_physic_position:0].x < 100 )
-    [ self apply_force_center:0 :get_global_config().ninja_push_force force_y:0];
+    
     float s = [((GameSouSouSouLevel*)[GameBase get_game].m_level) get_move_speed ];
     m_score += (s * delta_time)*0.1;
     
-    /*
-     debug ---
-    PlatformBase* touching = [ self first_touching_passable_platform];
-    for (PlatformBase* p in [GameBase get_game].m_world.m_gameobjects)
+    bool touching_passable_platform = [self first_touching_passable_platform];
+    if ( !touching_passable_platform && m_last_touching_passable_platform )
+        m_move_distance_when_leave_platform = [self current_moved];
+    
+    [ self apply_force_center:0 :get_global_config().ninja_push_force force_y:0];
+/*    if ( [self current_moved]- m_move_distance_when_leave_platform < hover_distance &&  !m_under_user_will )
     {
-        if ( m_landing_platforms.find(p) != m_landing_platforms.end() )
-            [p set_color_override:ccc4f(1, 0, 1, 1) duration:1000];
-        else
-            [p set_color_override:ccc4f(1, 0, 1, 0) duration:1000];
-        if ( p == touching )
-            [ p set_color_override:ccc4f(1, 1, 1, 1) duration:1000];
-        
+        m_hovering = true;
+        [self set_physic_linear_damping:0 :1000000];
+        [self set_color_override:ccc4f(1,1, 1, 1) duration:10000];
     }
-     */
-    //[self set_physic_linear_velocity:0 :m_velocity.x :m_velocity.y ];
+    else
+    {
+                [self set_color_override:ccc4f(1,1, 1, 0) duration:10000];
+        m_hovering = false;
+        [self set_physic_linear_damping:0 :1];
+    }*/
+    m_last_touching_passable_platform = touching_passable_platform;
+    
 }
 
 -(void) add_landing_platform:(PlatformBase*) platform
 {
     //NSLog(@"add platform %p",platform);
-    int old_count = m_landing_platforms.size();
     if ( m_landing_platforms.find(platform) != m_landing_platforms.end() )
     {
         //assert(0);//should not happen
     }
     m_landing_platforms[platform] ++;
-    if ( old_count == 0 )
-    {
-        
-        if ( m_next_input != input::none )
-        {
-            m_next_action = m_next_input;
-        }
-        [self clear_next_input];
-    }
 }
 
 -(void) del_landing_platform:(PlatformBase*) platform
@@ -548,7 +555,7 @@ public:
     }
     else
     {
-    m_landing_platforms[platform] --;
+        m_landing_platforms[platform] --;
         if ( m_landing_platforms[platform] == 0 )
         {
             m_landing_platforms.erase(platform);

@@ -249,13 +249,13 @@
 }
 -(void) cleanup
 {
-    NSLog(@"world cleanup , list retaincount");
+//    NSLog(@"world cleanup , list retaincount");
     for ( GameObjBase* obj in m_gameobjects )
     {
-        NSLog(@"%@ : %@ : %d",obj.m_name, obj,  [ obj retainCount ]);
+        //NSLog(@"%@ : %@ : %d",obj.m_name, obj,  [ obj retainCount ]);
         [obj release ];
     }
-    NSLog(@"world cleanup retaincount end");
+//    NSLog(@"world cleanup retaincount end");
     [ m_gameobjects removeAllObjects ];
     m_collision_listener->m_collisions.clear();
 }

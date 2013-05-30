@@ -24,6 +24,9 @@
 #import "BumppingScoreDisplay.h"
 #import "GlobalConfig.h"
 #import "RepeatBG.h"
+
+float god_safe_width = 300;
+
 @implementation GameSouSouSouLevel
 int reset_count = 0;
 - (NSString *)applicationDocumentsDirectory
@@ -39,15 +42,21 @@ int reset_count = 0;
     return m_move_speed + [(Hero*)(get_player(-1)) get_speed];
 }
 
+-(float) get_total_moved
+{
+    return m_total_moved;
+}
+
 -(void)reset
 {
     init_global_config();
 	m_filename_ = nil;
     [super reset];
     m_total_moved = 0;
-    
+    m_god_safe_insert_pos = 0;
+    m_cur_god_safe_insert_pos = -1024;
     m_sector_attached = 0;
-    
+    m_god_safe_insert_pos = 0;
     m_move_speed = get_global_config().level_move_speed;
     m_moved_pos = 0;
     m_current_sector_width = 0;
@@ -74,7 +83,7 @@ int reset_count = 0;
     
     m_bg1 = [[RepeatBG new] initWithFile:@"pic/bg.png"];
     [m_bg1 setAnchorPoint:ccp(0,0)];
-
+    
     float ratio = [[CCDirector sharedDirector] winSize].height / [[CCDirector sharedDirector] winSize].width;
     if ( ratio < 1 )
         ratio = 1/ ratio;
@@ -124,7 +133,7 @@ int reset_count = 0;
 
 -(void) attach_sector:(NSString*) filename :(CGPoint) at_pos
 {
-    NSLog(@"attach %d sector %@ at %f, %f", m_sector_attached, filename, at_pos.x, at_pos.y);
+    //NSLog(@"attach %d sector %@ at %f, %f", m_sector_attached, filename, at_pos.x, at_pos.y);
     m_sector_attached ++;
     if ( (m_sector_attached % 5 == 0) && (m_sector_attached != 0) )
         m_move_speed = get_global_config().level_move_speed  * (1 + get_global_config().level_move_accleration*(m_sector_attached / 5));
@@ -176,7 +185,7 @@ int reset_count = 0;
         return [get_global_config().test_maps objectAtIndex: m_sector_attached % [ get_global_config().test_maps count ]];
     }
     
-
+    
     if ( m_sector_attached == 0 )
         rnd_file = @"/levels/sector1.xml";
     if ( m_sector_attached == 1 )
@@ -228,12 +237,13 @@ int reset_count = 0;
     
     m_moved_pos += [self get_move_speed] * delta_time;
     m_total_moved += [self get_move_speed] * delta_time;
+    m_cur_god_safe_insert_pos -= [self get_move_speed] * delta_time;
     m_bg1.m_offset = fmod(m_total_moved/6.0,1024);
     
     if ( m_moved_pos >= m_current_sector_width )
     {
         NSString* rnd_file;
-
+        
         rnd_file = [ self rand_next_sector ];
         NSString* sector_file = [[self applicationDocumentsDirectory] stringByAppendingString: rnd_file];
         float fix = m_moved_pos - m_current_sector_width;
@@ -242,12 +252,34 @@ int reset_count = 0;
         m_acting_range_keyframes_.clear();
         m_moved_pos = fix;
     }
+    while ( [get_player(-1) is_god] && m_cur_god_safe_insert_pos < m_god_safe_insert_pos )
+    {
+//        NSLog(@"add god safe %f %f", m_total_moved, m_god_safe_insert_pos-1024 );
+        Platform* safe_platform = nil;
+        safe_platform = [Platform new] ;
+        [safe_platform init_default_values];
+        [ safe_platform init_with_xml:@"sprites/base.xml:earth_4"];
+  //      [ safe_platform set_scale:1 :1];
+        [ safe_platform set_physic_position:0 :ccp(m_cur_god_safe_insert_pos,0)];
+        [safe_platform set_zorder:300];
+        [[GameBase get_game].m_world add_gameobj:safe_platform layer:@"game"];
+        safe_platform = [Platform new] ;
+                [safe_platform init_default_values];     
+        [ safe_platform init_with_xml:@"sprites/base.xml:earth_4"];
+//        [ safe_platform set_scale:1 :1];
+        [ safe_platform set_physic_position:0 :ccp(m_cur_god_safe_insert_pos,768)];
+        [safe_platform set_zorder:300];
+        [[GameBase get_game].m_world add_gameobj:safe_platform layer:@"game"];
+        
+        m_cur_god_safe_insert_pos += god_safe_width;
+        //NSLog(@"new safe insert pos %f", m_cur_god_safe_insert_pos );
+    }
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos
 {
 	m_filename_ = filename;
-
+    
     NSURL *xmlURL = [NSURL fileURLWithPath:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:filename]];
     NSXMLParser* xmlparser = [[ NSXMLParser alloc ] initWithContentsOfURL:xmlURL];
 	SpriteXMLParser *sxmlparser = [[ SpriteXMLParser alloc] init:NULL];

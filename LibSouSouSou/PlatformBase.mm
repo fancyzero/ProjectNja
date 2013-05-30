@@ -37,6 +37,8 @@ platform_side string_to_platform_side( NSString* str )
 -(int) init_default_values
 {
     [ super init_default_values];
+    [ self set_batchable:true];
+    m_time_before_remove_outof_actrange_ = 0.1;
     return 0;
 }
 -(platform_side) get_side
@@ -105,6 +107,7 @@ b2RayCastCallback * cb;
 {
     return m_passable;
 }
+
 -(id) init_with_spawn_params:(NSDictionary*) params
 {
     self = [super init_with_spawn_params:params];

@@ -61,11 +61,13 @@ struct boostable_value
 
     float           m_score;
     std::map<PlatformBase*, int> m_landing_platforms;
-    input m_next_input;
-    input m_next_action;
+    bool    m_last_touching_passable_platform;
+    float   m_move_distance_when_leave_platform;//离开任何platform时的x距离
+    bool    m_under_user_will;//用户输入了操作，后，未碰到可站立的platform前
     boostable_value<float>           m_magnet;
     boostable_value<float>           m_speed;
     boostable_value<int>             m_god_mode;//0 off, other on
+    bool m_hovering;//是否处在离开passable platform 后的一段滞空状态
     
 }
 
@@ -78,7 +80,7 @@ struct boostable_value
 -(void) set_god_mode_boost:(int)v :(float) time;
 -(void) set_magnet_boost:(float) v :(float) time;
 -(void) set_speed_boost:(float) v :(float) time;
-
+-(float) current_moved;
 -(float) get_magnet;
 -(float) get_speed;
 -(float) get_score;
