@@ -12,6 +12,7 @@
 #import "CCFileUtils.h"
 #import "GameBase.h"
 #import "SpriteXMLParser.h"
+#include "pugixml/pugixml.hpp"
 
 
 NSMutableDictionary* sprite_defs = NULL;

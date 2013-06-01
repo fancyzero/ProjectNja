@@ -143,7 +143,7 @@ b2RayCastCallback * cb;
 -(int) init_with_xml:(NSString *)filename
 {
     [super init_with_xml:filename];
-    [ self set_collision_filter:cg_player1 | cg_player2 | cg_god_player cat:cg_static];
+    [ self set_collision_filter:cg_player1 | cg_player2 cat:cg_static];
     [ self set_physic_restitution: 0 ];
     [ self set_physic_friction:0 ];
     [self set_batchable:true];

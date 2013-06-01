@@ -52,6 +52,8 @@ int reset_count = 0;
     init_global_config();
 	m_filename_ = nil;
     [super reset];
+    if ( m_bg1 != nil )
+       [ m_bg1 release];
     m_total_moved = 0;
 
     m_god_safe_insert_pos_begin = m_cur_god_safe_insert_pos = -god_safe_width*3;
@@ -102,7 +104,7 @@ int reset_count = 0;
     if ( get_float_config(@"debug_physic") > 1 )
 	{
 		physics_debug_sprite* pds = [ physics_debug_sprite new ];
-		pds.zOrder = 200;
+		pds.zOrder = 200; 
 		[[GameBase get_game].m_scene.m_layer addChild:pds ];
 	}
 	m_cur_path = 0;
@@ -115,9 +117,9 @@ int reset_count = 0;
     if ( m_score_display != nil )
     {
         //TODO: memory leak?
-        
+        NSLog(@"%d",        [m_score_display retainCount]);
         [m_score_display release];
-        
+        [m_score_display release];
     }
     m_score_display = [ [BumppingScoreDisplay alloc] initWithString:@"0" charMapFile:@"fonts/fps_images.png" itemWidth:12 itemHeight:32 startCharMap:'.'];
     [m_score_display display_integer_value];

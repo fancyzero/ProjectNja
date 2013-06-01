@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		042E7A0F17363748003D6FD7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 042E7A0E17363748003D6FD7 /* Default-568h@2x.png */; };
+		0443940D1759D6910002C961 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0443940B1759D6910002C961 /* pugixml.cpp */; };
 		045639681734AA0E005BF488 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045639671734AA0E005BF488 /* QuartzCore.framework */; };
 		0456396A1734AA0E005BF488 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045639691734AA0E005BF488 /* OpenGLES.framework */; };
 		0456396C1734AA0E005BF488 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0456396B1734AA0E005BF488 /* OpenAL.framework */; };
@@ -238,6 +239,9 @@
 
 /* Begin PBXFileReference section */
 		042E7A0E17363748003D6FD7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
+		0443940A1759D6910002C961 /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
+		0443940B1759D6910002C961 /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
+		0443940C1759D6910002C961 /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hpp; sourceTree = "<group>"; };
 		045639641734AA0E005BF488 /* GameSouSouSou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameSouSouSou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045639671734AA0E005BF488 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		045639691734AA0E005BF488 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -703,6 +707,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044394091759D6910002C961 /* pugixml */ = {
+			isa = PBXGroup;
+			children = (
+				0443940A1759D6910002C961 /* pugiconfig.hpp */,
+				0443940B1759D6910002C961 /* pugixml.cpp */,
+				0443940C1759D6910002C961 /* pugixml.hpp */,
+			);
+			path = pugixml;
+			sourceTree = "<group>";
+		};
 		0456395B1734AA0E005BF488 = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +904,7 @@
 		04563C441734AEA8005BF488 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				044394091759D6910002C961 /* pugixml */,
 				04563C451734AEA8005BF488 /* Box2D */,
 				04563CAA1734AEA9005BF488 /* CocosDenshion */,
 				04563CB41734AEA9005BF488 /* LICENSE_Box2D.txt */,
@@ -1655,6 +1670,7 @@
 				04D54D221748CA8F00378012 /* DynamicObject.mm in Sources */,
 				04A73641174E6B9900524BE0 /* Pickup.mm in Sources */,
 				04C151C2175116AD001D8E47 /* RepeatBG.mm in Sources */,
+				0443940D1759D6910002C961 /* pugixml.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

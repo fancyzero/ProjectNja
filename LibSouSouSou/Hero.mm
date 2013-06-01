@@ -28,7 +28,7 @@ float standard_mass = 0;
 {
     
     self = [super init];
-   [self set_god_mode_boost:2 :10];
+  // [self set_god_mode_boost:2 :10];
 
     m_hovering = false;
     m_move_distance_when_leave_platform = invalid_distance;
@@ -503,7 +503,7 @@ public:
     //m_next_action = (input)(gogotest2 % 2);
     if ( play_dead )
     {
-        sleep(2);
+        //sleep(2);
         [self dead];
     }
     /* if ( [self is_god] )
