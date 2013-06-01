@@ -29,7 +29,7 @@
 -(void) add_gameobj: (GameObjBase*) obj;
 -(void) remove_gameobj: (GameObjBase*) obj;
 -(void) update:(float)delta_time;
--(void) enable_listener:(bool) enable:(bool) clear;
+-(void) enable_listener:(bool) enable :(bool) clear;
 /*
  bool has_colision
  for debug purpose

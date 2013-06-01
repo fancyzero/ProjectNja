@@ -8,7 +8,7 @@
 
 #import "cocos2d.h"
 #include <vector>
-
+#include <string>
 @class GameLayer;
 @class PhysicsSprite;
 struct fixture_data
@@ -68,7 +68,6 @@ struct phy_shape_def
 struct phy_body_def
 {
 	int	type;//
-	NSString* identity;
 	CGPoint offset;
 	float	rotation;
 	CGPoint anchor_point;
@@ -77,7 +76,7 @@ struct phy_body_def
 	int collision_filter;
     float restitution;
 	phy_body_def()
-	:type(0),identity(NULL),restitution(0),collision_group(0),collision_filter(0)
+	:type(0),restitution(0),collision_group(0),collision_filter(0)
 	{
 		offset.x = offset.y = 0;
 		anchor_point.x = anchor_point.y = 0.5;
@@ -108,12 +107,13 @@ struct sprite_component_def
 
 struct sprite_part_def
 {
-	NSString*						m_desc;
+    std::string						m_desc;
 	CGPoint							m_offset;
 	float							m_rotation;
 	sprite_part_def()
+    :m_rotation(0)
 	{
-		m_desc = NULL;
+        m_offset.x = m_offset.y = 0;
 	}
 };
 

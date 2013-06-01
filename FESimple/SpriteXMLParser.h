@@ -47,12 +47,6 @@
 
 @end
 
-@interface sprite_component_assamble_parser : SPriteParserBase
-{
-}
--(void) on_node_begin:(NSString*) cur_path  nodename:(NSString *)node_name attributes:(NSDictionary *)attributes;
-
-@end
 
 @interface physic_body_database_parser : SPriteParserBase
 {

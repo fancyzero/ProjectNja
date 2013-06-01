@@ -436,7 +436,7 @@ public:
 -(void) set_god_mode_boost:(int)v :(float) time
 {
 
-    bool old_is_god = [self is_god ];
+//    bool old_is_god = [self is_god ];
     m_god_mode.boost(time, v );
 }
 

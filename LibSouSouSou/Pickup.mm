@@ -37,7 +37,7 @@
         get_self_fixture( self, collision, self_fix, other_fix );
         if ( [h is_valid_fixture:other_fix] )
         {
-            //[h set_god_mode_boost:1 :m_god_time ];
+            [h set_god_mode_boost:1 :m_god_time ];
             [h set_speed_boost:m_boost_value :m_god_time];
             [self remove_from_game:true];
         }

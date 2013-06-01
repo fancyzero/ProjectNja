@@ -69,6 +69,9 @@ int string_to_collision_filters(NSString* str);
 int string_to_collision_categories(NSString* str);
 float frandom();
 @class CCNode;
+
+CGPoint cgpoint_from_string( const char* str, const CGPoint& default_value );
+
 CGPoint convert_local_to_layer_space( CCNode* node, CGPoint local_point);
 CGAffineTransform convert_transform_to_layer_space( CCNode* node );
 struct b2Vec2 PTM_vec2(const CGPoint& p);

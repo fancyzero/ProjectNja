@@ -1,88 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <sprites>
     <sprite name="earth_1" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:earth_1" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:earth_1" />
+		</components>
     </sprite>
     <sprite name="earth_2" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:earth_2" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:earth_2" />
+		</components>
     </sprite>
     <sprite name="earth_3" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:earth_3" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:earth_3" />
+		</components>
     </sprite>
     <sprite name="earth_4" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:earth_4" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:earth_4" />
+		</components>
     </sprite>
     
     <sprite name="ninja" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:ninja" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:ninja" />
+		</components>
     </sprite>
     
     <sprite name="bg1" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:bg1" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:bg1" />
+		</components>
     </sprite>
     <sprite name="saw" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:saw" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:saw" />
+		</components>
     </sprite>
     <sprite name="ball" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:ball" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:ball" />
+		</components>
     </sprite>
     
     <sprite name="rock_1" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:rock_1" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:rock_1" />
+		</components>
     </sprite>
     <sprite name="rock_2" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:rock_2" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:rock_2" />
+		</components>
     </sprite>
     <sprite name="rock_3" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:rock_3" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:rock_3" />
+		</components>
     </sprite>
     
     <sprite name="spike" >
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:spike" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:spike" />
+		</components>
     </sprite>
     
     <sprite name="coin">
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:coin" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:coin" />
+		</components>
     </sprite>
     <sprite name="coin1">
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:coin1" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:coin1" />
+		</components>
     </sprite>
     <sprite name="magnet">
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:magnet" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:magnet" />
+		</components>
     </sprite>
     <sprite name="god_portion">
-		<sprite_components>
-			<sprite_component desc="sprite_components/base.xml:god_portion" />
-		</sprite_components>
+		<components>
+			<component desc="sprite_components/base.xml:god_portion" />
+		</components>
     </sprite>
     
 </sprites>

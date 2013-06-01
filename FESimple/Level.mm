@@ -15,6 +15,7 @@
 #include <box2d.h>
 #import "Common.h"
 #import "GameBase.h"
+#include "pugixml.hpp"
 
 level_progress_trigger::level_progress_trigger()
 :params(NULL),progress_pos(0),id(0)
@@ -74,7 +75,62 @@ level_progress_trigger::~level_progress_trigger()
     m_position_offset = offset;
 }
 
+-(int) parse_level_from_file:(NSString*) filename
+{
+    NSString* full_path = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath:filename];
+    
+    pugi::xml_document doc;
+    doc.load_file([full_path UTF8String] );
+    
+    NSLog(@"%s", doc.root().name() );
+    pugi::xml_node level_desc = doc.select_single_node("/xml/level").node();
+    pugi::xml_node acting_range = doc.select_single_node("/xml/level/acting_range").node();
+    pugi::xml_node actions = doc.select_single_node("/xml/level/actions").node();
 
+    if ( level_desc )
+    {
+        [ m_level set_map_size:level_desc.attribute("map_width").as_float() :level_desc.attribute("map_height").as_float()];
+    }
+    if ( acting_range )
+    {
+        for ( auto it : acting_range.children("keyframe") )
+        {
+			level_acting_range_keyframe k;
+			CGPoint p;
+			k.act_rect.origin = cgpoint_from_string( it.attribute("pos").as_string(), ccp(0,0));
+			p = cgpoint_from_string( it.attribute("size").as_string(), ccp(0,0));
+			k.act_rect.size.width = p.x;
+			k.act_rect.size.height = p.y;
+			k.progress = it.attribute("progress").as_float();
+			[m_level add_acting_range_keyframe: k];
+        }
+    }
+    if ( actions )
+    {
+        for ( auto it : actions.children("action") )
+        {
+			level_progress_trigger trigger;
+			trigger.progress_pos = it.attribute("progress").as_float();
+			m_current_progress_parsed = trigger.progress_pos;
+            NSMutableDictionary* params = [NSMutableDictionary dictionary];
+            for( auto attr : it.attributes() )
+            {
+                [params setValue:[NSString stringWithUTF8String:attr.value()] forKey:[NSString stringWithUTF8String:attr.name()]];
+            }
+			trigger.set_params( params );
+			//NSLog(@"add trigger %@",trigger.get_params());
+            if ( m_position_offset.x != 0 || m_position_offset.y != 0 )
+            {
+                CGPoint pt = read_CGPoint_value(trigger.get_params(), @"init_position", ccp(0,0));
+                pt = ccpAdd( pt, m_position_offset);
+                [trigger.get_params() setValue:[NSString stringWithFormat:@"%f,%f", pt.x, pt.y] forKey:@"init_position"];
+            }
+			[m_level add_trigger: trigger];
+        }
+    }
+    return 0;
+}
+/*
 -(void) on_node_begin:(NSString *)cur_path nodename:(NSString *)node_name attributes:(NSDictionary *)attributes
 {
     if ( [ cur_path isEqualToString:@"/xml" ] )
@@ -126,7 +182,7 @@ level_progress_trigger::~level_progress_trigger()
 -(void) on_node_end:(NSString *)cur_path nodename:(NSString *)node_name
 {
     
-}
+}*/
 @end
 
 @implementation LevelBase
@@ -185,19 +241,10 @@ level_progress_trigger::~level_progress_trigger()
 -(int) load_from_file:(NSString*) filename
 {
 	m_filename_ = filename;
-    NSURL *xmlURL = [NSURL fileURLWithPath:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:filename]];
-    NSXMLParser* xmlparser = [[ NSXMLParser alloc ] initWithContentsOfURL:xmlURL];
-	SpriteXMLParser *sxmlparser = [[ SpriteXMLParser alloc] init:NULL];
     LevelParser* my_parser = [ LevelParser new];
 	my_parser->m_level = self;
-	[ sxmlparser->m_parsers addObject: my_parser ];
-	[ xmlparser setDelegate:sxmlparser];
-	BOOL ret = [ xmlparser parse ];
-	assert( ret );
-	ret = 0;
-	
-	[sxmlparser release];
-	[xmlparser release];
+    [my_parser parse_level_from_file:filename];
+    [my_parser release];
 	return 0;
 }
 

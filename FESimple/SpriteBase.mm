@@ -260,7 +260,7 @@ unsigned long long g_sprite_uid = 0;
 		spr.m_parent = self;
 
 
-        sprite_component_def* scdef = [ SpriteDefManager load_sprite_component_def:(*it).m_desc];
+        sprite_component_def* scdef = [ SpriteDefManager load_sprite_component_def:[NSString stringWithUTF8String:(*it).m_desc.c_str()]];
 
         //set scale and position before creating physic body
         //此处的offset决定了这个part创建时，距离SpriteBase坐标的偏移

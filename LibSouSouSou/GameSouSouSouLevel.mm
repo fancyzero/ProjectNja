@@ -117,11 +117,9 @@ int reset_count = 0;
     if ( m_score_display != nil )
     {
         //TODO: memory leak?
-        NSLog(@"%d",        [m_score_display retainCount]);
-        [m_score_display release];
         [m_score_display release];
     }
-    m_score_display = [ [BumppingScoreDisplay alloc] initWithString:@"0" charMapFile:@"fonts/fps_images.png" itemWidth:12 itemHeight:32 startCharMap:'.'];
+    m_score_display = [[ [BumppingScoreDisplay alloc] initWithString:@"0" charMapFile:@"fonts/fps_images.png" itemWidth:12 itemHeight:32 startCharMap:'.'] autorelease];
     [m_score_display display_integer_value];
     [m_score_display setRotation:90];
     
@@ -288,24 +286,15 @@ int reset_count = 0;
 
 }
 
+
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos
 {
 	m_filename_ = filename;
     
-    NSURL *xmlURL = [NSURL fileURLWithPath:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:filename]];
-    NSXMLParser* xmlparser = [[ NSXMLParser alloc ] initWithContentsOfURL:xmlURL];
-	SpriteXMLParser *sxmlparser = [[ SpriteXMLParser alloc] init:NULL];
     LevelParser* my_parser = [ LevelParser new];
     [my_parser set_position_offset:at_pos];
 	my_parser->m_level = self;
-	[ sxmlparser->m_parsers addObject: my_parser ];
-	[ xmlparser setDelegate:sxmlparser];
-	BOOL ret = [ xmlparser parse ];
-	assert( ret );
-	ret = 0;
-	
-	[sxmlparser release];
-	[xmlparser release];
+    [my_parser parse_level_from_file:filename];
 }
 
 -(void) on_sprite_dead: (SpriteBase*) sprite

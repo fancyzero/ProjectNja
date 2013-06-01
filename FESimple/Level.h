@@ -90,7 +90,7 @@ struct level_acting_range_keyframe
 @property (nonatomic, assign) int	m_next_trigger;
 @end
 
-@interface LevelParser : SPriteParserBase
+@interface LevelParser : NSObject
 {
 @public
 	LevelBase*			m_level;
@@ -99,8 +99,7 @@ struct level_acting_range_keyframe
     CGPoint             m_position_offset;
 }
 
+-(int) parse_level_from_file:(NSString*) filename;
 -(void) set_progres_offset:(float) offset;
 -(void) set_position_offset:(CGPoint) offset;
--(void) on_node_begin:(NSString*) cur_path  nodename:(NSString *)node_name attributes:(NSDictionary *)attributes;
--(void) on_node_end:(NSString*) cur_path  nodename:(NSString* ) node_name;
 @end

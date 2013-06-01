@@ -279,6 +279,7 @@ CGRect read_CGRect_value(NSDictionary* params, NSString* key, CGRect default_val
 	return rect;
 }
 
+
 CGPoint read_CGPoint_value(NSDictionary* params, NSString* key, CGPoint default_value)
 {
 	CGPoint pt;
@@ -605,4 +606,13 @@ SpriteBase* get_sprite_base( class b2Fixture* fix )
         return get_sprite(fix).m_parent;
     }
     return nil;
+}
+
+CGPoint cgpoint_from_string( const char* str, const CGPoint& default_value )
+{
+    if ( str == nullptr || str[0] == 0 )
+        return default_value;
+    CGPoint ret;
+    sscanf(str, "%f,%f", &ret.x, &ret.y);
+    return ret;
 }

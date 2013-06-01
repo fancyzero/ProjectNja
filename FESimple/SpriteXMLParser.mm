@@ -238,59 +238,7 @@ bool read_phy_body_def(phy_body_def* body_def, NSString* node_name, NSDictionary
 
 @end
 
-sprite_part_def read_sprite_part_def( NSDictionary* attributes)
-{
-	sprite_part_def spart;
-	
-	spart.m_desc = [attributes valueForKey:@"desc"];
-	[spart.m_desc retain];
-	spart.m_offset = read_CGPoint_value( attributes, @"offset", ccp(0,0));
-	spart.m_rotation = read_float_value( attributes, @"rotation");
-	return spart;
-}
 
-sprite_joint_def read_sprite_joint_def( NSDictionary* attributes)
-{
-	sprite_joint_def jdef;
-	jdef.component_a = read_int_value(attributes, @"component_a");
-	jdef.component_b = read_int_value(attributes, @"component_b");
-	jdef.joint_flags[0] = read_bool_value(attributes, @"enable_limit");
-	jdef.joint_params[0] = read_float_value(attributes, @"up_limit");
-	jdef.joint_params[1] = read_float_value(attributes, @"low_limit");
-	NSString* str = [ attributes valueForKey:@"type"];
-	if ( [ str isEqualToString:@"revolute"])
-	{
-		jdef.joint_type = e_revoluteJoint;
-	}
-	return jdef;
-}
-
-@implementation sprite_component_assamble_parser
-
--(void) on_node_begin:(NSString *)cur_path nodename:(NSString *)node_name attributes:(NSDictionary *)attributes
-{
-    if ( [ cur_path isEqualToString:@"/xml/sprite_components" ] )
-    {
-		sprite_part_def spart;
-
-        if ( [ node_name isEqualToString:@"sprite_component" ] )
-        {
-			spart = read_sprite_part_def(attributes);
-			m_xmlparser->m_sprite_part_defs->push_back(spart);
-        }
-    }
-	if ( [ cur_path isEqualToString:@"xml/joints"] )
-	{
-		if ( [ node_name isEqualToString:@"joint" ] )
-		{
-			read_sprite_joint_def(attributes);
-		}
-
-	}
-}
-
-
-@end
 
 @implementation physic_body_database_parser
 
@@ -317,53 +265,6 @@ sprite_joint_def read_sprite_joint_def( NSDictionary* attributes)
 	}
 }
 
-@end
-
-@implementation sprite_database_loader
-
--(void) on_node_begin:(NSString*) cur_path  nodename:(NSString *)node_name attributes:(NSDictionary *)attributes
-{
-    if ( [ cur_path isEqualToString:@"/sprites" ] )
-	{
-		if ( [node_name isEqualToString:@"sprite"] )
-		{
-			assert(current_sprite_def == NULL);
-			current_sprite_def = new sprite_def();
-			current_sprite_def->m_parts.clear();
-			current_sprite_def->m_joints.clear();
-			m_sprite_name = [attributes valueForKey:@"name"];
-		}
-	}
-	
-    if ( [ cur_path isEqualToString:@"/sprites/sprite/sprite_components" ] )
-	{
-		if ( [node_name isEqualToString:@"sprite_component"] )
-		{
-			current_sprite_def->m_parts.push_back( read_sprite_part_def(attributes) );
-		}
-	}
-	if ( [ cur_path isEqualToString:@"/sprites/sprite/joints" ] )
-	{
-		if ( [node_name isEqualToString:@"joint"] )
-		{
-			current_sprite_def->m_joints.push_back( read_sprite_joint_def(attributes) );
-		}
-	}
-
-}
--(void) on_node_end:(NSString*) cur_path  nodename:(NSString* ) node_name
-{
-	if ( [ cur_path isEqualToString:@"/sprites" ] )
-	{
-		if ( [node_name isEqualToString:@"sprite"] )
-		{
-			NSString* keyname = [m_filename stringByAppendingFormat:@":%@" ,m_sprite_name];
-			[SpriteDefManager add_sprite_def: current_sprite_def :keyname];
-			current_sprite_def = NULL;
-		}
-			
-	}
-}
 @end
 
 
