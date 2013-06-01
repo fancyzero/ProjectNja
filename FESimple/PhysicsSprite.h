@@ -32,6 +32,7 @@ struct anim_sequence_def
 	NSString*	frame_names;
     NSString*   filename;
     NSString*   anim_name;
+    NSString*   sprite_name;
     int         repeat_count;// -1  = repeat forever
     //CCAction*   act;
 	anim_sequence_def()
@@ -101,6 +102,7 @@ struct spr_anim_def
 
 struct sprite_component_def
 {
+    NSString*                       m_name;
 	phy_body_def					m_phy_body;
 	spr_anim_def					m_spr_anim;
 };

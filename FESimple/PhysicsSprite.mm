@@ -17,6 +17,78 @@
 #import "CCAnimateEx.h"
 
 #pragma mark - PhysicsSprite
+
+static NSMutableDictionary* anim_cache = nil;
+
+void push_anim( CCAnimation* anim, NSString* for_sprite, NSString* anim_name )
+{
+    if ( anim_cache == nil )
+        anim_cache = [[NSMutableDictionary dictionary] retain];
+    [anim_cache setValue:anim forKey:[NSString stringWithFormat:@"%@::%@", for_sprite, anim_name]];
+}
+
+CCAnimation* get_anim( anim_sequence_def* def, NSString* for_sprite, NSString* anim_name )
+{
+    if ( anim_cache == nil )
+        anim_cache = [[NSMutableDictionary dictionary]retain];
+    CCAnimation* anim = [anim_cache valueForKey:[NSString stringWithFormat:@"%@::%@", for_sprite, anim_name]];
+    if ( anim )
+        return anim;
+    NSMutableArray *Frames = [NSMutableArray array];//todo memory leak?
+    CCSpriteFrame* frame;
+
+    if ( [[def->filename pathExtension] isEqualToString:@"plist"] )
+    {
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:def->filename];
+        NSArray* framenames = [def->frame_names componentsSeparatedByString:@","];
+        for( int i=0; i < [framenames count]; i++ )
+        {
+            
+            frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[framenames objectAtIndex:i]];
+            /*
+             通过以上方法得来的frame 没有texture指针，之保存了贴图名
+             每次setDisplayFrame时都要先执行一次texturecache addimage一次才行
+             所以干脆就再创建这个frame之后，手动通过texturefilename设置texture指针，省的每次都要addimage一次
+             */
+            frame.texture = [[CCTextureCache sharedTextureCache] addImage:  [frame textureFilename]];
+            //[frame.texture setAliasTexParameters];
+            [Frames addObject:frame];
+            //NSLog(@"frame ratain count:%d",[frame retainCount]);
+        }
+    }
+    else
+    {
+        CCTexture2D* tex = [ [ CCTextureCache  sharedTextureCache ] addImage:def->filename];
+        //[tex setAliasTexParameters];
+        
+        if ( def->animated )
+        {
+            for(int i = 0; i < def->frame_cnt; ++i)
+            {
+                frame = [ CCSpriteFrame frameWithTexture:tex rect:CGRectMake( (i%def->cells_per_line)*(def->cell_w+def->cell_pad_x),
+                                                                             i/def->cells_per_line*(def->cell_h+def->cell_pad_y),
+                                                                             def->cell_w, def->cell_h) ];
+                [Frames addObject:frame];
+            }
+        }
+        else
+        {
+            // TODO:  Inpixels or InPoints?
+            frame = [ CCSpriteFrame frameWithTexture:tex rect:CGRectMake( 0,0, tex.contentSize.width, tex.contentSize.height )];
+            //NSLog(@"frame ratain count:%d",[frame retainCount]);
+            
+            [Frames addObject:frame];
+        }
+    }
+    anim = [CCAnimation animationWithSpriteFrames:Frames delay:def->frame_speed ];
+
+    //NSLog(@"frames ratain count:%d",[Frames retainCount]);
+    //[Frames release];
+
+    push_anim( anim, for_sprite, anim_name );
+    return anim;
+}
+
 @implementation PhysicsSprite
 
 @synthesize m_mask_color = m_mask_color_;
@@ -26,6 +98,8 @@
 @synthesize m_color_override_endtime = m_color_override_endtime_;
 
 float m_physics_loading_scale = 0.5;
+
+
 
 +(void) set_physics_loading_scale:(float) s
 {
@@ -88,7 +162,7 @@ float m_physics_loading_scale = 0.5;
 	ret = [self init_physics: &def->m_phy_body ];
 	if ( ret < 0 )
 		return ret;
-	
+
 	ret = [ self init_animations: &def->m_spr_anim];
     [self play_anim_sequence:@"default"];
     //anchorPoint only can be set after animations has been loaded othough the anchorPointInPixel will be caculated wrong
@@ -114,68 +188,19 @@ float m_physics_loading_scale = 0.5;
 	
 	for ( ANIM_SEQUENCES::iterator it = anims->m_anim_sequences.begin(); it != anims->m_anim_sequences.end(); ++it )
 	{
-		NSMutableArray *Frames = [NSMutableArray array];//todo memory leak?
-		CCSpriteFrame* frame;
-		
-		if ( [[(*it).filename pathExtension] isEqualToString:@"plist"] )
-		{
-			[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:(*it).filename];
-			NSArray* framenames = [(*it).frame_names componentsSeparatedByString:@","];
-			for( int i=0; i < [framenames count]; i++ )
-			{
-
-				frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[framenames objectAtIndex:i]];
-                /*
-                 通过以上方法得来的frame 没有texture指针，之保存了贴图名
-                 每次setDisplayFrame时都要先执行一次texturecache addimage一次才行
-                 所以干脆就再创建这个frame之后，手动通过texturefilename设置texture指针，省的每次都要addimage一次
-                */
-                frame.texture = [[CCTextureCache sharedTextureCache] addImage:  [frame textureFilename]];
-                //[frame.texture setAliasTexParameters];
-				[Frames addObject:frame];
-				//NSLog(@"frame ratain count:%d",[frame retainCount]);
-			}
-		}
-		else
-		{
-			CCTexture2D* tex = [ [ CCTextureCache  sharedTextureCache ] addImage:(*it).filename];
-            //[tex setAliasTexParameters];
-			
-			if ( (*it).animated )
-			{
-				for(int i = 0; i < (*it).frame_cnt; ++i)
-				{
-					frame = [ CCSpriteFrame frameWithTexture:tex rect:CGRectMake( (i%(*it).cells_per_line)*((*it).cell_w+(*it).cell_pad_x),
-																				 i/(*it).cells_per_line*((*it).cell_h+(*it).cell_pad_y),
-																				 (*it).cell_w, (*it).cell_h) ];
-					[Frames addObject:frame];
-				}
-			}
-			else
-			{
-                // TODO:  Inpixels or InPoints?
-				frame = [ CCSpriteFrame frameWithTexture:tex rect:CGRectMake( 0,0, tex.contentSize.width, tex.contentSize.height )];
-				//NSLog(@"frame ratain count:%d",[frame retainCount]);
-
-				[Frames addObject:frame];
-			}
-		}
-		CCAnimation *anim = [CCAnimation animationWithSpriteFrames:Frames delay:(*it).frame_speed ];
-		//NSLog(@"frames ratain count:%d",[Frames retainCount]);
-		//[Frames release];
-        CCAction*   act;
-        if ( (*it).repeat_count <= 0 )
+        CCAnimation* anim = get_anim( &(*it), m_component_def->m_name, (*it).anim_name);
+		//NSLog(@"frames ratain count:%d",[act retainCount]);
+		//seq->act = act;
+        CCAction* act;
+        if ( it->repeat_count <= 0 )
         {
             act = [CCRepeatForever actionWithAction:[CCAnimateEx actionWithAnimation:anim ]];
         }
         else
         {
-            act = [CCRepeat actionWithAction:[CCAnimateEx actionWithAnimation:anim ] times:(*it).repeat_count];
+            act = [CCRepeat actionWithAction:[CCAnimateEx actionWithAnimation:anim ] times:it->repeat_count];
         }
-    
-		//NSLog(@"frames ratain count:%d",[act retainCount]);
-		//seq->act = act;
-		
+
 		[m_anim_sequences_ setObject:act forKey:(*it).anim_name ];//todo use another struct to save actions
 	}
 	return 0;

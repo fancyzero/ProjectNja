@@ -278,6 +278,7 @@ bool read_phy_body_def(phy_body_def* body_def, NSString* node_name, NSDictionary
 		{
 			assert(current_def == NULL);
 			current_def = new sprite_component_def();
+            current_def->m_name = [m_component_name copy];
 			m_component_name = [attributes valueForKey:@"name"];
 		}
 	}
