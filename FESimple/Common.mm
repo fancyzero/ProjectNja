@@ -413,7 +413,7 @@ int collision_filter_enemy()
 }
 int collision_filter_player()
 {
-	return (cg_enemy | cg_enemy_bullet | cg_static | cg_acting_range | cg_pickup);
+	return (cg_enemy | cg_enemy_bullet | cg_static | cg_acting_range | cg_pickup );
 }
 int collision_filter_players_pickup()
 {

@@ -238,11 +238,6 @@ static CCDirector *_sharedDirector = nil;
 		dt = MAX(0,dt);
 	}
 
-#ifdef DEBUG
-	// If we are debugging our code, prevent big delta time
-	if( dt > 0.2f )
-		dt = 1/60.0f;
-#endif
 
 	lastUpdate_ = now;
 }

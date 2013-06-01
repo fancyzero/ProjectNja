@@ -96,6 +96,7 @@ void CollisionListener::EndContact(b2Contact* contact)
     {
         m_collisions.erase(pos);
     }
+
 }
 
 void CollisionListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold)

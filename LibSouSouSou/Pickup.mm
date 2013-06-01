@@ -17,13 +17,13 @@
 
 @end
 
-@implementation PickupBoost
+@implementation PickupGodPortion
 
 -(id) init_with_spawn_params:(NSDictionary *)params
 {
     self = [super init_with_spawn_params:params];
-    m_boost_time = read_float_value(params, @"duration", 10.0f );
-    m_boost_value = read_float_value(params, @"value", 400 );
+    m_god_time = read_float_value(params, @"duration", 10.0f );
+    m_boost_value = read_float_value(params, @"speed_boost", 400 );
     return self;
 }
 
@@ -37,10 +37,12 @@
         get_self_fixture( self, collision, self_fix, other_fix );
         if ( [h is_valid_fixture:other_fix] )
         {
-            [h set_speed_boost:m_boost_value :m_boost_time ];
+            [h set_god_mode_boost:1 :m_god_time ];
+            [h set_speed_boost:m_boost_value :m_god_time];
+            [self remove_from_game:true];
         }
     }
-    [self remove_from_game:true];
+
     return 0;
 }
 

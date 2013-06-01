@@ -25,6 +25,8 @@
 -(void) update:(float)delta_time
 {
     [ super update:delta_time ];
+        if ( !m_killed )
+        {
     [ self set_physic_fixed_rotation:0 :false ];
     [ self set_physic_angular_velocity:0 :m_rotat_speed ];
     GameSouSouSouLevel* lvl = (GameSouSouSouLevel*)[GameBase get_game].m_level;
@@ -33,6 +35,7 @@
     if ( self.m_position.x <= 512 )
         move_speed = (level_speed + m_fall_speed)/[ GameBase get_ptm_ratio ];
     [ self set_physic_linear_velocity:0 :-move_speed  :0 ];
+        }
 }
 @end
 

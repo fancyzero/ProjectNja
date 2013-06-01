@@ -127,6 +127,14 @@
 			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="magnet.png" framespeed="0"/>
 		</animation_def>
 	</sprite_component>
+    <sprite_component name="god_portion">
+		<physics_def>
+			<body type="kinematic" url="pdb/main.xml:magnet"/>
+		</physics_def>
+		<animation_def>
+			<sequence name="default" animated="true" texture="pic/scene.plist" framenames="god.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
 </sprite_components>
 
 

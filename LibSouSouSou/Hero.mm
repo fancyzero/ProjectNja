@@ -21,11 +21,14 @@ const float invalid_distance = -10000;
 const float hover_distance = 100;
 @implementation Hero
 bool play_dead = false;
+float standard_mass = 0;
+
+
 -(id) init
 {
     
     self = [super init];
-    [self set_god_mode_boost:2 :10];
+   [self set_god_mode_boost:2 :10];
 
     m_hovering = false;
     m_move_distance_when_leave_platform = invalid_distance;
@@ -37,6 +40,7 @@ bool play_dead = false;
     
     m_touched_side = ps_top;
     [self init_with_xml:@"sprites/base.xml:ninja" ];
+    standard_mass = [self get_sprite_component:0].m_phy_body->GetMass();
     /*  soft_ball* b = [[soft_ball alloc] initWithFile:@"blocks.png"];
      [ b init_physics:[GameBase get_game].m_world.m_physics_world :30];
      [b setZOrder:100];
@@ -273,8 +277,13 @@ public:
                 if ( self.m_position.y <= platform_pos.y && m_player_side == ps_can_land_bottom )
                     contact->SetEnabled(false);
             }
+            if ( [platform passable] || [platform kill_touched])
+            {
+                contact->SetEnabled(false);
+            }
         }
     }
+
 }
 
 -(void) on_begin_contact :( struct b2Contact* ) contact
@@ -407,17 +416,21 @@ public:
 
 -(void) set_god_mode:(int) v
 {
-    bool old_is_god = [self is_god ];
+    //bool old_is_god = [self is_god ];
     m_god_mode.base_value = v;
-    if ( old_is_god != [self is_god] )
-    {
-       // if ( [self is_god] )
-       // {
-         //   [self set_scale:2 :2];
-        //}
-        //else
-           // [self set_scale:1 :1];
-    }
+//    if ( old_is_god != [self is_god] )
+//    {
+//        if ( [self is_god] )
+//        {
+//            [ self set_collision_filter:collision_filter_player() cat:cg_god_player];
+//            [self set_scale:2 :2];
+//        }
+//        else
+//        {
+//            [ self set_collision_filter:collision_filter_player() cat:cg_player1];
+//            [self set_scale:1 :1];
+//        }
+//    }
 }
 
 -(void) set_god_mode_boost:(int)v :(float) time
@@ -425,13 +438,6 @@ public:
 
     bool old_is_god = [self is_god ];
     m_god_mode.boost(time, v );
-    //if ( old_is_god != [self is_god] )
-    //{
-      //  if ( [self is_god] )
-        //    [self set_scale:2 :2];
-       // else
-         //   [self set_scale:1 :1];
-    //}
 }
 
 -(void) set_magnet:(float) v
@@ -505,8 +511,11 @@ public:
      else
      [self turn_off_god_mode];
      */
+    float current_mass = [self get_sprite_component:0].m_phy_body->GetMass();
+    
     [ [self get_sprite_component:1] set_physic_position:[self get_physic_position:0]];
-    [ self apply_force_center:0 :m_velocity.x force_y:m_velocity.y ];
+
+    [ self apply_force_center:0 :m_velocity.x* current_mass / standard_mass force_y:m_velocity.y *current_mass / standard_mass];
     
     
     //if ( [self get_physic_position:0].x < 100 )
@@ -532,6 +541,7 @@ public:
         [self set_physic_linear_damping:0 :1];
     }*/
     m_last_touching_passable_platform = touching_passable_platform;
+
     
 }
 

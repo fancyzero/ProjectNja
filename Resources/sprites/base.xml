@@ -79,4 +79,10 @@
 			<sprite_component desc="sprite_components/base.xml:magnet" />
 		</sprite_components>
     </sprite>
+    <sprite name="god_portion">
+		<sprite_components>
+			<sprite_component desc="sprite_components/base.xml:god_portion" />
+		</sprite_components>
+    </sprite>
+    
 </sprites>

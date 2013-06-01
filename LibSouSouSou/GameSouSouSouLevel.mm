@@ -56,7 +56,7 @@ int reset_count = 0;
 
     m_god_safe_insert_pos_begin = m_cur_god_safe_insert_pos = -god_safe_width*3;
     m_god_safe_insert_pos = god_safe_width*5 + m_cur_god_safe_insert_pos;//m_god_safe_insert_pos必须是god_safe_width的整数倍
-    m_sector_attached = 
+    m_sector_attached = 0;
     m_move_speed = get_global_config().level_move_speed;
     m_moved_pos = 0;
     m_current_sector_width = 0;
@@ -218,7 +218,9 @@ int reset_count = 0;
     
     [self set_acting_range:rc_act];
     
-    
+    /*
+     添加物体阶段
+     */
 	if ( super.m_next_trigger < m_level_triggers.size() )
 	{
 		for ( int i = super.m_next_trigger; i < m_level_triggers.size(); ++i )
@@ -234,6 +236,33 @@ int reset_count = 0;
 			}
 		}
 	}
+    
+    while ( [get_player(-1) is_god] && m_cur_god_safe_insert_pos < m_god_safe_insert_pos )
+    {
+        //        NSLog(@"add god safe %f %f", m_total_moved, m_god_safe_insert_pos-1024 );
+        
+        Platform* safe_platform = nil;
+        safe_platform = [Platform new] ;
+        [ safe_platform init_default_values];
+        [ safe_platform init_with_xml:@"sprites/base.xml:earth_4"];
+        [ safe_platform set_physic_position:0 :ccp(m_cur_god_safe_insert_pos ,0)];
+        [ safe_platform set_zorder:300];
+        [ [GameBase get_game].m_world add_gameobj:safe_platform layer:@"game"];
+        safe_platform = [Platform new] ;
+        [ safe_platform init_default_values];
+        [ safe_platform init_with_xml:@"sprites/base.xml:earth_4"];
+        [ safe_platform set_physic_position:0 :ccp(m_cur_god_safe_insert_pos ,768)];
+        [ safe_platform set_zorder:300];
+        [ safe_platform set_physic_rotation:0 :180];
+        [ [GameBase get_game].m_world add_gameobj:safe_platform layer:@"game"];
+        //NSLog(@"new safe insert pos\t\t%0.2f\t\t%.02f", m_cur_god_safe_insert_pos, m_total_moved );
+        m_cur_god_safe_insert_pos += god_safe_width;
+        
+    }
+    /*
+     添加物体阶段 结束
+     移动场景开始
+     */
     
     m_moved_pos += [self get_move_speed] * delta_time;
     m_total_moved += [self get_move_speed] * delta_time;
@@ -254,29 +283,7 @@ int reset_count = 0;
         m_acting_range_keyframes_.clear();
         m_moved_pos = fix;
     }
-    while ( [get_player(-1) is_god] && m_cur_god_safe_insert_pos < m_god_safe_insert_pos )
-    {
-//        NSLog(@"add god safe %f %f", m_total_moved, m_god_safe_insert_pos-1024 );
-        Platform* safe_platform = nil;
-        safe_platform = [Platform new] ;
-        [safe_platform init_default_values];
-        [ safe_platform init_with_xml:@"sprites/base.xml:earth_4"];
-  //      [ safe_platform set_scale:1 :1];
-        [ safe_platform set_physic_position:0 :ccp(m_cur_god_safe_insert_pos,0)];
-        [safe_platform set_zorder:300];
-        [[GameBase get_game].m_world add_gameobj:safe_platform layer:@"game"];
-        safe_platform = [Platform new] ;
-                [safe_platform init_default_values];     
-        [ safe_platform init_with_xml:@"sprites/base.xml:earth_4"];
-//        [ safe_platform set_scale:1 :1];
-        [ safe_platform set_physic_position:0 :ccp(m_cur_god_safe_insert_pos,768)];
-        [safe_platform set_zorder:300];
-        [safe_platform set_physic_rotation:0 :180];
-        [[GameBase get_game].m_world add_gameobj:safe_platform layer:@"game"];
-       // NSLog(@"new safe insert pos %f", m_cur_god_safe_insert_pos );
-        m_cur_god_safe_insert_pos += god_safe_width;
 
-    }
 }
 
 -(void) append_from_file:(NSString*) filename :(CGPoint) at_pos

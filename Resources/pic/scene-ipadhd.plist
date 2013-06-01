@@ -20,7 +20,7 @@
             <key>coin.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1888,114},{100,110}}</string>
+                <string>{{1633,205},{100,110}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>coin1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1888,2},{100,110}}</string>
+                <string>{{1888,199},{100,110}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -95,10 +95,23 @@
                 <key>sourceSize</key>
                 <string>{626,238}</string>
             </dict>
+            <key>god.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1888,2},{136,195}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{136,195}}</string>
+                <key>sourceSize</key>
+                <string>{136,195}</string>
+            </dict>
             <key>magnet.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1633,205},{90,124}}</string>
+                <string>{{1735,205},{90,124}}</string>
                 <key>offset</key>
                 <string>{-2,0}</string>
                 <key>rotated</key>
@@ -170,7 +183,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:56e08f385c75bf336e1fcfd20e2fa630$</string>
+            <string>$TexturePacker:SmartUpdate:05aeed6efc9a4313426d4781bc0246b4$</string>
             <key>textureFileName</key>
             <string>scene-ipadhd.png</string>
         </dict>

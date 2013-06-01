@@ -29,6 +29,7 @@
 		0423ECAE163AEFF500A344A4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0423ECAD163AEFF500A344A4 /* AudioToolbox.framework */; };
 		0423ECB0163AEFF500A344A4 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0423ECAF163AEFF500A344A4 /* AppKit.framework */; };
 		0423ECB2163AEFF500A344A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0423ECB1163AEFF500A344A4 /* Foundation.framework */; };
+		0451D21917586E2D008647E2 /* RepeatBG.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0451D21817586E2D008647E2 /* RepeatBG.mm */; };
 		047792961736383E00BB85B2 /* BatchSpriteManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047790FF1736383D00BB85B2 /* BatchSpriteManager.mm */; };
 		047792971736383E00BB85B2 /* CCAnimateEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 047791011736383D00BB85B2 /* CCAnimateEx.m */; };
 		047792981736383E00BB85B2 /* CollisionListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047791031736383D00BB85B2 /* CollisionListener.mm */; };
@@ -263,6 +264,8 @@
 		0423ECAD163AEFF500A344A4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0423ECAF163AEFF500A344A4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		0423ECB1163AEFF500A344A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0451D21717586E2D008647E2 /* RepeatBG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatBG.h; sourceTree = "<group>"; };
+		0451D21817586E2D008647E2 /* RepeatBG.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RepeatBG.mm; sourceTree = "<group>"; };
 		047790FE1736383D00BB85B2 /* BatchSpriteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatchSpriteManager.h; sourceTree = "<group>"; };
 		047790FF1736383D00BB85B2 /* BatchSpriteManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BatchSpriteManager.mm; sourceTree = "<group>"; };
 		047791001736383D00BB85B2 /* CCAnimateEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimateEx.h; sourceTree = "<group>"; };
@@ -1299,6 +1302,8 @@
 		047792871736383E00BB85B2 /* LibSouSouSou */ = {
 			isa = PBXGroup;
 			children = (
+				0451D21717586E2D008647E2 /* RepeatBG.h */,
+				0451D21817586E2D008647E2 /* RepeatBG.mm */,
 				04A73642174E6DAD00524BE0 /* Pickup.mm */,
 				04A73643174E6DAD00524BE0 /* Pickup.h */,
 				04D54D23174906D800378012 /* DynamicObject.mm */,
@@ -1674,6 +1679,7 @@
 				04BC4A15174506F900845F6E /* GlobalConfig.mm in Sources */,
 				04D54D25174906D800378012 /* DynamicObject.mm in Sources */,
 				04A73644174E6DAD00524BE0 /* Pickup.mm in Sources */,
+				0451D21917586E2D008647E2 /* RepeatBG.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

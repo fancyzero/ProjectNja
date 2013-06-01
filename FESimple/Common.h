@@ -57,6 +57,7 @@ enum collison_group_def
 	cg_enemy_bullet=16,
 	cg_acting_range=32,
 	cg_pickup=64,
+    cg_god_player = 128,
 
 };
 

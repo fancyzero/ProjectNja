@@ -11,10 +11,10 @@
 @interface Pickup : PlatformBase
 @end
 
-@interface PickupBoost : Pickup
+@interface PickupGodPortion : Pickup
 {
     float m_boost_value;
-    float m_boost_time;
+    float m_god_time;
 }
 @end
 
