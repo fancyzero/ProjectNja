@@ -32,7 +32,7 @@
     m_physics_world->SetContactListener(m_collision_listener);
     m_physics_debug = new GLESDebugDraw([GameBase get_ptm_ratio]);
     accum_delta = 0;
-    physic_frame_time = 1/60.0f;
+    physic_frame_time = 1/120.0f;
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
     		flags += b2Draw::e_jointBit;
@@ -191,11 +191,14 @@
     copyof_gameobjects =[m_gameobjects copy];
 
     accum_delta += delta_time;
+  //  int tick = 0;
     while (accum_delta > physic_frame_time)
     {
+    //    tick++;
         m_physics_world->Step(physic_frame_time, 1, 1);
         accum_delta -= physic_frame_time;
     }
+//    NSLog(@"t %d", tick);
     //process contacts
     std::vector<Collision>::iterator it;
     for ( it = m_collision_listener->m_collisions.begin(); 
