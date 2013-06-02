@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		042E7A0F17363748003D6FD7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 042E7A0E17363748003D6FD7 /* Default-568h@2x.png */; };
+		0431A2AD175B9B8C0037F3A0 /* PhysicRibbon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431A2AC175B9B8C0037F3A0 /* PhysicRibbon.mm */; };
 		0443940D1759D6910002C961 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0443940B1759D6910002C961 /* pugixml.cpp */; };
 		045639681734AA0E005BF488 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045639671734AA0E005BF488 /* QuartzCore.framework */; };
 		0456396A1734AA0E005BF488 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045639691734AA0E005BF488 /* OpenGLES.framework */; };
@@ -239,6 +240,8 @@
 
 /* Begin PBXFileReference section */
 		042E7A0E17363748003D6FD7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
+		0431A2AB175B9B8C0037F3A0 /* PhysicRibbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicRibbon.h; sourceTree = "<group>"; };
+		0431A2AC175B9B8C0037F3A0 /* PhysicRibbon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicRibbon.mm; sourceTree = "<group>"; };
 		0443940A1759D6910002C961 /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
 		0443940B1759D6910002C961 /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
 		0443940C1759D6910002C961 /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hpp; sourceTree = "<group>"; };
@@ -897,6 +900,8 @@
 				04A73640174E6B9900524BE0 /* Pickup.mm */,
 				04C151C0175116AD001D8E47 /* RepeatBG.h */,
 				04C151C1175116AD001D8E47 /* RepeatBG.mm */,
+				0431A2AB175B9B8C0037F3A0 /* PhysicRibbon.h */,
+				0431A2AC175B9B8C0037F3A0 /* PhysicRibbon.mm */,
 			);
 			path = LibSouSouSou;
 			sourceTree = "<group>";
@@ -1671,6 +1676,7 @@
 				04A73641174E6B9900524BE0 /* Pickup.mm in Sources */,
 				04C151C2175116AD001D8E47 /* RepeatBG.mm in Sources */,
 				0443940D1759D6910002C961 /* pugixml.cpp in Sources */,
+				0431A2AD175B9B8C0037F3A0 /* PhysicRibbon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

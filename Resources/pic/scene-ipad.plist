@@ -7,7 +7,7 @@
             <key>ball.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{784,169},{208,187}}</string>
+                <string>{{784,186},{208,187}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>coin.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{819,105},{50,55}}</string>
+                <string>{{819,122},{50,55}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>earth_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{568,451},{443,113}}</string>
+                <string>{{568,375},{443,113}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>earth_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,461},{313,119}}</string>
+                <string>{{2,554},{313,119}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>magnet.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{871,105},{46,62}}</string>
+                <string>{{871,122},{46,62}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -120,6 +120,19 @@
                 <string>{{8,1},{46,62}}</string>
                 <key>sourceSize</key>
                 <string>{64,64}</string>
+            </dict>
+            <key>ribbon.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{819,105},{100,15}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{100,15}}</string>
+                <key>sourceSize</key>
+                <string>{100,15}</string>
             </dict>
             <key>rock_1.png</key>
             <dict>
@@ -150,7 +163,7 @@
             <key>rock_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{673,358},{319,91}}</string>
+                <string>{{2,461},{319,91}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -183,7 +196,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:104b0984099f5a7961ce05685f8e7fb1$</string>
+            <string>$TexturePacker:SmartUpdate:06dd0535550978da26fba3aab11432b0$</string>
             <key>textureFileName</key>
             <string>scene-ipad.png</string>
         </dict>

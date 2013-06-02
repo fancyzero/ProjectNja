@@ -17,6 +17,8 @@
 #import "World.h"
 #import "GameScene.h"
 #include "Box2D.h"
+#import "PhysicRibbon.h"
+
 const float invalid_distance = -10000;
 const float hover_distance = 100;
 @implementation Hero
@@ -28,8 +30,10 @@ float standard_mass = 0;
 {
     
     self = [super init];
-   [self set_god_mode_boost:2 :10000];
+  // [self set_god_mode_boost:2 :10000];
 
+    m_hero_scale.cur = m_hero_scale.dest = 1;
+    m_hero_scale.fixed_morph_time = 0.3;
     m_hovering = false;
     m_move_distance_when_leave_platform = invalid_distance;
     m_speed.reset();
@@ -40,7 +44,23 @@ float standard_mass = 0;
     
     m_touched_side = ps_top;
     [self init_with_xml:@"sprites/base.xml:ninja" ];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"pic/scene.plist"];
+    CCSpriteFrame* frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"ribbon.png"];
+    PhysicRibbon* rib = [[[PhysicRibbon alloc] initWithSpriteFrame:frame]autorelease];
+    rib.m_parent = self;
+    self->m_sprite_components.push_back(rib);
+
+    //create joint
+    b2RevoluteJointDef joint;
+    PhysicsJoint pj;
+    float ptm = [GameBase get_ptm_ratio];
+    joint.Initialize(m_sprite_components[0].m_phy_body, m_sprite_components[1].m_phy_body, b2Vec2(m_sprite_components[1].m_position.x/ptm, m_sprite_components[1].m_position.y/ptm));
+    joint.enableLimit = false;
+    pj.m_b2Joint =	[GameBase get_game].m_world.m_physics_world->CreateJoint(&joint);
+    m_physic_joints.push_back(pj);
+    
     standard_mass = [self get_sprite_component:0].m_phy_body->GetMass();
+
     /*  soft_ball* b = [[soft_ball alloc] initWithFile:@"blocks.png"];
      [ b init_physics:[GameBase get_game].m_world.m_physics_world :30];
      [b setZOrder:100];
@@ -58,6 +78,8 @@ float standard_mass = 0;
     m_player_side = ps_can_land_bottom;
     m_velocity = ccp( 0, -get_global_config().ninja_jump_speed);
     self.m_time_before_remove_outof_actrange = 1;
+    [self get_sprite_component:0].m_phy_body->SetBullet(true);
+
     return self;
 }
 
@@ -416,11 +438,15 @@ public:
 
 -(void) set_god_mode:(int) v
 {
-    //bool old_is_god = [self is_god ];
+    bool old_is_god = [self is_god ];
     m_god_mode.base_value = v;
-//    if ( old_is_god != [self is_god] )
-//    {
-//        if ( [self is_god] )
+    if ( old_is_god != [self is_god] )
+    {
+        if ( [self is_god] )
+            m_hero_scale.set_dest(2);
+        else
+            m_hero_scale.set_dest(1);
+    }
 //        {
 //            [ self set_collision_filter:collision_filter_player() cat:cg_god_player];
 //            [self set_scale:2 :2];
@@ -436,8 +462,15 @@ public:
 -(void) set_god_mode_boost:(int)v :(float) time
 {
 
-//    bool old_is_god = [self is_god ];
+    bool old_is_god = [self is_god ];
     m_god_mode.boost(time, v );
+    if ( old_is_god != [self is_god] )
+    {
+        if ( [self is_god] )
+            m_hero_scale.set_dest(2);
+        else
+            m_hero_scale.set_dest(1);
+    }
 }
 
 -(void) set_magnet:(float) v
@@ -498,6 +531,10 @@ public:
 -(void) update:(float)delta_time
 {
     [ super update:delta_time];
+    float old_scale = m_hero_scale;
+    m_hero_scale.update(delta_time);
+    if ( old_scale != m_hero_scale )
+        [self set_scale:m_hero_scale :m_hero_scale ];
     //[self remove_from_game:true];
     // static int gogotest2 = 0;
     //gogotest2++;

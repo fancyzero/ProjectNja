@@ -23,6 +23,73 @@ enum input
     none
 };
 
+
+template<typename T, bool use_fixed_morph_time>
+struct morph_value
+{
+    T cur;
+    T dest;
+    T approch_speed;
+    float set_time = 0;
+    T   from_cur;
+    float fixed_morph_time = 0;
+    operator T()
+    {
+        return cur;
+    }
+    void set_cur( T c )
+    {
+        cur = c;
+
+    }
+    void set_dest( T d )
+    {
+        from_cur = cur;
+        dest = d;
+        set_time = current_game_time();
+    }
+    void update( float delta_time )
+    {
+        if ( use_fixed_morph_time )
+        {
+            if ( cur != dest )
+            {
+                T delta = dest - from_cur;
+                float len = current_game_time() - set_time;
+                if ( len > fixed_morph_time )
+                    cur = dest;
+                float alpha = len / fixed_morph_time;
+                if ( alpha < 0 )
+                    alpha = 0;
+                if (alpha > 1 )
+                    alpha = 1;
+                alpha *= alpha;
+                cur = from_cur + alpha * delta;
+            }
+        }
+        else
+        {
+            T delta = delta_time * approch_speed;
+            
+            if ( cur > dest )
+            {
+                if ( delta > cur - dest )
+                    cur = dest;
+                else
+                    cur -= delta;
+            }
+            else if ( cur < dest )
+            {
+                if ( delta > dest - cur )
+                    cur = dest;
+                else
+                    cur += delta;
+            }
+        }
+
+    }
+};
+
 template<typename T>
 struct boostable_value
 {
@@ -68,6 +135,7 @@ struct boostable_value
     boostable_value<float>           m_speed;
     boostable_value<int>             m_god_mode;//0 off, other on
     bool m_hovering;//是否处在离开passable platform 后的一段滞空状态
+    morph_value<float,true>         m_hero_scale;
     
 }
 
