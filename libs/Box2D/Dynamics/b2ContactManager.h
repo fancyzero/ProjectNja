@@ -40,6 +40,9 @@ public:
 	void Destroy(b2Contact* c);
 
 	void Collide();
+    
+    void PauseNewContacts();
+    void ResumeNewContacts();
 
 	b2BroadPhase m_broadPhase;
 	b2Contact* m_contactList;
@@ -47,6 +50,10 @@ public:
 	b2ContactFilter* m_contactFilter;
 	b2ContactListener* m_contactListener;
 	b2BlockAllocator* m_allocator;
+    
+private:
+    //add by fancyzero
+    bool m_pausedNewContacts;
 };
 
 #endif

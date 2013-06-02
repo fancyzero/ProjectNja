@@ -32,6 +32,7 @@ b2ContactManager::b2ContactManager()
 	m_contactFilter = &b2_defaultFilter;
 	m_contactListener = &b2_defaultListener;
 	m_allocator = NULL;
+    m_pausedNewContacts = false;
 }
 
 void b2ContactManager::Destroy(b2Contact* c)
@@ -169,8 +170,22 @@ void b2ContactManager::Collide()
 	}
 }
 
+void b2ContactManager::PauseNewContacts()
+{
+    m_pausedNewContacts = true;
+}
+
+void b2ContactManager::ResumeNewContacts()
+{
+    m_pausedNewContacts = false;
+    FindNewContacts();
+}
+
+
 void b2ContactManager::FindNewContacts()
 {
+    if ( m_pausedNewContacts )
+        return;
 	m_broadPhase.UpdatePairs(this);
 }
 

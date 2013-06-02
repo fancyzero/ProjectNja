@@ -223,6 +223,7 @@ int reset_count = 0;
      */
 	if ( super.m_next_trigger < m_level_triggers.size() )
 	{
+        [GameBase get_game].m_world.m_physics_world->PauseNewContact();
 		for ( int i = super.m_next_trigger; i < m_level_triggers.size(); ++i )
 		{
 			if ( m_level_triggers[i].progress_pos < self.m_level_progress )
@@ -235,6 +236,7 @@ int reset_count = 0;
 				break;
 			}
 		}
+        [GameBase get_game].m_world.m_physics_world->ResumeNewContact();
 	}
     
     while ( [get_player(-1) is_god] && m_cur_god_safe_insert_pos < m_god_safe_insert_pos )

@@ -203,7 +203,9 @@ public:
 	/// Dump the world into the log file.
 	/// @warning this should be called outside of a time step.
 	void Dump();
-
+    /// added by fancyzero
+    void PauseNewContact();
+    void ResumeNewContact();
 private:
 
 	// m_flags
@@ -254,7 +256,6 @@ private:
 	bool m_subStepping;
 
 	bool m_stepComplete;
-
 	b2Profile m_profile;
 };
 

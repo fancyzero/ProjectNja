@@ -1314,3 +1314,14 @@ void b2World::Dump()
 	b2Log("joints = NULL;\n");
 	b2Log("bodies = NULL;\n");
 }
+
+void b2World::PauseNewContact()
+{
+    m_contactManager.PauseNewContacts();
+}
+
+void b2World::ResumeNewContact()
+{
+    m_contactManager.ResumeNewContacts();
+}
+
