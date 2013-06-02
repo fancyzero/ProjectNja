@@ -30,7 +30,7 @@ float standard_mass = 0;
 {
     
     self = [super init];
-  // [self set_god_mode_boost:2 :10000];
+   [self set_god_mode_boost:2 :10000];
 
     m_hero_scale.cur = m_hero_scale.dest = 1;
     m_hero_scale.fixed_morph_time = 0.3;
@@ -46,17 +46,26 @@ float standard_mass = 0;
     [self init_with_xml:@"sprites/base.xml:ninja" ];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"pic/scene.plist"];
     CCSpriteFrame* frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"ribbon.png"];
-    PhysicRibbon* rib = [[[PhysicRibbon alloc] initWithSpriteFrame:frame]autorelease];
+    PhysicRibbon* rib = [[PhysicRibbon alloc] initWithSpriteFrame:frame];
     rib.m_parent = self;
     self->m_sprite_components.push_back(rib);
-
+    rib.m_position = ccpAdd( ccp(-100,0), self.m_position);
+    [rib init_physics];
     //create joint
     b2RevoluteJointDef joint;
     PhysicsJoint pj;
-    float ptm = [GameBase get_ptm_ratio];
-    joint.Initialize(m_sprite_components[0].m_phy_body, m_sprite_components[1].m_phy_body, b2Vec2(m_sprite_components[1].m_position.x/ptm, m_sprite_components[1].m_position.y/ptm));
-    joint.enableLimit = false;
+
+    joint.Initialize(m_sprite_components[0].m_phy_body, m_sprite_components[1].m_phy_body, m_sprite_components[0].m_phy_body->GetPosition()- b2Vec2(3,0));
+    joint.enableLimit = true;
+    joint.upperAngle = 1;
+    joint.lowerAngle = 0;
+    joint.enableMotor = true;
+    joint.maxMotorTorque = 100;
+    joint.motorSpeed = 10;
+
+
     pj.m_b2Joint =	[GameBase get_game].m_world.m_physics_world->CreateJoint(&joint);
+
     m_physic_joints.push_back(pj);
     
     standard_mass = [self get_sprite_component:0].m_phy_body->GetMass();

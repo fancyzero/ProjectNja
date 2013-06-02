@@ -14,4 +14,6 @@
 @property float dampping;
 @property float frequency;
 
+
+-(int) init_physics ;
 @end
