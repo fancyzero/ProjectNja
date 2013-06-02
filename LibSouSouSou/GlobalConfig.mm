@@ -35,6 +35,7 @@ NSString* get_string_config(NSString* str)
 void init_global_config()
 {
         NSString * tm = get_string_config(@"test_maps");
+    g_global_config.physic_debug = get_float_config(@"debug_physic")>1;
     g_global_config.level_move_speed = get_float_config(@"min_level_speed");
     g_global_config.level_move_speed_max = get_float_config(@"max_level_speed");
     g_global_config.level_move_accleration = get_float_config(@"level_acceleration");

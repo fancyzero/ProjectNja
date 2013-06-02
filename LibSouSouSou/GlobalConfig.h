@@ -17,6 +17,7 @@ struct GlobalConfig
     float level_move_speed_max;
     float level_move_accleration;
     float hero_spawn_location;
+    bool  physic_debug;
     NSArray* test_maps;
 };
 

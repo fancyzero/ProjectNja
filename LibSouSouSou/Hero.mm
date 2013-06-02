@@ -28,7 +28,7 @@ float standard_mass = 0;
 {
     
     self = [super init];
-  // [self set_god_mode_boost:2 :10];
+   [self set_god_mode_boost:2 :10000];
 
     m_hovering = false;
     m_move_distance_when_leave_platform = invalid_distance;
@@ -498,6 +498,7 @@ public:
 -(void) update:(float)delta_time
 {
     [ super update:delta_time];
+    //[self remove_from_game:true];
     // static int gogotest2 = 0;
     //gogotest2++;
     //m_next_action = (input)(gogotest2 % 2);

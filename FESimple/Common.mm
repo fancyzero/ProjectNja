@@ -283,18 +283,10 @@ CGRect read_CGRect_value(NSDictionary* params, NSString* key, CGRect default_val
 CGPoint read_CGPoint_value(NSDictionary* params, NSString* key, CGPoint default_value)
 {
 	CGPoint pt;
-	pt.x = 0;
-	pt.y = 0;
 	if ( [params objectForKey:key ] == NULL )
 		return default_value;
-	NSArray* numbers=[[ params valueForKey:key] componentsSeparatedByString:@","];
-	if ( [numbers count] >= 2)
-	{
-		pt.x  = [[ numbers objectAtIndex:0] floatValue];
-		pt.y = [[ numbers objectAtIndex:1] floatValue];
-	}
-	//NSLog( @"number: %d", [numbers retainCount]);
-	//[ numbers release];
+    
+    sscanf([[ params valueForKey:key] UTF8String], "%f,%f", &pt.x, &pt.y);
 	return pt;
 }
 	

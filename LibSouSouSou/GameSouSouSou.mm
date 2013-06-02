@@ -15,6 +15,7 @@
 #import "World.h"
 #import "SpriteDefManager.h"
 #import "GameSouSouSou.h"
+#import "GlobalConfig.h"
 
 //NSMutableArray* m_sprites;
 
@@ -66,6 +67,7 @@
 -(void) init_game
 {
 	[super init_game];
+        init_global_config();
     m_level_ = [GameSouSouSouLevel new];
     [ m_level_ reset];
     [[GameBase get_game].m_scene setAnchorPoint:ccp(0,0)];

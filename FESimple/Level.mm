@@ -55,6 +55,24 @@ level_progress_trigger::~level_progress_trigger()
 	}
 }
 
+struct LevelData
+{
+	std::vector<level_progress_trigger>	m_level_triggers;
+    bool map_size_avalible = false;
+    CGSize map_size;
+	std::vector<level_acting_range_keyframe> m_acting_range_keyframes_;
+    
+};
+
+static NSMutableDictionary* level_cache = nil;
+
+
+void push_cache( LevelData* data, NSString* filename )
+{
+    if ( level_cache == nil )
+        level_cache = [[NSMutableDictionary dictionary] retain];
+    [level_cache setValue: [NSValue valueWithPointer:data] forKey:filename];
+}
 
 
 @implementation LevelParser
@@ -75,21 +93,51 @@ level_progress_trigger::~level_progress_trigger()
     m_position_offset = offset;
 }
 
--(int) parse_level_from_file:(NSString*) filename
+-(void) init_level_with_level_data:(const LevelData*) data
 {
-    NSString* full_path = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath:filename];
-    
+    if ( data->map_size_avalible )
+        [ m_level set_map_size:data->map_size.width :data->map_size.height ];
+    for( auto it : data->m_acting_range_keyframes_ )
+        [ m_level add_acting_range_keyframe: it ];
+    for ( auto it : data->m_level_triggers )
+    {
+        auto it_copy = it;
+        if ( m_position_offset.x != 0 || m_position_offset.y != 0 )
+        {
+            CGPoint pt = read_CGPoint_value(it_copy.get_params(), @"init_position", ccp(0,0));
+            pt = ccpAdd( pt, m_position_offset);
+            [it_copy.get_params() setValue:[NSString stringWithFormat:@"%f,%f", pt.x, pt.y] forKey:@"init_position"];
+        }
+        [m_level add_trigger:it_copy];
+    }
+}
+
+
+-(LevelData*) get_level:( NSString*) filename
+{
+    if ( level_cache == nil )
+        level_cache = [[NSMutableDictionary dictionary]retain];
+    if ( [level_cache objectForKey:filename] != nil )
+    {
+        return (LevelData*)[[level_cache objectForKey:filename] pointerValue];
+        
+    }
+    LevelData* data = new LevelData();
     pugi::xml_document doc;
+    NSString* full_path = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath:filename];
     doc.load_file([full_path UTF8String] );
     
     NSLog(@"%s", doc.root().name() );
     pugi::xml_node level_desc = doc.select_single_node("/xml/level").node();
     pugi::xml_node acting_range = doc.select_single_node("/xml/level/acting_range").node();
     pugi::xml_node actions = doc.select_single_node("/xml/level/actions").node();
-
+    
     if ( level_desc )
     {
-        [ m_level set_map_size:level_desc.attribute("map_width").as_float() :level_desc.attribute("map_height").as_float()];
+        
+        data->map_size_avalible = true;
+        data->map_size.width = level_desc.attribute("map_width").as_float();
+        data->map_size.height = level_desc.attribute("map_height").as_float();
     }
     if ( acting_range )
     {
@@ -102,7 +150,7 @@ level_progress_trigger::~level_progress_trigger()
 			k.act_rect.size.width = p.x;
 			k.act_rect.size.height = p.y;
 			k.progress = it.attribute("progress").as_float();
-			[m_level add_acting_range_keyframe: k];
+            data->m_acting_range_keyframes_.push_back(k);
         }
     }
     if ( actions )
@@ -111,78 +159,36 @@ level_progress_trigger::~level_progress_trigger()
         {
 			level_progress_trigger trigger;
 			trigger.progress_pos = it.attribute("progress").as_float();
-			m_current_progress_parsed = trigger.progress_pos;
+			//m_current_progress_parsed = trigger.progress_pos;
             NSMutableDictionary* params = [NSMutableDictionary dictionary];
             for( auto attr : it.attributes() )
             {
                 [params setValue:[NSString stringWithUTF8String:attr.value()] forKey:[NSString stringWithUTF8String:attr.name()]];
             }
+            
 			trigger.set_params( params );
+            
 			//NSLog(@"add trigger %@",trigger.get_params());
-            if ( m_position_offset.x != 0 || m_position_offset.y != 0 )
-            {
-                CGPoint pt = read_CGPoint_value(trigger.get_params(), @"init_position", ccp(0,0));
-                pt = ccpAdd( pt, m_position_offset);
-                [trigger.get_params() setValue:[NSString stringWithFormat:@"%f,%f", pt.x, pt.y] forKey:@"init_position"];
-            }
-			[m_level add_trigger: trigger];
+
+            data->m_level_triggers.push_back(trigger);
         }
     }
+    push_cache(data, filename);
+    return data;
+}
+
+
+
+-(int) parse_level_from_file:(NSString*) filename
+{
+    LevelData* ld = [ self get_level:filename];
+    if ( ld != nil )
+        [ self init_level_with_level_data: ld];
     return 0;
 }
-/*
--(void) on_node_begin:(NSString *)cur_path nodename:(NSString *)node_name attributes:(NSDictionary *)attributes
-{
-    if ( [ cur_path isEqualToString:@"/xml" ] )
-    {
-        if ( [ node_name isEqualToString:@"level" ] )
-        {
-			[ m_level set_map_size:[[ attributes valueForKey:@"map_width" ] intValue ]:[[ attributes valueForKey:@"map_height" ] intValue]];
-		}
-    }
-    if ( [ cur_path isEqualToString:@"/xml/level/acting_range" ] )
-    {
-        if ( [ node_name isEqualToString:@"keyframe" ] )
-        {
-			level_acting_range_keyframe k;
-			CGPoint p;
-			p = read_CGPoint_value(attributes, @"pos", ccp(0, 0));
-			k.act_rect.origin = p;
-			p = read_CGPoint_value(attributes, @"size", ccp(0, 0));
-			k.act_rect.size.width = p.x;
-			k.act_rect.size.height = p.y;
-			k.progress = read_float_value(attributes, @"progress");
-			[m_level add_acting_range_keyframe: k];
-		}
-    }
-	if ( [ cur_path isEqualToString:@"/xml/level/actions"])
-	{
-		if ( [ node_name isEqualToString:@"action" ] )
-		{
-			level_progress_trigger trigger;
-			trigger.progress_pos = [[attributes valueForKey:@"progress"] floatValue];// + m_current_progress_parsed;
-			m_current_progress_parsed = trigger.progress_pos;
-			trigger.set_params( [NSMutableDictionary dictionaryWithDictionary:attributes]);
-			//NSLog(@"add trigger %@",trigger.get_params());
-            if ( m_position_offset.x != 0 || m_position_offset.y != 0 )
-            {
-                CGPoint pt = read_CGPoint_value(trigger.get_params(), @"init_position", ccp(0,0));
-                pt = ccpAdd( pt, m_position_offset);
-                [trigger.get_params() setValue:[NSString stringWithFormat:@"%f,%f", pt.x, pt.y] forKey:@"init_position"];
-            }
-			[m_level add_trigger: trigger];
-			//NSLog(@"%p temp trigger %ld", &trigger, [trigger.get_params() retainCount]);
-			
-		}
-		//trigger.
-	}
-}
 
 
--(void) on_node_end:(NSString *)cur_path nodename:(NSString *)node_name
-{
-    
-}*/
+
 @end
 
 @implementation LevelBase

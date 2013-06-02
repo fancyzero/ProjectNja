@@ -49,7 +49,7 @@ int reset_count = 0;
 
 -(void)reset
 {
-    init_global_config();
+
 	m_filename_ = nil;
     [super reset];
     if ( m_bg1 != nil )
@@ -101,7 +101,7 @@ int reset_count = 0;
     
     [[GameBase get_game].m_scene.m_layer addChild:m_bg1 ];
     
-    if ( get_float_config(@"debug_physic") > 1 )
+    if ( get_global_config().physic_debug )
 	{
 		physics_debug_sprite* pds = [ physics_debug_sprite new ];
 		pds.zOrder = 200; 
