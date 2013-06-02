@@ -31,14 +31,13 @@ struct anim_sequence_def
     bool    animated;
 	NSString*	frame_names;
     NSString*   filename;
-    NSString*   anim_name;
-    NSString*   sprite_name;
+    std::string   anim_name;
+    std::string sprite_name;
     int         repeat_count;// -1  = repeat forever
     //CCAction*   act;
 	anim_sequence_def()
+    :repeat_count(-1),frame_names(nil),filename(nil)
 	{
-        repeat_count = -1;
-		frame_names = filename = anim_name = NULL;
 	}
 };
 
@@ -102,7 +101,7 @@ struct spr_anim_def
 
 struct sprite_component_def
 {
-    NSString*                       m_name;
+    std::string                     m_name;
 	phy_body_def					m_phy_body;
 	spr_anim_def					m_spr_anim;
 };

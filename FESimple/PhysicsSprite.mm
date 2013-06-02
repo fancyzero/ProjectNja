@@ -15,23 +15,23 @@
 #import "common.h"
 #import "GameLayer.h"
 #import "CCAnimateEx.h"
-
+#include <map>
 #pragma mark - PhysicsSprite
 
-static NSMutableDictionary* anim_cache = nil;
+static std::map<std::string, CCAnimation*> anim_cache;
 
-void push_anim( CCAnimation* anim, NSString* for_sprite, NSString* anim_name )
+void push_anim( CCAnimation* anim, const char* full_name )
 {
-    if ( anim_cache == nil )
-        anim_cache = [[NSMutableDictionary dictionary] retain];
-    [anim_cache setValue:anim forKey:[NSString stringWithFormat:@"%@::%@", for_sprite, anim_name]];
+    anim_cache[full_name] = anim;
 }
 
-CCAnimation* get_anim( anim_sequence_def* def, NSString* for_sprite, NSString* anim_name )
+CCAnimation* get_anim( anim_sequence_def* def, const std::string& for_sprite, const std::string& anim_name )
 {
-    if ( anim_cache == nil )
-        anim_cache = [[NSMutableDictionary dictionary]retain];
-    CCAnimation* anim = [anim_cache valueForKey:[NSString stringWithFormat:@"%@::%@", for_sprite, anim_name]];
+    
+    char full_name[1024];
+    sprintf(full_name, "%s::%s", for_sprite.c_str(), anim_name.c_str());
+
+    CCAnimation* anim = anim_cache[full_name];
     if ( anim )
         return anim;
     NSMutableArray *Frames = [NSMutableArray array];//todo memory leak?
@@ -80,12 +80,12 @@ CCAnimation* get_anim( anim_sequence_def* def, NSString* for_sprite, NSString* a
             [Frames addObject:frame];
         }
     }
-    anim = [CCAnimation animationWithSpriteFrames:Frames delay:def->frame_speed ];
+    anim = [[CCAnimation animationWithSpriteFrames:Frames delay:def->frame_speed ] retain];
 
     //NSLog(@"frames ratain count:%d",[Frames retainCount]);
     //[Frames release];
 
-    push_anim( anim, for_sprite, anim_name );
+    push_anim( anim, full_name );
     return anim;
 }
 
@@ -194,14 +194,17 @@ float m_physics_loading_scale = 0.5;
         CCAction* act;
         if ( it->repeat_count <= 0 )
         {
-            act = [CCRepeatForever actionWithAction:[CCAnimateEx actionWithAnimation:anim ]];
+            if ( [anim.frames count] == 1 )
+                act = [CCAnimateEx actionWithAnimation:anim ];
+            else
+                act = [CCRepeatForever actionWithAction:[CCAnimateEx actionWithAnimation:anim ]];
         }
         else
         {
             act = [CCRepeat actionWithAction:[CCAnimateEx actionWithAnimation:anim ] times:it->repeat_count];
         }
 
-		[m_anim_sequences_ setObject:act forKey:(*it).anim_name ];//todo use another struct to save actions
+		[m_anim_sequences_ setObject:act forKey:[ NSString stringWithUTF8String:(*it).anim_name.c_str() ] ];//todo use another struct to save actions
 	}
 	return 0;
 	

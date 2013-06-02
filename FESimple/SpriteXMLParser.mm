@@ -91,7 +91,7 @@ anim_sequence_def read_anim_sequence( NSDictionary* attributes )
 		new_seq.frame_cnt = [[ attributes valueForKey:@"framecount" ] intValue];
 		new_seq.frame_speed = [[ attributes valueForKey:@"framespeed" ] floatValue];
 		new_seq.filename = [[ attributes valueForKey:@"texture"]copy];
-		new_seq.anim_name = [[ attributes valueForKey:@"name"]copy];
+		new_seq.anim_name = [[ attributes valueForKey:@"name"] UTF8String];
 		new_seq.animated = true;
 		new_seq.frame_names=[[ attributes valueForKey:@"framenames"] copy];
         new_seq.repeat_count = read_int_value(attributes, @"repeat_count",-1);
@@ -107,12 +107,12 @@ anim_sequence_def read_anim_sequence( NSDictionary* attributes )
 		new_seq.cells_per_line = 0;
 		new_seq.frame_cnt = 1;
 		new_seq.filename = [[ attributes valueForKey:@"texture"] copy];
-		new_seq.anim_name = [[ attributes valueForKey:@"name"] copy];
+		new_seq.anim_name = [[ attributes valueForKey:@"name"] UTF8String];
 		new_seq.animated = false;
 		new_seq.frame_names=[[ attributes valueForKey:@"framenames"] copy];
 	}
 	[new_seq.frame_names retain];
-	[new_seq.anim_name retain];
+
 	[new_seq.filename retain];
 	
 	if ( [attributes valueForKey:@"anchor_x"] != NULL )
@@ -278,7 +278,8 @@ bool read_phy_body_def(phy_body_def* body_def, NSString* node_name, NSDictionary
 		{
 			assert(current_def == NULL);
 			current_def = new sprite_component_def();
-            current_def->m_name = [m_component_name copy];
+            if ( [m_component_name UTF8String] )
+                current_def->m_name = [m_component_name UTF8String];
 			m_component_name = [attributes valueForKey:@"name"];
 		}
 	}
