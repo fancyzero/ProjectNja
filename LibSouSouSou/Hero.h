@@ -125,7 +125,7 @@ struct boostable_value
     
     player_side     m_player_side;
     platform_side   m_touched_side;
-
+    bool            m_old_is_god;
     float           m_score;
     std::map<PlatformBase*, int> m_landing_platforms;
     bool    m_last_touching_passable_platform;

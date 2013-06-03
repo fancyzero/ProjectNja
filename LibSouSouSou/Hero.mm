@@ -30,7 +30,7 @@ float standard_mass = 0;
 {
     
     self = [super init];
-   [self set_god_mode_boost:2 :10000];
+  // [self set_god_mode_boost:2 :10000];
 
     m_hero_scale.cur = m_hero_scale.dest = 1;
     m_hero_scale.fixed_morph_time = 0.3;
@@ -43,31 +43,43 @@ float standard_mass = 0;
     m_landing_platforms.clear();
     
     m_touched_side = ps_top;
-    [self init_with_xml:@"sprites/base.xml:ninja" ];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"pic/scene.plist"];
+   [self init_with_xml:@"sprites/base.xml:ninja" ];
+   /* [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"pic/scene.plist"];
     CCSpriteFrame* frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"ribbon.png"];
     PhysicRibbon* rib = [[PhysicRibbon alloc] initWithSpriteFrame:frame];
     rib.m_parent = self;
     self->m_sprite_components.push_back(rib);
-    rib.m_position = ccpAdd( ccp(-100,0), self.m_position);
+    rib.m_position = ccpAdd( ccp(-200,0), self.m_position);
     [rib init_physics];
-    //create joint
-    b2RevoluteJointDef joint;
+    */
     PhysicsJoint pj;
+    //create joint
+    /*b2RevoluteJointDef joint;
 
-    joint.Initialize(m_sprite_components[0].m_phy_body, m_sprite_components[1].m_phy_body, m_sprite_components[0].m_phy_body->GetPosition()- b2Vec2(3,0));
+
+    joint.Initialize(m_sprite_components[0].m_phy_body, m_sprite_components[1].m_phy_body, m_sprite_components[0].m_phy_body->GetPosition());
     joint.enableLimit = true;
-    joint.upperAngle = 1;
-    joint.lowerAngle = 0;
+    joint.upperAngle = 45;
+    joint.lowerAngle = -45;
     joint.enableMotor = true;
     joint.maxMotorTorque = 100;
-    joint.motorSpeed = 10;
-
-
+    joint.motorSpeed = 10;*/
+/*
+    b2DistanceJointDef joint;
+    joint.Initialize(m_sprite_components[0].m_phy_body, m_sprite_components[1].m_phy_body, m_sprite_components[0].m_phy_body->GetPosition(),m_sprite_components[1].m_phy_body->GetPosition());
+    //joint.collideConnected = true;
+    joint.frequencyHz = 100;*/
+    
+   /* b2RopeJointDef joint;
+    joint.bodyA = m_sprite_components[0].m_phy_body;
+    joint.bodyB = m_sprite_components[1].m_phy_body;
+    joint.localAnchorA = b2Vec2(0,0);
+    joint.localAnchorB = b2Vec2(0,0);
+    joint.maxLength = 1;
     pj.m_b2Joint =	[GameBase get_game].m_world.m_physics_world->CreateJoint(&joint);
 
     m_physic_joints.push_back(pj);
-    
+    */
     standard_mass = [self get_sprite_component:0].m_phy_body->GetMass();
 
     /*  soft_ball* b = [[soft_ball alloc] initWithFile:@"blocks.png"];
@@ -276,7 +288,14 @@ public:
     }
     
 }
-
+-(void) on_post_solve:(struct b2Contact*) contact :(const struct b2ContactImpulse*) impulse
+{
+//    for ( int i = 0; i < impulse->count; i++ )
+    //if ( impulse->tangentImpulses[0] > 0 )
+    //{
+      //  NSLog(@"impulse %f, %f,%f, %f", impulse->normalImpulses[0], impulse->normalImpulses[1],impulse->tangentImpulses[0], impulse->tangentImpulses[1]);
+    //}
+}
 -(void) on_pre_solve:(struct b2Contact*) contact :(const struct b2Manifold*) old_manifold
 {
     //return;
@@ -308,7 +327,7 @@ public:
                 if ( self.m_position.y <= platform_pos.y && m_player_side == ps_can_land_bottom )
                     contact->SetEnabled(false);
             }
-            if ( [platform passable] || [platform kill_touched])
+            if ( [self is_god] && ( [platform passable] || [platform kill_touched]) )
             {
                 contact->SetEnabled(false);
             }
@@ -447,15 +466,9 @@ public:
 
 -(void) set_god_mode:(int) v
 {
-    bool old_is_god = [self is_god ];
+
     m_god_mode.base_value = v;
-    if ( old_is_god != [self is_god] )
-    {
-        if ( [self is_god] )
-            m_hero_scale.set_dest(2);
-        else
-            m_hero_scale.set_dest(1);
-    }
+
 //        {
 //            [ self set_collision_filter:collision_filter_player() cat:cg_god_player];
 //            [self set_scale:2 :2];
@@ -470,16 +483,7 @@ public:
 
 -(void) set_god_mode_boost:(int)v :(float) time
 {
-
-    bool old_is_god = [self is_god ];
     m_god_mode.boost(time, v );
-    if ( old_is_god != [self is_god] )
-    {
-        if ( [self is_god] )
-            m_hero_scale.set_dest(2);
-        else
-            m_hero_scale.set_dest(1);
-    }
 }
 
 -(void) set_magnet:(float) v
@@ -544,6 +548,33 @@ public:
     m_hero_scale.update(delta_time);
     if ( old_scale != m_hero_scale )
         [self set_scale:m_hero_scale :m_hero_scale ];
+    bool cur_god = [self is_god];
+    if ( cur_god != m_old_is_god )
+    {
+            if ( cur_god )
+                m_hero_scale.set_dest(2);
+            else
+            {
+                for (SpriteBase* p in [GameBase get_game].m_world.m_gameobjects)
+                {
+                    PlatformBase* plat;
+                    if ( [p isKindOfClass:[PlatformBase class]] )
+                        plat = (PlatformBase*) p;
+
+                    if ( [plat kill_touched] && plat.m_position.x - self.m_position.x < 500 )
+                    {
+                        [plat set_killed];
+                        float angle = frandom() * 3.1415926f * 2;
+                        [plat set_physic_linear_velocity:0 :cos(angle)*100 :sin(angle)*100];
+                        [plat set_physic_angular_velocity:0 :3000];
+                    }
+                    
+                }
+                
+                m_hero_scale.set_dest(1);
+            }
+    }
+    m_old_is_god = cur_god;
     //[self remove_from_game:true];
     // static int gogotest2 = 0;
     //gogotest2++;
@@ -589,7 +620,10 @@ public:
     }*/
     m_last_touching_passable_platform = touching_passable_platform;
 
-    
+    b2Vec2 v = [self get_sprite_component:0].m_phy_body->GetLinearVelocity();
+    if ( v.x < 0 )
+        v.x = 0;
+    [self get_sprite_component:0].m_phy_body->SetLinearVelocity(v);
 }
 
 -(void) add_landing_platform:(PlatformBase*) platform

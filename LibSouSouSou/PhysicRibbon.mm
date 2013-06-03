@@ -16,7 +16,7 @@ void make_distance_joint(  b2Body* a ,b2Body* b)
     b2World * world = [GameBase get_game].m_world.m_physics_world;
     b2DistanceJointDef joint;
     joint.Initialize(a,b,a->GetPosition(), b->GetPosition() );
-    joint.collideConnected = true;
+   // joint.collideConnected = true;
     joint.frequencyHz = 50;
     joint.dampingRatio = 1;
     world->CreateJoint(&joint);
@@ -28,27 +28,29 @@ void make_distance_joint(  b2Body* a ,b2Body* b)
     b2World * world = [GameBase get_game].m_world.m_physics_world;
     float ptm = [GameBase get_ptm_ratio];
     b2Body* bodys[10*2];
-    for ( int i = 0; i < 1; i++ )
+    for ( int i = 0; i < 10; i++ )
     {
         for ( int j = 0; j < 2; j++ )
         {
             b2BodyDef bddef;
-            bddef.position = b2Vec2(i*0.5 + m_position_.x / ptm,j*1 + m_position_.y/ptm) ;
+            bddef.position = b2Vec2(i*0.5 + m_position_.x / ptm,j*0.5 + m_position_.y/ptm) ;
             bddef.type = b2_dynamicBody;
             b2Body* body = world->CreateBody(&bddef);
             
             b2FixtureDef fixdef;
             b2CircleShape s;
-            s.m_radius = 0.1f;
+            s.m_radius = 0.2f;
             s.m_p = b2Vec2(0,0);
             fixdef.shape = &s;
             fixdef.density = 0.001;
             fixdef.isSensor = true;
+            fixdef.filter.categoryBits = 0;
+            fixdef.filter.maskBits = 0;
             body->CreateFixture(&fixdef);
             if ( m_phy_body_ == nil )
             {
                 m_phy_body_ = body;
-                return 0;
+                //return 0;
             }
             else
             {
