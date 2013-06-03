@@ -77,11 +77,14 @@ float g_dir_len_power = 3;
 
    // static int gogotest = 0;
     //if ( gogotest %2 )
-        
+    if ( get_player(-1) == nil)
+    {
+        [[GameBase get_game] reset];
+    }
     if( pos.y > [[CCDirector sharedDirector] winSize].height/2 )
-        [ m_player go_right];
+        [ get_player(-1) go_right];
     else
-        [ m_player go_left];
+        [ get_player(-1) go_left];
     //gogotest ++;
 	return NO;
 }
