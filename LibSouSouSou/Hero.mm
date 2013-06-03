@@ -38,7 +38,7 @@ float standard_mass = 0;
     m_move_distance_when_leave_platform = invalid_distance;
     m_speed.reset();
     m_magnet.reset();
-    m_score = 0;
+    
     play_dead = false;
     m_landing_platforms.clear();
     
@@ -104,7 +104,7 @@ float standard_mass = 0;
     return self;
 }
 
--(float ) get_score
+-(score ) get_score
 {
     return m_score;
 }
@@ -454,7 +454,7 @@ public:
         //        static float32 p = 1;
         play_sfx(@"sfx/coin.wav");//, p+=0.01f);
         [other remove_from_game:true];
-        m_score += [(SCoin*)other get_points];
+        m_score.coins += [(SCoin*)other get_points];
     }
     return 1;
 }
@@ -599,7 +599,7 @@ public:
     //if ( [self get_physic_position:0].x < 100 )
     
     float s = [((GameSouSouSouLevel*)[GameBase get_game].m_level) get_move_speed ];
-    m_score += (s * delta_time)*0.1;
+    m_score.len += (s * delta_time)*0.01;
     
     bool touching_passable_platform = [self first_touching_passable_platform];
     if ( !touching_passable_platform && m_last_touching_passable_platform )

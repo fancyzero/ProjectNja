@@ -13,6 +13,7 @@
 #import "GameScene.h"
 #import "InputDeviceBase.h"
 #import "Hero.h"
+#import "Level.h"
 float g_move_dir_max_len = 17;
 float g_dir_len_power = 3;
 @implementation Controller
@@ -79,7 +80,7 @@ float g_dir_len_power = 3;
     //if ( gogotest %2 )
     if ( get_player(-1) == nil)
     {
-        [[GameBase get_game] reset];
+        [[GameBase get_game].m_level request_reset];
     }
     if( pos.y > [[CCDirector sharedDirector] winSize].height/2 )
         [ get_player(-1) go_right];

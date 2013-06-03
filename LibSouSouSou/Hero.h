@@ -23,6 +23,11 @@ enum input
     none
 };
 
+struct score
+{
+    float len;
+    unsigned int coins;
+};
 
 template<typename T, bool use_fixed_morph_time>
 struct morph_value
@@ -126,7 +131,6 @@ struct boostable_value
     player_side     m_player_side;
     platform_side   m_touched_side;
     bool            m_old_is_god;
-    float           m_score;
     std::map<PlatformBase*, int> m_landing_platforms;
     bool    m_last_touching_passable_platform;
     float   m_move_distance_when_leave_platform;//离开任何platform时的x距离
@@ -136,10 +140,10 @@ struct boostable_value
     boostable_value<int>             m_god_mode;//0 off, other on
     bool m_hovering;//是否处在离开passable platform 后的一段滞空状态
     morph_value<float,true>         m_hero_scale;
-    
+    score                           m_score;
 }
 
-
+-(score) get_score;
 -(bool) is_god;
 
 -(void) set_god_mode:(int) v;
@@ -151,7 +155,7 @@ struct boostable_value
 -(float) current_moved;
 -(float) get_magnet;
 -(float) get_speed;
--(float) get_score;
+
 -(id) init;
 -(void) go_left;
 -(void) go_right;

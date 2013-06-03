@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041C1B3B175CCA7A0055EEFF /* ScoreLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 041C1B3A175CCA7A0055EEFF /* ScoreLayer.mm */; };
 		042E7A0F17363748003D6FD7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 042E7A0E17363748003D6FD7 /* Default-568h@2x.png */; };
 		0431A2AD175B9B8C0037F3A0 /* PhysicRibbon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431A2AC175B9B8C0037F3A0 /* PhysicRibbon.mm */; };
 		0443940D1759D6910002C961 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0443940B1759D6910002C961 /* pugixml.cpp */; };
@@ -239,6 +240,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041C1B39175CCA7A0055EEFF /* ScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreLayer.h; sourceTree = "<group>"; };
+		041C1B3A175CCA7A0055EEFF /* ScoreLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScoreLayer.mm; sourceTree = "<group>"; };
 		042E7A0E17363748003D6FD7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
 		0431A2AB175B9B8C0037F3A0 /* PhysicRibbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicRibbon.h; sourceTree = "<group>"; };
 		0431A2AC175B9B8C0037F3A0 /* PhysicRibbon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicRibbon.mm; sourceTree = "<group>"; };
@@ -902,6 +905,8 @@
 				04C151C1175116AD001D8E47 /* RepeatBG.mm */,
 				0431A2AB175B9B8C0037F3A0 /* PhysicRibbon.h */,
 				0431A2AC175B9B8C0037F3A0 /* PhysicRibbon.mm */,
+				041C1B39175CCA7A0055EEFF /* ScoreLayer.h */,
+				041C1B3A175CCA7A0055EEFF /* ScoreLayer.mm */,
 			);
 			path = LibSouSouSou;
 			sourceTree = "<group>";
@@ -1677,6 +1682,7 @@
 				04C151C2175116AD001D8E47 /* RepeatBG.mm in Sources */,
 				0443940D1759D6910002C961 /* pugixml.cpp in Sources */,
 				0431A2AD175B9B8C0037F3A0 /* PhysicRibbon.mm in Sources */,
+				041C1B3B175CCA7A0055EEFF /* ScoreLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

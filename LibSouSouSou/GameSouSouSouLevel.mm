@@ -52,6 +52,7 @@ int reset_count = 0;
 
 	m_filename_ = nil;
     [super reset];
+    m_waiting_reset_start = 0;
     if ( m_bg1 != nil )
        [ m_bg1 release];
     m_total_moved = 0;
@@ -129,6 +130,11 @@ int reset_count = 0;
     [m_score_display set_auto_bump: false];
     [m_score_display retain];
     
+    m_result = [[[CCLabelTTF alloc] initWithString:@"Result:" fontName:@"Marker Felt" fontSize:42] autorelease];
+    [m_result setVisible:false];
+   [ m_result setColor:ccc3(70, 90, 200)];
+    [m_result setPosition:ccp(300,300)];
+    [[[GameBase get_game].m_scene get_layer_by_name:@"ui"] addChild:m_result];    
 }
 
 -(void) attach_sector:(NSString*) filename :(CGPoint) at_pos
@@ -208,7 +214,7 @@ int reset_count = 0;
 	
 	[m_score_display setPosition:ccp(1200,768/2)];
     [m_score_display set_default_scale: 3];
-    float score = [(Hero*)get_player(-1) get_score ];
+    float score = [(Hero*)get_player(-1) get_score ].len + [(Hero*)get_player(-1) get_score ].coins;
     [m_score_display set_value:score ];
 	// update acting range
 	CGRect rc_act;
@@ -303,8 +309,11 @@ int reset_count = 0;
 {
     if ( [sprite isKindOfClass:[ Hero class]] )
     {
+        m_waiting_reset_start = current_game_time();
+        [m_result setString:[NSString stringWithFormat:@"Disntance: %.0f\nCoins: %d", [(Hero*)get_player(-1) get_score ].len , [(Hero*)get_player(-1) get_score ].coins]];
+        [m_result setVisible:TRUE];
 		// sleep( 3 );
-        [ self request_reset];
+        //[ self request_reset];
     }
 }
 -(void) on_remove_obj: (GameObjBase*) obj

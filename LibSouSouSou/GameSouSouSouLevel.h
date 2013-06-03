@@ -24,6 +24,8 @@ class b2PhysicBody;
     float m_god_safe_insert_pos_begin;
     float m_god_safe_insert_pos;
     float m_cur_god_safe_insert_pos;
+    CCLabelTTF* m_result;
+    float m_waiting_reset_start;
 
 }
 -(float) get_total_moved;
