@@ -7,10 +7,11 @@
 //
 
 #import "Level.h"
+#import "PlatformBase.h"
 @class BumppingScoreDisplay;
 @class RepeatBG;
 class b2PhysicBody;
-
+@class BoundingPlatform;
 @interface GameSouSouSouLevel : LevelBase
 {
     int m_cur_path;
@@ -26,8 +27,12 @@ class b2PhysicBody;
     float m_cur_god_safe_insert_pos;
     CCLabelTTF* m_result;
     float m_waiting_reset_start;
+    BoundingPlatform*   m_top_bound;
+    BoundingPlatform*   m_bottom_bound;
 
 }
+
+-(void) enable_bound:(bound_type) type :(bool) enable;
 -(float) get_total_moved;
 -(float) get_move_speed;
 -(void) update:(float)delta_time;

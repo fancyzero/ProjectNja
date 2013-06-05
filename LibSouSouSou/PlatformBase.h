@@ -38,3 +38,16 @@ platform_side string_to_platform_side( const char* str );
 -(void) set_side:( platform_side ) side;
 
 @end
+
+enum bound_type
+{
+    top,
+    bottom,
+};
+@interface BoundingPlatform : PlatformBase
+{
+    bound_type m_type;
+}
+-(void) enable:(bool) flag;
+-(void) set_type:(bound_type) type;
+@end

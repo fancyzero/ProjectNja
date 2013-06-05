@@ -160,3 +160,73 @@ b2RayCastCallback * cb;
 }
 
 @end
+
+@implementation BoundingPlatform
+
+
+-(b2Body*) create_bound:(CGPoint) pos :(CGPoint) size :(PhysicsSprite*) sprite_comp
+{
+    
+    float ptm = [GameBase get_ptm_ratio];
+    b2BodyDef bodydef;
+    bodydef.type = b2_staticBody;
+    bodydef.position = b2Vec2(0,0);
+    b2Body* body = [GameBase get_game].m_world.m_physics_world->CreateBody(&bodydef);
+    
+    float w = size.x / ptm;
+    float h = size.y / ptm;
+    float xoffset = pos.x / ptm;
+    float yoffset = pos.y / ptm;
+    
+    b2PolygonShape shape;
+    shape.SetAsBox(w/2, h/2, b2Vec2(xoffset, h/2 + yoffset), 0);
+
+    b2Filter filter;
+    filter.categoryBits=cg_acting_range;
+    filter.maskBits=cg_player1 | cg_player2 | cg_acting_range;
+    
+    b2Fixture* fix = body->CreateFixture(&shape,1);
+    fix->SetFriction( 0 );
+    fix->SetRestitution(0);
+    fix->SetFilterData(filter);
+    fixture_data * ud = new fixture_data;
+    ud->sprite = sprite_comp;
+    ud->identity = 0;
+    
+    fix->SetUserData(ud);
+    
+    return body;
+    
+}
+-(id) init
+{
+    self = [super init];
+    PhysicsSprite* comp;
+    comp = [PhysicsSprite new];
+    comp.m_phy_body = [self create_bound:ccp(0,0) :ccp(2048,768/2) :comp];
+    comp.m_parent = self;
+    m_sprite_components.push_back(comp);
+    return self;
+}
+-(void) enable:(bool) flag
+{
+    if ( !flag )
+       [ self set_collision_filter:0 cat:0];
+    else
+        [self set_collision_filter:cg_player1 | cg_player2 cat: cg_acting_range];
+}
+-(void) set_type:(bound_type) type
+{
+    m_type = type;
+    switch (m_type) {
+        case top:
+            [self set_physic_position:0 :ccp(-1000,768/2 + 50)];
+            break;
+        case bottom:
+            [self set_physic_position:0 :ccp(-1000,-50)];
+            break;
+        default:
+            break;
+    }
+}
+@end

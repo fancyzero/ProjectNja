@@ -24,7 +24,10 @@ const float hover_distance = 100;
 @implementation Hero
 bool play_dead = false;
 float standard_mass = 0;
-
+GameSouSouSouLevel* get_game_level()
+{
+    return (GameSouSouSouLevel*)[GameBase get_game].m_level;
+}
 
 -(id) init
 {
@@ -42,6 +45,7 @@ float standard_mass = 0;
     play_dead = false;
     m_landing_platforms.clear();
     
+
     m_touched_side = ps_top;
    [self init_with_xml:@"sprites/base.xml:ninja" ];
    /* [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"pic/scene.plist"];
@@ -241,6 +245,19 @@ public:
             return;
         }
     }
+    
+switch (  [self get_track ] )
+    {
+        case tr_top:
+            
+            break;
+        case tr_middle:
+           [ get_game_level() enable_bound:bottom :true];
+            break;
+        case tr_bottom:
+            [ get_game_level() enable_bound:top :true];
+            break;
+    }
     m_move_distance_when_leave_platform = invalid_distance;
     m_under_user_will = true;
     [self play_jump_sfx];
@@ -259,7 +276,16 @@ public:
         
     }
 }
-
+-(track) get_track
+{
+    CGPoint pos = [self get_physic_position:0];
+    if ( pos.y < 768 /3 )
+        return tr_bottom;
+    else if ( pos.y < 768/3*2 )
+        return tr_middle;
+    else
+        return tr_top;
+}
 
 -(void) go_right
 {
@@ -271,6 +297,21 @@ public:
             return;
         }
     }
+    
+    
+    switch (  [self get_track ] )
+    {
+        case tr_top:
+            [ get_game_level() enable_bound:bottom :true];
+            break;
+        case tr_middle:
+            [ get_game_level() enable_bound:top :true];
+            break;
+        case tr_bottom:
+
+            break;
+    }
+    
     m_move_distance_when_leave_platform = invalid_distance;
     m_under_user_will = true;
     [self play_jump_sfx];

@@ -23,6 +23,13 @@ enum input
     none
 };
 
+enum track
+{
+    tr_top,
+    tr_bottom,
+    tr_middle
+};
+
 struct score
 {
     float len;
@@ -141,8 +148,10 @@ struct boostable_value
     bool m_hovering;//是否处在离开passable platform 后的一段滞空状态
     morph_value<float,true>         m_hero_scale;
     score                           m_score;
+    b2Body*                         m_bound[2];
 }
 
+-(track) get_track;
 -(score) get_score;
 -(bool) is_god;
 

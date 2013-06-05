@@ -24,6 +24,8 @@
 #import "BumppingScoreDisplay.h"
 #import "GlobalConfig.h"
 #import "RepeatBG.h"
+#import "PlatformBase.h"
+
 
 float god_safe_width = 300;
 
@@ -47,6 +49,31 @@ int reset_count = 0;
     return m_total_moved;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        m_top_bound = m_bottom_bound = nil;
+    }
+    return self;
+}
+
+-(void) enable_bound:(bound_type) type :(bool) enable
+{
+    switch (type) {
+        case top:
+            [m_top_bound enable:enable];
+            [m_bottom_bound enable:!enable];
+            break;
+        case bottom:
+            [m_top_bound enable:!enable];
+            [m_bottom_bound enable:enable];
+            break;
+        default:
+            break;
+    }
+}
+
 -(void)reset
 {
 
@@ -56,7 +83,17 @@ int reset_count = 0;
     if ( m_bg1 != nil )
        [ m_bg1 release];
     m_total_moved = 0;
-
+    if ( m_bottom_bound != nil )
+        [ m_bottom_bound release];
+        if ( m_top_bound != nil )
+            [ m_top_bound release];
+        
+    m_bottom_bound = [BoundingPlatform new];
+    m_top_bound = [BoundingPlatform new];
+    
+    [m_top_bound set_type: top];
+    [m_bottom_bound set_type: bottom];
+    
     m_god_safe_insert_pos_begin = m_cur_god_safe_insert_pos = -god_safe_width*3;
     m_god_safe_insert_pos = god_safe_width*5 + m_cur_god_safe_insert_pos;//m_god_safe_insert_pos必须是god_safe_width的整数倍
     m_sector_attached = 0;
@@ -101,8 +138,11 @@ int reset_count = 0;
     [m_bg1.texture setTexParameters:&tp];
     
     [[GameBase get_game].m_scene.m_layer addChild:m_bg1 ];
-    
-    if ( get_global_config().physic_debug )
+    ///////////////
+    ///////////////
+    ///////////////
+    ////////////
+    if ( 1)//get_global_config().physic_debug )
 	{
 		physics_debug_sprite* pds = [ physics_debug_sprite new ];
 		pds.zOrder = 200; 
