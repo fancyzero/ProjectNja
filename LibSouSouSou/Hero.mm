@@ -596,7 +596,7 @@ switch (  [self get_track ] )
                 m_hero_scale.set_dest(2);
             else
             {
-                for (SpriteBase* p in [GameBase get_game].m_world.m_gameobjects)
+               /* for (GameObjBase* p in [GameBase get_game].m_world.m_gameobjects)
                 {
                     PlatformBase* plat;
                     if ( [p isKindOfClass:[PlatformBase class]] )
@@ -610,7 +610,7 @@ switch (  [self get_track ] )
                         [plat set_physic_angular_velocity:0 :3000];
                     }
                     
-                }
+                }*/
                 
                 m_hero_scale.set_dest(1);
             }
