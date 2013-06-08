@@ -60,6 +60,7 @@ int reset_count = 0;
 
 -(void) enable_bound:(bound_type) type :(bool) enable
 {
+    return;
     switch (type) {
         case top:
             [m_top_bound enable:enable];
@@ -83,14 +84,15 @@ int reset_count = 0;
     if ( m_bg1 != nil )
        [ m_bg1 release];
     m_total_moved = 0;
-    if ( m_bottom_bound != nil )
+    
+    /*if ( m_bottom_bound != nil )
         [ m_bottom_bound release];
         if ( m_top_bound != nil )
             [ m_top_bound release];
         
     m_bottom_bound = [BoundingPlatform new];
     m_top_bound = [BoundingPlatform new];
-    
+    */
     [m_top_bound set_type: top];
     [m_bottom_bound set_type: bottom];
     
@@ -142,7 +144,7 @@ int reset_count = 0;
     ///////////////
     ///////////////
     ////////////
-    if ( 1)//get_global_config().physic_debug )
+    if ( get_global_config().physic_debug )
 	{
 		physics_debug_sprite* pds = [ physics_debug_sprite new ];
 		pds.zOrder = 200; 

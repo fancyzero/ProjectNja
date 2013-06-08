@@ -229,6 +229,7 @@
 		04563E581734DFAF005BF488 /* SSceneStaticObj.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04563E571734DFAF005BF488 /* SSceneStaticObj.mm */; };
 		0477938D17364CB200BB85B2 /* PlatformBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477938C17364CB200BB85B2 /* PlatformBase.mm */; };
 		0477939017364CD200BB85B2 /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477938F17364CD200BB85B2 /* Platform.mm */; };
+		049E487A1762DB9E005F125A /* ExcellentText.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049E48791762DB9E005F125A /* ExcellentText.mm */; };
 		04A4E306174252CC00E84366 /* SCoin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E305174252CC00E84366 /* SCoin.mm */; };
 		04A4E30F17425DEA00E84366 /* BumppingScoreDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4E30E17425DEA00E84366 /* BumppingScoreDisplay.mm */; };
 		04A73641174E6B9900524BE0 /* Pickup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A73640174E6B9900524BE0 /* Pickup.mm */; };
@@ -248,7 +249,7 @@
 		0443940A1759D6910002C961 /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
 		0443940B1759D6910002C961 /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
 		0443940C1759D6910002C961 /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hpp; sourceTree = "<group>"; };
-		045639641734AA0E005BF488 /* GameSouSouSou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameSouSouSou.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		045639641734AA0E005BF488 /* GameSouSouSou3line.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameSouSouSou3line.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045639671734AA0E005BF488 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		045639691734AA0E005BF488 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		0456396B1734AA0E005BF488 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -677,6 +678,8 @@
 		0477938C17364CB200BB85B2 /* PlatformBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlatformBase.mm; sourceTree = "<group>"; };
 		0477938E17364CD200BB85B2 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		0477938F17364CD200BB85B2 /* Platform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
+		049E48781762DB9E005F125A /* ExcellentText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcellentText.h; sourceTree = "<group>"; };
+		049E48791762DB9E005F125A /* ExcellentText.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ExcellentText.mm; sourceTree = "<group>"; };
 		04A4E304174252CC00E84366 /* SCoin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCoin.h; sourceTree = "<group>"; };
 		04A4E305174252CC00E84366 /* SCoin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCoin.mm; sourceTree = "<group>"; };
 		04A4E30D17425DEA00E84366 /* BumppingScoreDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BumppingScoreDisplay.h; sourceTree = "<group>"; };
@@ -739,7 +742,7 @@
 		045639651734AA0E005BF488 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				045639641734AA0E005BF488 /* GameSouSouSou.app */,
+				045639641734AA0E005BF488 /* GameSouSouSou3line.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -907,6 +910,8 @@
 				0431A2AC175B9B8C0037F3A0 /* PhysicRibbon.mm */,
 				041C1B39175CCA7A0055EEFF /* ScoreLayer.h */,
 				041C1B3A175CCA7A0055EEFF /* ScoreLayer.mm */,
+				049E48781762DB9E005F125A /* ExcellentText.h */,
+				049E48791762DB9E005F125A /* ExcellentText.mm */,
 			);
 			path = LibSouSouSou;
 			sourceTree = "<group>";
@@ -1419,7 +1424,7 @@
 			);
 			name = GameSouSouSou;
 			productName = GameSouSouSou;
-			productReference = 045639641734AA0E005BF488 /* GameSouSouSou.app */;
+			productReference = 045639641734AA0E005BF488 /* GameSouSouSou3line.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1683,6 +1688,7 @@
 				0443940D1759D6910002C961 /* pugixml.cpp in Sources */,
 				0431A2AD175B9B8C0037F3A0 /* PhysicRibbon.mm in Sources */,
 				041C1B3B175CCA7A0055EEFF /* ScoreLayer.mm in Sources */,
+				049E487A1762DB9E005F125A /* ExcellentText.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

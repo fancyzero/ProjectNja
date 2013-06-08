@@ -446,6 +446,16 @@ switch (  [self get_track ] )
             [ self del_landing_platform:(PlatformBase*)other];
         }
     }
+    else if ( [self is_excelent_sensor:myself] && [other isKindOfClass:[PlatformBase class]] && [(PlatformBase*)other kill_touched] )
+    {
+        //绝妙
+        PlatformBase* p = (PlatformBase*)other;
+        if ( ![p get_excellented] )
+        {
+            [ p set_excellented];
+            m_score.coins += 100;
+        }
+    }
 }
 
 
@@ -478,14 +488,8 @@ switch (  [self get_track ] )
             }
             else
             {
-                //绝妙
-               /* PlatformBase* p = (PlatformBase*)other;
-                if ( ![p get_excellented] )
-                {
-                    [ p set_excellented];
-                    m_score += 100;
-                }
-                */
+
+                
             }
         }
         
@@ -698,6 +702,10 @@ switch (  [self get_track ] )
 -(bool) is_valid_fixture:(b2Fixture*) fix
 {
     return ((fixture_data*)fix->GetUserData())->identity == 0;
+}
+-(bool) is_excelent_sensor:(b2Fixture*) fix
+{
+    return ((fixture_data*)fix->GetUserData())->identity == 1;
 }
 
 @end
