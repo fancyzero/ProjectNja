@@ -149,6 +149,7 @@ struct boostable_value
     morph_value<float,true>         m_hero_scale;
     score                           m_score;
     b2Body*                         m_bound[2];
+    CGPoint                         m_previous_pos;
 }
 
 -(track) get_track;

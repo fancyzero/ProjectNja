@@ -85,5 +85,9 @@
 			<component desc="sprite_components/base.xml:god_portion" />
 		</components>
     </sprite>
-    
+    <sprite name="excellent">
+		<components>
+			<component desc="sprite_components/base.xml:excellent" />
+		</components>
+    </sprite>
 </sprites>

@@ -18,7 +18,7 @@
 #import "GameScene.h"
 #include "Box2D.h"
 #import "PhysicRibbon.h"
-
+#import "ExcellentText.h"
 const float invalid_distance = -10000;
 const float hover_distance = 100;
 @implementation Hero
@@ -449,6 +449,12 @@ switch (  [self get_track ] )
     else if ( [self is_excelent_sensor:myself] && [other isKindOfClass:[PlatformBase class]] && [(PlatformBase*)other kill_touched] )
     {
         //绝妙
+        ExcellentText* txt;
+        txt = [ExcellentText new];
+        [txt init_with_xml:@"sprites/base.xml:excellent"];
+        
+        [txt set_position:m_previous_pos.x y:m_previous_pos.y];
+        [[GameBase get_game].m_world add_gameobj:txt];
         PlatformBase* p = (PlatformBase*)other;
         if ( ![p get_excellented] )
         {
@@ -589,6 +595,7 @@ switch (  [self get_track ] )
 -(void) update:(float)delta_time
 {
     [ super update:delta_time];
+    m_previous_pos = [ self get_physic_position:0];
     float old_scale = m_hero_scale;
     m_hero_scale.update(delta_time);
     if ( old_scale != m_hero_scale )

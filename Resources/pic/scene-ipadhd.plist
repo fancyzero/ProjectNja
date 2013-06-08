@@ -7,7 +7,7 @@
             <key>ball.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1564,363},{416,374}}</string>
+                <string>{{1564,433},{416,374}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>earth_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1132,739},{886,226}}</string>
+                <string>{{1132,809},{886,226}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -95,6 +95,19 @@
                 <key>sourceSize</key>
                 <string>{626,238}</string>
             </dict>
+            <key>excellent.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1735,237},{98,194}}</string>
+                <key>offset</key>
+                <string>{-1,2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{98,194}}</string>
+                <key>sourceSize</key>
+                <string>{100,200}</string>
+            </dict>
             <key>god.png</key>
             <dict>
                 <key>frame</key>
@@ -111,7 +124,7 @@
             <key>magnet.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1735,237},{90,124}}</string>
+                <string>{{1342,465},{90,124}}</string>
                 <key>offset</key>
                 <string>{-2,0}</string>
                 <key>rotated</key>
@@ -196,7 +209,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6e761293f1cca45bd26abedf81e1fde9$</string>
+            <string>$TexturePacker:SmartUpdate:beba14e80762c56039df007e9ab12fed$</string>
             <key>textureFileName</key>
             <string>scene-ipadhd.png</string>
         </dict>

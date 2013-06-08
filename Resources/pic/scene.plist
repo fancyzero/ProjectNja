@@ -7,7 +7,7 @@
             <key>ball.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{784,186},{208,187}}</string>
+                <string>{{784,222},{208,187}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>earth_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{568,375},{443,113}}</string>
+                <string>{{568,411},{443,113}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -95,6 +95,19 @@
                 <key>sourceSize</key>
                 <string>{313,119}</string>
             </dict>
+            <key>excellent.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{871,122},{48,98}}</string>
+                <key>offset</key>
+                <string>{-1,1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{48,98}}</string>
+                <key>sourceSize</key>
+                <string>{50,100}</string>
+            </dict>
             <key>god.png</key>
             <dict>
                 <key>frame</key>
@@ -111,7 +124,7 @@
             <key>magnet.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{871,122},{46,62}}</string>
+                <string>{{673,236},{46,62}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -196,7 +209,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:1df0faad65c40b98a21dbbdf5e3310e9$</string>
+            <string>$TexturePacker:SmartUpdate:4a9a3b466f3a2be6621811d2f5381684$</string>
             <key>textureFileName</key>
             <string>scene.png</string>
         </dict>
