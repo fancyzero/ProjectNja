@@ -249,7 +249,7 @@
 		0443940A1759D6910002C961 /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
 		0443940B1759D6910002C961 /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
 		0443940C1759D6910002C961 /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hpp; sourceTree = "<group>"; };
-		045639641734AA0E005BF488 /* GameSouSouSou3line.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameSouSouSou3line.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		045639641734AA0E005BF488 /* GameSouSouSou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameSouSouSou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045639671734AA0E005BF488 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		045639691734AA0E005BF488 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		0456396B1734AA0E005BF488 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -742,7 +742,7 @@
 		045639651734AA0E005BF488 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				045639641734AA0E005BF488 /* GameSouSouSou3line.app */,
+				045639641734AA0E005BF488 /* GameSouSouSou.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1424,7 +1424,7 @@
 			);
 			name = GameSouSouSou;
 			productName = GameSouSouSou;
-			productReference = 045639641734AA0E005BF488 /* GameSouSouSou3line.app */;
+			productReference = 045639641734AA0E005BF488 /* GameSouSouSou.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
