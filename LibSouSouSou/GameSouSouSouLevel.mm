@@ -321,7 +321,8 @@ int reset_count = 0;
         m_cur_god_safe_insert_pos = m_god_safe_insert_pos_begin;
     m_bg1.m_offset = fmod(m_total_moved/6.0,1024);
     
-    if ( m_moved_pos >= m_current_sector_width )
+    
+    if ( m_moved_pos >= m_current_sector_width - 2200)
     {
         NSString* rnd_file;
         

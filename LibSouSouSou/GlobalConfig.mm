@@ -34,7 +34,11 @@ NSString* get_string_config(NSString* str)
 
 void init_global_config()
 {
-        NSString * tm = get_string_config(@"test_maps");
+    
+    NSString * tm = get_string_config(@"test_maps");
+    g_global_config.vision_scale = get_float_config(@"vision_scale");
+    if ( g_global_config.vision_scale <= 0 )
+        g_global_config.vision_scale = 768;
     g_global_config.physic_debug = get_float_config(@"debug_physic")>1;
     g_global_config.level_move_speed = get_float_config(@"min_level_speed");
     g_global_config.level_move_speed_max = get_float_config(@"max_level_speed");

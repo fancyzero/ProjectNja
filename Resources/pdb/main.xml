@@ -26,7 +26,7 @@
 </body>
 <body name="ninja_run" id="1" anchor_rel="0.678,0.332" anchor_abs="219.580,107.450" size="324.000,324.000">
 <circle radius="59.076" is_sensor="false" />
-<polygon identity="1" vertices=" 220.420,63.550 ,-39.580,63.550 ,-39.580,-82.450 ,180.420,-82.450" is_sensor="true" />
+<polygon identity="1" density="0.0001" vertices=" 220.420,63.550 ,-39.580,63.550 ,-39.580,-82.450 ,180.420,-82.450" is_sensor="true" />
 </body>
 <body name="spike" id="0" anchor_rel="0.500,0.000" anchor_abs="126.500,0.000" size="253.000,201.000">
 <polygon vertices=" 99.500,0.000 ,98.500,143.000 ,13.500,193.000 ,-95.500,135.000 ,-100.500,0.000" is_sensor="false" />

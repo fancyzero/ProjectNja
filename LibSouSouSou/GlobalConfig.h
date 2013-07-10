@@ -11,6 +11,7 @@
 float get_float_config(NSString* str);
 struct GlobalConfig
 {
+    float vision_scale;
     float level_move_speed;
     float ninja_jump_speed;
     float ninja_push_force;
