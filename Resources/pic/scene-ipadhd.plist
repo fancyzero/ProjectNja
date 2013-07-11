@@ -59,7 +59,7 @@
             <key>earth_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,465},{1338,242}}</string>
+                <string>{{2,477},{1338,242}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>earth_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1094},{626,238}}</string>
+                <string>{{2,1106},{626,238}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -121,10 +121,49 @@
                 <key>sourceSize</key>
                 <string>{136,195}</string>
             </dict>
+            <key>hp1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1638,349},{72,69}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{72,69}}</string>
+                <key>sourceSize</key>
+                <string>{72,69}</string>
+            </dict>
+            <key>hp2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1564,349},{72,69}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{72,69}}</string>
+                <key>sourceSize</key>
+                <string>{72,69}</string>
+            </dict>
+            <key>line.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,465},{1504,10}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{1504,10}}</string>
+                <key>sourceSize</key>
+                <string>{1504,10}</string>
+            </dict>
             <key>magnet.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1342,465},{90,124}}</string>
+                <string>{{1342,477},{90,124}}</string>
                 <key>offset</key>
                 <string>{-2,0}</string>
                 <key>rotated</key>
@@ -163,7 +202,7 @@
             <key>rock_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,709},{1128,200}}</string>
+                <string>{{2,721},{1128,200}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -176,7 +215,7 @@
             <key>rock_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,911},{637,181}}</string>
+                <string>{{2,923},{637,181}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -209,7 +248,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:beba14e80762c56039df007e9ab12fed$</string>
+            <string>$TexturePacker:SmartUpdate:a9655db7cac5743471e079d67d52b64d$</string>
             <key>textureFileName</key>
             <string>scene-ipadhd.png</string>
         </dict>

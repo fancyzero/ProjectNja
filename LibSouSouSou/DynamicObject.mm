@@ -10,6 +10,13 @@
 #include "common.h"
 #import "GameBase.h"
 #import "GameSouSouSouLevel.h"
+@implementation RockWarning
+-(void) update:(float)delta_time
+{
+}
+
+@end
+
 @implementation FallenRock
 
 -(id) init_with_spawn_params:(NSDictionary *)params

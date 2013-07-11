@@ -90,4 +90,9 @@
 			<component desc="sprite_components/base.xml:excellent" />
 		</components>
     </sprite>
+    <sprite name="rock warning">
+		<components>
+			<component desc="sprite_components/base.xml:rock warning" />
+		</components>
+    </sprite>
 </sprites>

@@ -8,6 +8,9 @@
 
 #import "PlatformBase.h"
 
+@interface RockWarning : SpriteBase
+-(void) update:(float)delta_time;
+@end
 @interface FallenRock : PlatformBase
 {
     float m_fall_speed;

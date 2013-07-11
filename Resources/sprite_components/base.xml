@@ -140,6 +140,11 @@
 			<sequence name="default" animated="false" texture="pic/scene.plist" framenames="excellent.png" framespeed="0"/>
 		</animation_def>
 	</sprite_component>
+    <sprite_component name="rock warning">
+		<animation_def>
+			<sequence name="default" animated="false" texture="pic/scene.plist" framenames="rock warning.png" framespeed="0"/>
+		</animation_def>
+	</sprite_component>
     
 </sprite_components>
 
